@@ -1,0 +1,284 @@
+A!	SourceNode-1.0.03748	2.0	Java
+
+X	c:01/000	com.ibm.saguaro.system.Assembly
+X	c:01/001	com.ibm.saguaro.system.Util
+X	c:01/002	com.ibm.saguaro.system.Timer
+X	c:01/003	com.ibm.saguaro.system.Time
+X	c:01/004	com.ibm.saguaro.system.MoteException
+X	c:01/005	com.ibm.saguaro.system.Device
+X	c:01/006	com.ibm.saguaro.system.SDev
+X	c:01/007	com.ibm.saguaro.system.CDev
+X	c:01/008	com.ibm.saguaro.system.OutOfResourcesException
+X	c:01/009	com.ibm.saguaro.system.OsException
+X	c:01/00A	com.ibm.saguaro.system.NullReferenceException
+X	c:01/00B	com.ibm.saguaro.system.SystemException
+X	c:01/00C	com.ibm.saguaro.system.Mote
+X	c:01/00D	com.ibm.saguaro.system.LIP
+X	c:01/00E	com.ibm.saguaro.system.LED
+X	c:01/00F	com.ibm.saguaro.system.InvalidCastException
+X	c:01/010	com.ibm.saguaro.system.IndexOutOfRangeException
+X	c:01/011	com.ibm.saguaro.system.I2C
+X	c:01/012	com.ibm.saguaro.system.GPIO
+X	c:01/013	com.ibm.saguaro.system.Err
+X	c:01/014	com.ibm.saguaro.system.DeviceException
+X	c:01/015	com.ibm.saguaro.system.SPI
+X	c:01/016	com.ibm.saguaro.system.Radio
+X	c:01/017	com.ibm.saguaro.system.WLIP
+X	c:01/018	com.ibm.saguaro.system.ArrayTypeMismatchException
+X	c:01/019	com.ibm.saguaro.system.ArithmException
+X	c:01/01A	com.ibm.saguaro.system.ArgumentException
+X	c:01/01B	com.ibm.saguaro.system.AccessException
+X	c:01/01C	com.ibm.saguaro.system.ADC
+X	c:02/000	com.ibm.saguaro.logger.Logger
+
+C!	c:004	embs.SourceNode	-1	0	c:000
+R	tsend	r:com.ibm.saguaro.system.Timer	0	0
+R	tstart	r:com.ibm.saguaro.system.Timer	0	1
+R	xmit	c[]	0	2
+R	radio	r:com.ibm.saguaro.system.Radio	0	3
+F	light	z	0	0
+F	wait	l	0	1
+F	n	i	0	3
+F	nc	i	0	4
+F	t	i	0	5
+F	currentChannel	i	0	6
+F	ownPanId	c	0	7
+F	ownShortAddr	c	0	8
+M!	SourceNode(r:embs.SourceNode)v	-1	m:0070	000E0	4
+M	access$000(i,c[],i,i,l)i	-1	m:0072	000E4	14
+M	onReceive(i,c[],i,i,l)i	-1	m:0079	000F2	54
+M!	restart(c,l)v	-1	m:0094	00128	32
+M	setChannel(c)v	-1	m:00A4	00148	8
+M	toggleLed(i)v	-1	m:00A8	00150	28
+
+C	c:006	com.ibm.saguaro.system.$tatics	-1	-1	c:01/000
+r	embs.SourceNode.tsend	r:com.ibm.saguaro.system.Timer	-1	0
+r	embs.SourceNode.tstart	r:com.ibm.saguaro.system.Timer	-1	1
+r	embs.SourceNode.xmit	c[]	-1	2
+r	embs.SourceNode.radio	r:com.ibm.saguaro.system.Radio	-1	3
+f	embs.SourceNode.light	z	-1	0
+f	embs.SourceNode.wait	l	-1	1
+f	embs.SourceNode.n	i	-1	3
+f	embs.SourceNode.nc	i	-1	4
+f	embs.SourceNode.t	i	-1	5
+f	embs.SourceNode.currentChannel	i	-1	6
+f	embs.SourceNode.ownPanId	c	-1	7
+f	embs.SourceNode.ownShortAddr	c	-1	8
+M	__init()v	-1	m:0010	00020	192
+
+c	0002D	0	12	0	12	0	m:0010
+c	00031	0	16	0	16	0	m:0010
+c	0003B	0	17	0	17	0	m:0010
+c	00040	0	20	0	20	0	m:0010
+c	00046	0	24	0	24	0	m:0010
+c	0004A	0	25	0	25	0	m:0010
+c	0004F	0	26	0	26	0	m:0010
+c	00054	0	29	0	29	0	m:0010
+c	00060	0	33	0	33	0	m:0010
+c	00066	0	34	0	34	0	m:0010
+c	0006C	0	35	0	35	0	m:0010
+c	00074	0	36	0	36	0	m:0010
+c	0007E	0	37	0	37	0	m:0010
+c	00087	0	38	0	38	0	m:0010
+c	00092	0	39	0	39	0	m:0010
+c	0009D	0	41	0	41	0	m:0010
+c	000A7	0	44	0	44	0	m:0010
+c	000B1	0	60	0	60	0	m:0010
+c	000BB	0	61	0	61	0	m:0010
+c	000C5	0	69	0	69	0	m:0010
+c	000D0	0	71	0	71	0	m:0010
+c	000DF	0	73	0	73	0	m:0010
+e	000E0	m:0010
+c	000E3	0	8	0	8	0	m:0070
+l!	000E3	000E4	r:embs.SourceNode	this	m:0070	0
+e!	000E4	m:0070
+c	000E7	0	8	0	8	0	m:0072
+l	000E7	000F1	i	x0	m:0072	0
+l	000E7	000F1	c[]	x1	m:0072	1
+l	000E7	000F1	i	x2	m:0072	2
+l	000E7	000F1	i	x3	m:0072	3
+l	000E7	000F1	l	x4	m:0072	4
+e	000F2	m:0072
+c	000F5	0	77	0	77	0	m:0079
+l	000F5	00128	i	flags	m:0079	0
+l	000F5	00128	c[]	data	m:0079	1
+l	000F5	00128	i	len	m:0079	2
+l	000F5	00128	i	info	m:0079	3
+l	000F5	00128	l	time	m:0079	4
+c	000F8	0	79	0	79	0	m:0079
+c	000FD	0	82	0	82	0	m:0079
+c	0010C	0	84	0	84	0	m:0079
+c	0010E	0	90	0	90	0	m:0079
+c	00112	0	91	0	91	0	m:0079
+c	00116	0	92	0	92	0	m:0079
+c	0011A	0	94	0	94	0	m:0079
+c	00122	0	95	0	95	0	m:0079
+c	00126	0	96	0	96	0	m:0079
+e	00128	m:0079
+c	0012B	0	139	0	139	0	m:0094
+l!	0012B	00147	c	param	m:0094	0
+l!	0012B	00147	l	time	m:0094	1
+c	00131	0	140	0	140	0	m:0094
+c	0013B	0	141	0	141	0	m:0094
+c	00146	0	143	0	143	0	m:0094
+e!	00148	m:0094
+c	0014B	0	111	0	111	0	m:00A4
+l	0014B	00150	c	channel	m:00A4	0
+c	0014F	0	112	0	112	0	m:00A4
+e	00150	m:00A4
+c	00153	0	101	0	101	0	m:00A8
+l	00153	0016B	i	led	m:00A8	0
+c	00159	0	102	0	102	0	m:00A8
+l	00159	0016B	i	ledState	m:00A8	1
+c	0015C	0	103	0	103	0	m:00A8
+c	00164	0	105	0	105	0	m:00A8
+c	0016A	0	107	0	107	0	m:00A8
+e	0016C	m:00A8
+S	M:/EMBS/EMBS_assessment/part2/src/embs/SourceNode.java
+:	package embs;
+:	
+:	import com.ibm.saguaro.system.*;
+:	import com.ibm.saguaro.logger.*;
+:	//import embs.SinkParameter;
+:	
+:	
+:	public class SourceNode {
+:	
+:	    private static Timer  tsend;
+:	    private static Timer  tstart;
+:	    private static boolean light=false;
+:	    
+:	    private static byte[] xmit;
+:	    private static long   wait;
+:	    static Radio radio = new Radio();
+:	    private static int n = 8; // number of beacons of sync phase - sample only, assessment will use unknown values
+:	    private static int nc;
+:	    
+:	    private static int t = 600; // milliseconds between beacons - sample only, assessment will use unknown values 
+:	    
+:	//    private static SinkParameter[] sinks = {new SinkParameter(0, 11, 11), new SinkParameter(1, 12, 12),new SinkParameter(2, 13, 13)};
+:	    // settings for SourceNode A
+:	    private static int currentChannel = 1;
+:	    private static byte ownPanId = (byte) 14;
+:	    private static byte ownShortAddr = (byte) 14;
+:	    static {
+:	        // Open the default radio
+:	        radio.open(Radio.DID, null, 0, 0);
+:	        
+:	
+:	        // Prepare beacon frame with source and destination addressing
+:	        xmit = new byte[12];
+:	        xmit[0] = Radio.FCF_BEACON;
+:	        xmit[1] = Radio.FCA_SRC_SADDR|Radio.FCA_DST_SADDR;
+:	        Util.set16le(xmit, 3, 14); // destination PAN address 
+:	        Util.set16le(xmit, 5, 0xFFFF); // broadcast address 
+:	        Util.set16le(xmit, 7, 14); // own PAN address 
+:	        Util.set16le(xmit, 9, 14); // own short address 
+:	
+:	        xmit[11] = (byte)n;
+:	
+:			// register delegate for received frames
+:	        radio.setRxHandler(new DevCallback(null){
+:	                public int invoke (int flags, byte[] data, int len, int info, long time) {
+:	                    return  SourceNode.onReceive(flags, data, len, info, time);
+:	                }
+:	            });
+:	
+:	//        // Setup a periodic timer callback for beacon transmissions
+:	//        tsend = new Timer();
+:	//        tsend.setCallback(new TimerEvent(null){
+:	//                public void invoke(byte param, long time){
+:	//                    SourceNode.periodicSend(param, time);
+:	//                }
+:	//            });
+:	            
+:	
+:	        // Setup a periodic timer callback to restart the protocol
+:	        tstart = new Timer();
+:	        tstart.setCallback(new TimerEvent(null){
+:	                public void invoke(byte param, long time){
+:	                    SourceNode.restart(param, time);
+:	                }
+:	            });
+:	
+:	//            
+:	        // Convert the periodic delay from ms to platform ticks
+:	        wait = Time.toTickSpan(Time.MILLISECS, t);
+:	        
+:	        tstart.setAlarmBySpan(Time.toTickSpan(Time.SECONDS, 5)); //starts the protocol 5 seconds after constructing the assembly
+:	        
+:	    }
+:	
+:	    // Called when a frame is received or at the end of a reception period 
+:	    private static int onReceive (int flags, byte[] data, int len, int info, long time) {
+:	        if (data == null) { // marks end of reception period
+:	            // turn green LED off 
+:		        LED.setState((byte)1, (byte)0);
+:		        
+:		        //set alarm to restart protocol
+:		    	tstart.setAlarmBySpan(10*wait);
+:	                    
+:	            return 0;
+:	        }
+:	
+:	
+:			// frame received, so blink red LED and log its payload
+:	
+:	        toggleLed(0);
+:	        toggleLed(1);
+:	        toggleLed(2);
+:			
+:			Logger.appendByte(data[11]);
+:	        Logger.flush(Mote.WARN);
+:	        return 0;
+:	        
+:	    }
+:	    
+:	    private static void toggleLed(int led){
+:	    	int ledState = LED.getState((byte) led);
+:	    	if (ledState==0){
+:	    		LED.setState((byte) led, (byte) 1);
+:	    	} else {
+:	    		LED.setState((byte) led, (byte) 0);
+:	    	}
+:	    }
+:	
+:	
+:	    private static void setChannel(byte channel) {
+:	        currentChannel = channel;
+:		}
+:	
+:	
+:	//	// Called on a timer alarm
+:	//    public static void periodicSend(byte param, long time) {
+:	//        
+:	//        if(nc>0){
+:	//	        // transmit a beacon 
+:	//    	    radio.transmit(Device.ASAP|Radio.TXMODE_POWER_MAX, xmit, 0, 12, 0);
+:	//        	// program new alarm
+:	//        	tsend.setAlarmBySpan(wait);
+:	//        	nc--;
+:	//        	xmit[11]--;
+:	//        }
+:	//        else{
+:	//        	//start reception phase
+:	//	        radio.startRx(Device.ASAP, 0, Time.currentTicks()+wait);
+:	//	        // turn green LED on 
+:	//	        LED.setState((byte)1, (byte)1);
+:	//	        
+:	//        }
+:	//        
+:	//    }
+:	
+:	
+:	    // Called on a timer alarm, starts the protocol
+:	    public static void restart(byte param, long time) {
+:	        nc=n;
+:	        xmit[11]=(byte)n;
+:	       	tsend.setAlarmBySpan(0);
+:	        
+:	    }
+:	
+:	
+:	
+:	}

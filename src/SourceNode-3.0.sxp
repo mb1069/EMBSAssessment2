@@ -1,0 +1,33 @@
+.sxp-version 2.0
+
+.assembly SourceNode-3.0
+
+
+.namespace embs
+
+.class#0 public SourceNode
+
+	.method#0 static public SourceNode(r:embs.SourceNode this)v
+.end
+
+
+.class#1 public SinkParameters
+
+	.method#0 public setN(i n)v
+
+	.method#1 public getT()i
+
+	.method#2 public setT(i t)v
+
+	.method#3 public getN()i
+
+	.method#4 public getChannel()c
+
+	.method#5 public getPanid()c
+
+	.method#6 public getAddress()c
+
+	.method#1 static public SinkParameters(r:embs.SinkParameters this, i channel,i panid,i address)v
+.end
+
+.end

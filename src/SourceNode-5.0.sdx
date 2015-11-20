@@ -1,0 +1,317 @@
+A!	SourceNode-5.0.10054	2.0	Java
+
+X	c:01/000	com.ibm.saguaro.system.Assembly
+X	c:01/001	com.ibm.saguaro.system.Util
+X	c:01/002	com.ibm.saguaro.system.Timer
+X	c:01/003	com.ibm.saguaro.system.Time
+X	c:01/004	com.ibm.saguaro.system.MoteException
+X	c:01/005	com.ibm.saguaro.system.Device
+X	c:01/006	com.ibm.saguaro.system.SDev
+X	c:01/007	com.ibm.saguaro.system.CDev
+X	c:01/008	com.ibm.saguaro.system.OutOfResourcesException
+X	c:01/009	com.ibm.saguaro.system.OsException
+X	c:01/00A	com.ibm.saguaro.system.NullReferenceException
+X	c:01/00B	com.ibm.saguaro.system.SystemException
+X	c:01/00C	com.ibm.saguaro.system.Mote
+X	c:01/00D	com.ibm.saguaro.system.LIP
+X	c:01/00E	com.ibm.saguaro.system.LED
+X	c:01/00F	com.ibm.saguaro.system.InvalidCastException
+X	c:01/010	com.ibm.saguaro.system.IndexOutOfRangeException
+X	c:01/011	com.ibm.saguaro.system.I2C
+X	c:01/012	com.ibm.saguaro.system.GPIO
+X	c:01/013	com.ibm.saguaro.system.Err
+X	c:01/014	com.ibm.saguaro.system.DeviceException
+X	c:01/015	com.ibm.saguaro.system.SPI
+X	c:01/016	com.ibm.saguaro.system.Radio
+X	c:01/017	com.ibm.saguaro.system.WLIP
+X	c:01/018	com.ibm.saguaro.system.ArrayTypeMismatchException
+X	c:01/019	com.ibm.saguaro.system.ArithmException
+X	c:01/01A	com.ibm.saguaro.system.ArgumentException
+X	c:01/01B	com.ibm.saguaro.system.AccessException
+X	c:01/01C	com.ibm.saguaro.system.ADC
+X	c:02/000	com.ibm.saguaro.logger.Logger
+
+C!	c:004	embs.SourceNode	-1	0	c:000
+R	tstart	r:com.ibm.saguaro.system.Timer	0	0
+R	xmit	c[]	0	1
+R	radio	r:com.ibm.saguaro.system.Radio	0	2
+R	sinks	r:embs.SinkParameters[]	0	3
+R	tsend	r:com.ibm.saguaro.system.Timer	0	3327
+F	light	z	0	0
+F	wait	l	0	1
+F	currentChannel	i	0	3
+F	ownPanId	c	0	4
+F	ownShortAddr	c	0	5
+M!	SourceNode(r:embs.SourceNode)v	-1	m:00CA	00194	4
+M	access$000(i,c[],i,i,l)i	-1	m:00CC	00198	14
+M	onReceive(i,c[],i,i,l)i	-1	m:00D3	001A6	48
+M	setChannel(i)v	-1	m:00EB	001D6	70
+M	toggleLed(i)v	-1	m:010E	0021C	28
+
+C!	c:006	embs.SinkParameters	1	1	c:000
+f	T	i	1	0
+f	N	i	1	1
+f	address	c	1	2
+f	panid	c	1	3
+f	channel	c	1	4
+m!	getAddress()c	1	m:00AE	0015C	8	6
+m!	getChannel()c	1	m:00B2	00164	8	4
+m!	getN()i	1	m:00B6	0016C	8	3
+m!	getPanid()c	1	m:00BA	00174	8	5
+m!	getT()i	1	m:00BE	0017C	8	1
+m!	setN(i)v	1	m:00C2	00184	8	0
+m!	setT(i)v	1	m:00C6	0018C	8	2
+M!	SinkParameters(r:embs.SinkParameters,i,i,i)v	1	m:00A4	00148	20
+
+C	c:00E	com.ibm.saguaro.system.$tatics	-1	-1	c:01/000
+r	embs.SourceNode.tstart	r:com.ibm.saguaro.system.Timer	-1	0
+r	embs.SourceNode.xmit	c[]	-1	1
+r	embs.SourceNode.radio	r:com.ibm.saguaro.system.Radio	-1	2
+r	embs.SourceNode.sinks	r:embs.SinkParameters[]	-1	3
+f	embs.SourceNode.light	z	-1	0
+f	embs.SourceNode.wait	l	-1	1
+f	embs.SourceNode.currentChannel	i	-1	3
+f	embs.SourceNode.ownPanId	c	-1	4
+f	embs.SourceNode.ownShortAddr	c	-1	5
+M	__init()v	-1	m:0020	00040	264
+
+c	0004D	0	12	0	12	0	m:0020
+c	00051	0	16	0	16	0	m:0020
+c	0005B	0	18	0	18	0	m:0020
+c	0008F	0	20	0	20	0	m:0020
+c	00093	0	21	0	21	0	m:0020
+c	00098	0	22	0	22	0	m:0020
+c	0009C	0	25	0	25	0	m:0020
+c	000A8	0	28	0	28	0	m:0020
+c	000B8	0	30	0	30	0	m:0020
+c	000C9	0	31	0	31	0	m:0020
+c	000D9	0	34	0	34	0	m:0020
+c	000DF	0	35	0	35	0	m:0020
+c	000E5	0	36	0	36	0	m:0020
+c	000ED	0	37	0	37	0	m:0020
+c	000FF	0	38	0	38	0	m:0020
+c	00108	0	39	0	39	0	m:0020
+c	0011B	0	40	0	40	0	m:0020
+c	00127	0	43	0	43	0	m:0020
+c	00131	0	49	0	49	0	m:0020
+c	00146	0	50	0	50	0	m:0020
+e	00148	m:0020
+c	0014B	1	12	0	12	0	m:00A4
+l!	0014B	0015B	r:embs.SinkParameters	this	m:00A4	0
+l!	0014B	0015B	i	channel	m:00A4	1
+l!	0014B	0015B	i	panid	m:00A4	2
+l!	0014B	0015B	i	address	m:00A4	3
+c	00150	1	13	0	13	0	m:00A4
+c	00155	1	14	0	14	0	m:00A4
+c	0015A	1	15	0	15	0	m:00A4
+e!	0015C	m:00A4
+c	0015F	1	23	0	23	0	m:00AE
+l	0015F	00163	r:embs.SinkParameters	this	m:00AE	0
+e!	00164	m:00AE
+c	00167	1	21	0	21	0	m:00B2
+l	00167	0016B	r:embs.SinkParameters	this	m:00B2	0
+e!	0016C	m:00B2
+c	0016F	1	20	0	20	0	m:00B6
+l	0016F	00173	r:embs.SinkParameters	this	m:00B6	0
+e!	00174	m:00B6
+c	00177	1	22	0	22	0	m:00BA
+l	00177	0017B	r:embs.SinkParameters	this	m:00BA	0
+e!	0017C	m:00BA
+c	0017F	1	18	0	18	0	m:00BE
+l	0017F	00183	r:embs.SinkParameters	this	m:00BE	0
+e!	00184	m:00BE
+c	00187	1	17	0	17	0	m:00C2
+l!	00187	0018C	r:embs.SinkParameters	this	m:00C2	0
+l	00187	0018C	i	n	m:00C2	1
+e!	0018C	m:00C2
+c	0018F	1	19	0	19	0	m:00C6
+l!	0018F	00194	r:embs.SinkParameters	this	m:00C6	0
+l	0018F	00194	i	t	m:00C6	1
+e!	00194	m:00C6
+c	00197	0	8	0	8	0	m:00CA
+l!	00197	00198	r:embs.SourceNode	this	m:00CA	0
+e!	00198	m:00CA
+c	0019B	0	8	0	8	0	m:00CC
+l	0019B	001A5	i	x0	m:00CC	0
+l	0019B	001A5	c[]	x1	m:00CC	1
+l	0019B	001A5	i	x2	m:00CC	2
+l	0019B	001A5	i	x3	m:00CC	3
+l	0019B	001A5	l	x4	m:00CC	4
+e	001A6	m:00CC
+c	001A9	0	54	0	54	0	m:00D3
+l	001A9	001D6	i	flags	m:00D3	0
+l	001A9	001D6	c[]	data	m:00D3	1
+l	001A9	001D6	i	len	m:00D3	2
+l	001A9	001D6	i	info	m:00D3	3
+l	001A9	001D6	l	time	m:00D3	4
+c	001AC	0	56	0	56	0	m:00D3
+c	001B1	0	59	0	59	0	m:00D3
+c	001C0	0	61	0	61	0	m:00D3
+c	001C2	0	66	0	66	0	m:00D3
+c	001C8	0	70	0	70	0	m:00D3
+c	001D0	0	71	0	71	0	m:00D3
+c	001D4	0	72	0	72	0	m:00D3
+e	001D6	m:00D3
+c	001D9	0	88	0	88	0	m:00EB
+l	001D9	0021B	i	channel	m:00EB	0
+c	001DE	0	89	0	89	0	m:00EB
+l	001DE	0021B	r:embs.SinkParameters	sp	m:00EB	1
+c	001E4	0	90	0	90	0	m:00EB
+c	001F2	0	91	0	91	0	m:00EB
+c	00201	0	92	0	92	0	m:00EB
+c	00216	0	93	0	93	0	m:00EB
+c	0021A	0	94	0	94	0	m:00EB
+e	0021C	m:00EB
+c	0021F	0	77	0	77	0	m:010E
+l	0021F	00237	i	led	m:010E	0
+c	00225	0	78	0	78	0	m:010E
+l	00225	00237	i	ledState	m:010E	1
+c	00228	0	79	0	79	0	m:010E
+c	00230	0	81	0	81	0	m:010E
+c	00236	0	83	0	83	0	m:010E
+e	00238	m:010E
+S	M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java
+:	package embs;
+:	
+:	import com.ibm.saguaro.system.*;
+:	import com.ibm.saguaro.logger.*;
+:	//import embs.SinkParameter;
+:	
+:	
+:	public class SourceNode {
+:	
+:	    private static Timer  tsend;
+:	    private static Timer  tstart;
+:	    private static boolean light=false;
+:	    
+:	    private static byte[] xmit;
+:	    private static long   wait;
+:	    static Radio radio = new Radio();
+:	
+:	    private static SinkParameters[] sinks = {new SinkParameters(1, 0x11, 0x11), new SinkParameters(2, 0x12, 0x12),new SinkParameters(3, 0x13, 0x13)};
+:	    // settings for SourceNode A
+:	    private static int currentChannel = 0;
+:	    private static byte ownPanId = 0x11;
+:	    private static byte ownShortAddr = 0x1;
+:	    static {
+:	        // Open the default radio
+:	        radio.open(Radio.DID, null, 0, 0);
+:	
+:	        // Set channel 
+:	        radio.setChannel(sinks[currentChannel].getChannel());
+:	        // Set the PAN ID and the short address
+:	        radio.setPanId(sinks[currentChannel].getPanid(), true);
+:	        radio.setShortAddr(sinks[currentChannel].getAddress());
+:	        
+:	        // Prepare beacon frame with source and destination addressing
+:	        xmit = new byte[12];
+:	        xmit[0] = Radio.FCF_BEACON;
+:	        xmit[1] = Radio.FCA_SRC_SADDR|Radio.FCA_DST_SADDR;
+:	        Util.set16le(xmit, 3, sinks[currentChannel].getPanid()); // destination PAN address 
+:	        Util.set16le(xmit, 5, 0xFFFF); // broadcast address 
+:	        Util.set16le(xmit, 7, sinks[currentChannel].getPanid()); // own PAN address 
+:	        Util.set16le(xmit, 9, ownShortAddr); // own short address 
+:	
+:			// register delegate for received frames
+:	        radio.setRxHandler(new DevCallback(null){
+:	                public int invoke (int flags, byte[] data, int len, int info, long time) {
+:	                    return  SourceNode.onReceive(flags, data, len, info, time);
+:	                }
+:	            });
+:	
+:	        radio.startRx(Device.ASAP, 0, Time.currentTicks()+0x7FFFFFFF);
+:	    }
+:	
+:	    // Called when a frame is received or at the end of a reception period 
+:	    private static int onReceive (int flags, byte[] data, int len, int info, long time) {
+:	        if (data == null) { // marks end of reception period
+:	            // turn green LED off 
+:		        LED.setState((byte)1, (byte)0);
+:		        
+:		        //set alarm to restart protocol
+:		    	tstart.setAlarmBySpan(10*wait);
+:	                    
+:	            return 0;
+:	        }
+:	
+:	
+:			// frame received, so blink red LED and log its payload
+:	        toggleLed(currentChannel);
+:	//        int nextChannel = (currentChannel++) % 3;
+:	//        setChannel(currentChannel);
+:	
+:			Logger.appendByte(data[11]);
+:	        Logger.flush(Mote.WARN);
+:	        return 0;
+:	        
+:	    }
+:	    
+:	    private static void toggleLed(int led){
+:	    	int ledState = LED.getState((byte) led);
+:	    	if (ledState==0){
+:	    		LED.setState((byte) led, (byte) 1);
+:	    	} else {
+:	    		LED.setState((byte) led, (byte) 0);
+:	    	}
+:	    }
+:	
+:	
+:	    private static void setChannel(int channel) {
+:	    	
+:	    	SinkParameters sp = sinks[channel];
+:	    	radio.stopRx();
+:	        radio.setChannel(sinks[channel].getChannel());
+:	        radio.setPanId(sinks[channel].getPanid(), true);
+:	        radio.startRx(Device.ASAP, 0, Time.currentTicks()+0x7FFFFFFF);
+:	        currentChannel = channel;
+:		}
+:	
+:	
+:	//	// Called on a timer alarm
+:	//    public static void periodicSend(byte param, long time) {
+:	//        
+:	//        if(nc>0){
+:	//	        // transmit a beacon 
+:	//    	    radio.transmit(Device.ASAP|Radio.TXMODE_POWER_MAX, xmit, 0, 12, 0);
+:	//        	// program new alarm
+:	//        	tsend.setAlarmBySpan(wait);
+:	//        	nc--;
+:	//        	xmit[11]--;
+:	//        }
+:	//        else{
+:	//        	//start reception phase
+:	//	        radio.startRx(Device.ASAP, 0, Time.currentTicks()+wait);
+:	//	        // turn green LED on 
+:	//	        LED.setState((byte)1, (byte)1);
+:	//	        
+:	//        }
+:	//        
+:	//    }
+:	}
+S	M:/EMBS/EMBS_assessment2/part2/src/embs/SinkParameters.java
+:	package embs;
+:	
+:	public class SinkParameters {
+:	    private byte channel;
+:	    private byte panid;
+:	    private byte address;
+:	    
+:	    private int N;
+:	    private int T;
+:	    
+:	    public SinkParameters(int channel, int panid, int address){
+:	    	this.channel = (byte) channel;
+:	    	this.panid = (byte) panid;
+:	    	this.address = (byte) address;
+:	    }
+:	
+:		public void setN(int n) {this.N = n;}
+:		public int getT() {return T;}
+:		public void setT(int t) {this.T = t;}
+:		public int getN() {return N;}
+:		public byte getChannel() {return channel;}
+:		public byte getPanid() {return panid;}
+:		public byte getAddress() {return address;}
+:	    
+:	    
+:	}

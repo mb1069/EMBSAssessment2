@@ -1,0 +1,15 @@
+.sxp-version 2.0
+
+.assembly SourceNode-1.0
+
+
+.namespace embs
+
+.class#0 public SourceNode
+
+	.method#0 static public SourceNode(r:embs.SourceNode this)v
+
+	.method#1 static public restart(c param, l time)v
+.end
+
+.end

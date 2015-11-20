@@ -1,0 +1,11 @@
+//Initialise all motes
+mote-create 4;
+
+
+moma-factory-reset;
+moma-load logger; 1 moma-load Sink1; 2 moma-load Sink2; 3 moma-load Sink3; moma-list;
+
+
+// To reset source Node
+0 moma-factory-reset; 0 moma-load logger; 0 moma-load SourceNode;
+
