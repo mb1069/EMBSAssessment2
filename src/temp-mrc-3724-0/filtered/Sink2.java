@@ -1,3 +1,4 @@
+//line 1 "M:/EMBS/EMBS_assessment2/part2/src/embs/Sink2.java"
 package embs;
 
 import com.ibm.saguaro.system.*;
@@ -18,7 +19,7 @@ public class Sink2 {
 	private static int t = 500; // milliseconds between beacons - sample only, assessment will use unknown values 
 
 	// settings for sink B
-    private static byte channel = (byte) 12; // channel 11
+    private static byte channel = 12; // channel 11
     private static byte panid = 0x12;
     private static byte address = 0x12;
 
@@ -40,7 +41,7 @@ public class Sink2 {
 		xmit = new byte[12];
 		xmit[0] = Radio.FCF_BEACON;
 		xmit[1] = Radio.FCA_SRC_SADDR|Radio.FCA_DST_SADDR;
-		Util.set16le(xmit, 3, panid); // destination PAN address 
+		Util.set16le(xmit, 3, 14); // destination PAN address 
 		Util.set16le(xmit, 5, 0xFFFF); // broadcast address 
 		Util.set16le(xmit, 7, panid); // own PAN address 
 		Util.set16le(xmit, 9, address); // own short address 

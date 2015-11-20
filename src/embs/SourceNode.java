@@ -15,17 +15,27 @@ public class SourceNode {
     private static long   wait;
     static Radio radio = new Radio();
 
-    private static SinkParameters[] sinks = {new SinkParameters(1, 0x11, 0x11), new SinkParameters(2, 0x12, 0x12),new SinkParameters(3, 0x13, 0x13)};
+    private static SinkParameters[] sinks = {
+    	new SinkParameters((byte) 11,(byte)  0x11,(byte)  0x11), 
+    	new SinkParameters((byte) 12, (byte) 0x12, (byte) 0x12),
+    	new SinkParameters((byte) 13, (byte) 0x13, (byte) 0x13)};
     // settings for SourceNode A
-    private static int currentChannel = 0;
+    private static int currentChannel = 1;
     private static byte ownPanId = 0x11;
     private static byte ownShortAddr = 0x1;
+    
+
+    private static byte YELLOW_LED = (byte) 0;
+    private static byte GREEN_LED = (byte) 1;
+    private static byte RED_LED = (byte) 2;
+    
     static {
         // Open the default radio
         radio.open(Radio.DID, null, 0, 0);
 
+        
         // Set channel 
-        radio.setChannel(sinks[currentChannel].getChannel());
+        radio.setChannel((byte) 12);
         // Set the PAN ID and the short address
         radio.setPanId(sinks[currentChannel].getPanid(), true);
         radio.setShortAddr(sinks[currentChannel].getAddress());
@@ -37,7 +47,7 @@ public class SourceNode {
         Util.set16le(xmit, 3, sinks[currentChannel].getPanid()); // destination PAN address 
         Util.set16le(xmit, 5, 0xFFFF); // broadcast address 
         Util.set16le(xmit, 7, sinks[currentChannel].getPanid()); // own PAN address 
-        Util.set16le(xmit, 9, ownShortAddr); // own short address 
+        Util.set16le(xmit, 9, sinks[currentChannel].getAddress()); // own short address 
 
 		// register delegate for received frames
         radio.setRxHandler(new DevCallback(null){
@@ -46,7 +56,7 @@ public class SourceNode {
                 }
             });
 
-        radio.startRx(Device.TIMED, Time.toTickSpan(Time.MILLISECS, 5), Time.currentTicks()+0x7FFFFFFF);
+        radio.startRx(Device.ASAP, 0, Time.currentTicks()+0x7FFFFFFF);
     }
 
     // Called when a frame is received or at the end of a reception period 
@@ -60,13 +70,16 @@ public class SourceNode {
                     
             return 0;
         }
-
-
+        int n = data[11];
+    	Logger.appendString(csr.s2b("Current n: "));
+    	Logger.appendInt(n);
+    	Logger.flush(Mote.ERROR);
 		// frame received, so blink red LED and log its payload
         toggleLed(currentChannel);
-//        int nextChannel = (currentChannel++) % 3;
-//        setChannel(currentChannel);
-
+        if (n==1){
+	        int nextChannel = (currentChannel+1) % 3;
+	        setChannel(nextChannel);
+        }
 		Logger.appendByte(data[11]);
         Logger.flush(Mote.WARN);
         return 0;
@@ -84,12 +97,14 @@ public class SourceNode {
 
 
     private static void setChannel(int channel) {
-    	
+    	Logger.appendString(csr.s2b("Changing channel to: "));
+    	Logger.appendInt(channel);
+    	Logger.flush(Mote.ERROR);
     	SinkParameters sp = sinks[channel];
     	radio.stopRx();
-        radio.setChannel(sinks[channel].getChannel());
-        radio.setPanId(sinks[channel].getPanid(), true);
-        radio.startRx(Device.ASAP, 0, Time.currentTicks()+0x7FFFFFFF);
+        radio.setChannel(sp.getChannel());
+        radio.setPanId(sp.getPanid(), true);
+        radio.startRx(Device.TIMED, Time.toTickSpan(Time.MILLISECS, 5), Time.currentTicks()+0x7FFFFFFF);
         currentChannel = channel;
 	}
 

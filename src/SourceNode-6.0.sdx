@@ -1,4 +1,4 @@
-A!	SourceNode-5.0.11968	2.0	Java
+A!	SourceNode-6.0.16728	2.0	Java
 
 X	c:01/000	com.ibm.saguaro.system.Assembly
 X	c:01/001	com.ibm.saguaro.system.Util
@@ -42,11 +42,16 @@ F	wait	l	0	1
 F	currentChannel	i	0	3
 F	ownPanId	c	0	4
 F	ownShortAddr	c	0	5
-M!	SourceNode(r:embs.SourceNode)v	-1	m:00CC	00198	4
-M	access$000(i,c[],i,i,l)i	-1	m:00CE	0019C	14
-M	onReceive(i,c[],i,i,l)i	-1	m:00D5	001AA	70
-M	setChannel(i)v	-1	m:00F8	001F0	70
-M	toggleLed(i)v	-1	m:011B	00236	28
+F	YELLOW_LED	c	0	6
+F	GREEN_LED	c	0	7
+F	RED_LED	c	0	8
+H	Changing_channel_to$UTF8	b[]	0	67,104,97,110,103,105,110,103,32,99,104,97,110,110,101,108,32,116,111,58,32
+H	Current_n$UTF8	b[]	0	67,117,114,114,101,110,116,32,110,58,32
+M!	SourceNode(r:embs.SourceNode)v	-1	m:00CF	0019E	4
+M	access$000(i,c[],i,i,l)i	-1	m:00D1	001A2	14
+M	onReceive(i,c[],i,i,l)i	-1	m:00D8	001B0	68
+M	setChannel(i)v	-1	m:00FA	001F4	80
+M	toggleLed(i)v	-1	m:0122	00244	28
 
 C!	c:006	embs.SinkParameters	1	1	c:000
 f	T	i	1	0
@@ -54,14 +59,14 @@ f	N	i	1	1
 f	address	c	1	2
 f	panid	c	1	3
 f	channel	c	1	4
-m!	getAddress()c	1	m:00B0	00160	8	6
-m!	getChannel()c	1	m:00B4	00168	8	4
-m!	getN()i	1	m:00B8	00170	8	3
-m!	getPanid()c	1	m:00BC	00178	8	5
-m!	getT()i	1	m:00C0	00180	8	1
-m!	setN(i)v	1	m:00C4	00188	8	0
-m!	setT(i)v	1	m:00C8	00190	8	2
-M!	SinkParameters(r:embs.SinkParameters,i,i,i)v	1	m:00A6	0014C	20
+m!	getAddress()c	1	m:00B3	00166	8	6
+m!	getChannel()c	1	m:00B7	0016E	8	4
+m!	getN()i	1	m:00BB	00176	8	3
+m!	getPanid()c	1	m:00BF	0017E	8	5
+m!	getT()i	1	m:00C3	00186	8	1
+m!	setN(i)v	1	m:00C7	0018E	8	0
+m!	setT(i)v	1	m:00CB	00196	8	2
+M!	SinkParameters(r:embs.SinkParameters,c,c,c)v	1	m:00AB	00156	16
 
 C	c:00E	com.ibm.saguaro.system.$tatics	-1	-1	c:01/000
 r	embs.SourceNode.tstart	r:com.ibm.saguaro.system.Timer	-1	0
@@ -73,108 +78,118 @@ f	embs.SourceNode.wait	l	-1	1
 f	embs.SourceNode.currentChannel	i	-1	3
 f	embs.SourceNode.ownPanId	c	-1	4
 f	embs.SourceNode.ownShortAddr	c	-1	5
-M	__init()v	-1	m:0020	00040	268
+f	embs.SourceNode.YELLOW_LED	c	-1	6
+f	embs.SourceNode.GREEN_LED	c	-1	7
+f	embs.SourceNode.RED_LED	c	-1	8
+M	__init()v	-1	m:0020	00040	278
 
 c	0004D	0	12	0	12	0	m:0020
 c	00051	0	16	0	16	0	m:0020
 c	0005B	0	18	0	18	0	m:0020
-c	0008F	0	20	0	20	0	m:0020
-c	00093	0	21	0	21	0	m:0020
-c	00098	0	22	0	22	0	m:0020
-c	0009C	0	25	0	25	0	m:0020
-c	000A8	0	28	0	28	0	m:0020
-c	000B8	0	30	0	30	0	m:0020
-c	000C9	0	31	0	31	0	m:0020
-c	000D9	0	34	0	34	0	m:0020
-c	000DF	0	35	0	35	0	m:0020
-c	000E5	0	36	0	36	0	m:0020
-c	000ED	0	37	0	37	0	m:0020
-c	000FF	0	38	0	38	0	m:0020
-c	00108	0	39	0	39	0	m:0020
-c	0011B	0	40	0	40	0	m:0020
-c	00127	0	43	0	43	0	m:0020
-c	00131	0	49	0	49	0	m:0020
-c	0014A	0	50	0	50	0	m:0020
-e	0014C	m:0020
-c	0014F	1	12	0	12	0	m:00A6
-l!	0014F	0015F	r:embs.SinkParameters	this	m:00A6	0
-l!	0014F	0015F	i	channel	m:00A6	1
-l!	0014F	0015F	i	panid	m:00A6	2
-l!	0014F	0015F	i	address	m:00A6	3
-c	00154	1	13	0	13	0	m:00A6
-c	00159	1	14	0	14	0	m:00A6
-c	0015E	1	15	0	15	0	m:00A6
-e!	00160	m:00A6
-c	00163	1	23	0	23	0	m:00B0
-l	00163	00167	r:embs.SinkParameters	this	m:00B0	0
-e!	00168	m:00B0
-c	0016B	1	21	0	21	0	m:00B4
-l	0016B	0016F	r:embs.SinkParameters	this	m:00B4	0
-e!	00170	m:00B4
-c	00173	1	20	0	20	0	m:00B8
-l	00173	00177	r:embs.SinkParameters	this	m:00B8	0
-e!	00178	m:00B8
-c	0017B	1	22	0	22	0	m:00BC
-l	0017B	0017F	r:embs.SinkParameters	this	m:00BC	0
-e!	00180	m:00BC
-c	00183	1	18	0	18	0	m:00C0
-l	00183	00187	r:embs.SinkParameters	this	m:00C0	0
-e!	00188	m:00C0
-c	0018B	1	17	0	17	0	m:00C4
-l!	0018B	00190	r:embs.SinkParameters	this	m:00C4	0
-l	0018B	00190	i	n	m:00C4	1
-e!	00190	m:00C4
-c	00193	1	19	0	19	0	m:00C8
-l!	00193	00198	r:embs.SinkParameters	this	m:00C8	0
-l	00193	00198	i	t	m:00C8	1
-e!	00198	m:00C8
-c	0019B	0	8	0	8	0	m:00CC
-l!	0019B	0019C	r:embs.SourceNode	this	m:00CC	0
-e!	0019C	m:00CC
-c	0019F	0	8	0	8	0	m:00CE
-l	0019F	001A9	i	x0	m:00CE	0
-l	0019F	001A9	c[]	x1	m:00CE	1
-l	0019F	001A9	i	x2	m:00CE	2
-l	0019F	001A9	i	x3	m:00CE	3
-l	0019F	001A9	l	x4	m:00CE	4
-e	001AA	m:00CE
-c	001AD	0	54	0	54	0	m:00D5
-l	001AD	001F0	i	flags	m:00D5	0
-l	001AD	001F0	c[]	data	m:00D5	1
-l	001AD	001F0	i	len	m:00D5	2
-l	001AD	001F0	i	info	m:00D5	3
-l	001AD	001F0	l	time	m:00D5	4
-c	001B0	0	56	0	56	0	m:00D5
-c	001B5	0	59	0	59	0	m:00D5
-c	001C4	0	61	0	61	0	m:00D5
-c	001C6	0	66	0	66	0	m:00D5
-c	001CC	0	67	0	67	0	m:00D5
-c	001D4	0	68	0	68	0	m:00D5
-l	001D4	001F0	i	nextChannel	m:00D5	6
-c	001D8	0	69	0	69	0	m:00D5
-c	001DE	0	70	0	70	0	m:00D5
-c	001E2	0	71	0	71	0	m:00D5
-c	001EA	0	72	0	72	0	m:00D5
-c	001EE	0	73	0	73	0	m:00D5
-e	001F0	m:00D5
-c	001F3	0	88	0	88	0	m:00F8
-l	001F3	00235	i	channel	m:00F8	0
-c	001F8	0	89	0	89	0	m:00F8
-l	001F8	00235	r:embs.SinkParameters	sp	m:00F8	1
-c	001FE	0	90	0	90	0	m:00F8
-c	0020C	0	91	0	91	0	m:00F8
-c	0021B	0	92	0	92	0	m:00F8
-c	00230	0	93	0	93	0	m:00F8
-c	00234	0	95	0	95	0	m:00F8
-e	00236	m:00F8
-c	00239	0	78	0	78	0	m:011B
-l	00239	00251	i	led	m:011B	0
-c	0023F	0	79	0	79	0	m:011B
-l	0023F	00251	i	ledState	m:011B	1
-c	00242	0	80	0	80	0	m:011B
-c	0024A	0	82	0	82	0	m:011B
-c	00250	0	84	0	84	0	m:011B
-e	00252	m:011B
+c	00092	0	23	0	23	0	m:0020
+c	00096	0	24	0	24	0	m:0020
+c	0009B	0	25	0	25	0	m:0020
+c	0009F	0	28	0	28	0	m:0020
+c	000A3	0	29	0	29	0	m:0020
+c	000A7	0	30	0	30	0	m:0020
+c	000AB	0	34	0	34	0	m:0020
+c	000B7	0	38	0	38	0	m:0020
+c	000BF	0	40	0	40	0	m:0020
+c	000D0	0	41	0	41	0	m:0020
+c	000E0	0	44	0	44	0	m:0020
+c	000E6	0	45	0	45	0	m:0020
+c	000EC	0	46	0	46	0	m:0020
+c	000F4	0	47	0	47	0	m:0020
+c	00106	0	48	0	48	0	m:0020
+c	0010F	0	49	0	49	0	m:0020
+c	00122	0	50	0	50	0	m:0020
+c	00135	0	53	0	53	0	m:0020
+c	0013F	0	59	0	59	0	m:0020
+c	00154	0	60	0	60	0	m:0020
+e	00156	m:0020
+c	00159	1	12	0	12	0	m:00AB
+l!	00159	00166	r:embs.SinkParameters	this	m:00AB	0
+l!	00159	00166	c	channel	m:00AB	1
+l!	00159	00166	c	panid	m:00AB	2
+l!	00159	00166	c	address	m:00AB	3
+c	0015D	1	13	0	13	0	m:00AB
+c	00161	1	14	0	14	0	m:00AB
+c	00165	1	15	0	15	0	m:00AB
+e!	00166	m:00AB
+c	00169	1	23	0	23	0	m:00B3
+l	00169	0016D	r:embs.SinkParameters	this	m:00B3	0
+e!	0016E	m:00B3
+c	00171	1	21	0	21	0	m:00B7
+l	00171	00175	r:embs.SinkParameters	this	m:00B7	0
+e!	00176	m:00B7
+c	00179	1	20	0	20	0	m:00BB
+l	00179	0017D	r:embs.SinkParameters	this	m:00BB	0
+e!	0017E	m:00BB
+c	00181	1	22	0	22	0	m:00BF
+l	00181	00185	r:embs.SinkParameters	this	m:00BF	0
+e!	00186	m:00BF
+c	00189	1	18	0	18	0	m:00C3
+l	00189	0018D	r:embs.SinkParameters	this	m:00C3	0
+e!	0018E	m:00C3
+c	00191	1	17	0	17	0	m:00C7
+l!	00191	00196	r:embs.SinkParameters	this	m:00C7	0
+l	00191	00196	i	n	m:00C7	1
+e!	00196	m:00C7
+c	00199	1	19	0	19	0	m:00CB
+l!	00199	0019E	r:embs.SinkParameters	this	m:00CB	0
+l	00199	0019E	i	t	m:00CB	1
+e!	0019E	m:00CB
+c	001A1	0	8	0	8	0	m:00CF
+l!	001A1	001A2	r:embs.SourceNode	this	m:00CF	0
+e!	001A2	m:00CF
+c	001A5	0	8	0	8	0	m:00D1
+l	001A5	001AF	i	x0	m:00D1	0
+l	001A5	001AF	c[]	x1	m:00D1	1
+l	001A5	001AF	i	x2	m:00D1	2
+l	001A5	001AF	i	x3	m:00D1	3
+l	001A5	001AF	l	x4	m:00D1	4
+e	001B0	m:00D1
+c	001B3	0	64	0	64	0	m:00D8
+l	001B3	001F4	i	flags	m:00D8	0
+l	001B3	001F4	c[]	data	m:00D8	1
+l	001B3	001F4	i	len	m:00D8	2
+l	001B3	001F4	i	info	m:00D8	3
+l	001B3	001F4	l	time	m:00D8	4
+c	001B6	0	66	0	66	0	m:00D8
+c	001BB	0	69	0	69	0	m:00D8
+c	001CA	0	71	0	71	0	m:00D8
+c	001CC	0	73	0	73	0	m:00D8
+c	001D2	0	74	0	74	0	m:00D8
+l	001D2	001F4	i	n	m:00D8	6
+c	001D8	0	75	0	75	0	m:00D8
+c	001DC	0	76	0	76	0	m:00D8
+c	001E0	0	78	0	78	0	m:00D8
+c	001E6	0	81	0	81	0	m:00D8
+l	001E6	001F4	i	nextChannel	m:00D8	7
+c	001EE	0	82	0	82	0	m:00D8
+c	001F2	0	83	0	83	0	m:00D8
+e	001F4	m:00D8
+c	001F7	0	98	0	98	0	m:00FA
+l	001F7	00244	i	channel	m:00FA	0
+c	001FD	0	99	0	99	0	m:00FA
+c	00201	0	100	0	100	0	m:00FA
+c	00205	0	101	0	101	0	m:00FA
+c	0020B	0	102	0	102	0	m:00FA
+l	0020B	00244	r:embs.SinkParameters	sp	m:00FA	1
+c	00211	0	103	0	103	0	m:00FA
+c	0021B	0	104	0	104	0	m:00FA
+c	00226	0	105	0	105	0	m:00FA
+c	0023F	0	106	0	106	0	m:00FA
+c	00243	0	107	0	107	0	m:00FA
+e	00244	m:00FA
+c	00247	0	88	0	88	0	m:0122
+l	00247	0025F	i	led	m:0122	0
+c	0024D	0	89	0	89	0	m:0122
+l	0024D	0025F	i	ledState	m:0122	1
+c	00250	0	90	0	90	0	m:0122
+c	00258	0	92	0	92	0	m:0122
+c	0025E	0	94	0	94	0	m:0122
+e	00260	m:0122
 S	M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java
 :	package embs;
 :	
@@ -193,17 +208,27 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java
 :	    private static long   wait;
 :	    static Radio radio = new Radio();
 :	
-:	    private static SinkParameters[] sinks = {new SinkParameters(1, 0x11, 0x11), new SinkParameters(2, 0x12, 0x12),new SinkParameters(3, 0x13, 0x13)};
+:	    private static SinkParameters[] sinks = {
+:	    	new SinkParameters((byte) 11,(byte)  0x11,(byte)  0x11), 
+:	    	new SinkParameters((byte) 12, (byte) 0x12, (byte) 0x12),
+:	    	new SinkParameters((byte) 13, (byte) 0x13, (byte) 0x13)};
 :	    // settings for SourceNode A
-:	    private static int currentChannel = 0;
+:	    private static int currentChannel = 1;
 :	    private static byte ownPanId = 0x11;
 :	    private static byte ownShortAddr = 0x1;
+:	    
+:	
+:	    private static byte YELLOW_LED = (byte) 0;
+:	    private static byte GREEN_LED = (byte) 1;
+:	    private static byte RED_LED = (byte) 2;
+:	    
 :	    static {
 :	        // Open the default radio
 :	        radio.open(Radio.DID, null, 0, 0);
 :	
+:	        
 :	        // Set channel 
-:	        radio.setChannel(sinks[currentChannel].getChannel());
+:	        radio.setChannel((byte) 12);
 :	        // Set the PAN ID and the short address
 :	        radio.setPanId(sinks[currentChannel].getPanid(), true);
 :	        radio.setShortAddr(sinks[currentChannel].getAddress());
@@ -215,7 +240,7 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java
 :	        Util.set16le(xmit, 3, sinks[currentChannel].getPanid()); // destination PAN address 
 :	        Util.set16le(xmit, 5, 0xFFFF); // broadcast address 
 :	        Util.set16le(xmit, 7, sinks[currentChannel].getPanid()); // own PAN address 
-:	        Util.set16le(xmit, 9, ownShortAddr); // own short address 
+:	        Util.set16le(xmit, 9, sinks[currentChannel].getAddress()); // own short address 
 :	
 :			// register delegate for received frames
 :	        radio.setRxHandler(new DevCallback(null){
@@ -224,7 +249,7 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java
 :	                }
 :	            });
 :	
-:	        radio.startRx(Device.TIMED, Time.toTickSpan(Time.MILLISECS, 5), Time.currentTicks()+0x7FFFFFFF);
+:	        radio.startRx(Device.ASAP, 0, Time.currentTicks()+0x7FFFFFFF);
 :	    }
 :	
 :	    // Called when a frame is received or at the end of a reception period 
@@ -238,14 +263,14 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java
 :	                    
 :	            return 0;
 :	        }
-:	
-:	
+:	        int n = data[11];
+:	    	Logger.appendString(csr.s2b("Current n: "));
+:	    	Logger.appendInt(n);
+:	    	Logger.flush(Mote.ERROR);
 :			// frame received, so blink red LED and log its payload
 :	        toggleLed(currentChannel);
 :	        int nextChannel = (currentChannel+1) % 3;
-:	        setChannel(nextChannel);
-:	    	Logger.appendInt(currentChannel);
-:	    	Logger.flush(Mote.ERROR);
+:	//        setChannel(nextChannel);
 :			Logger.appendByte(data[11]);
 :	        Logger.flush(Mote.WARN);
 :	        return 0;
@@ -263,13 +288,15 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java
 :	
 :	
 :	    private static void setChannel(int channel) {
+:	    	Logger.appendString(csr.s2b("Changing channel to: "));
+:	    	Logger.appendInt(channel);
+:	    	Logger.flush(Mote.ERROR);
 :	    	SinkParameters sp = sinks[channel];
 :	    	radio.stopRx();
-:	        radio.setChannel(sinks[channel].getChannel());
-:	        radio.setPanId(sinks[channel].getPanid(), true);
-:	        radio.startRx(Device.ASAP, 0, Time.currentTicks()+0x7FFFFFFF);
+:	        radio.setChannel(sp.getChannel());
+:	        radio.setPanId(sp.getPanid(), true);
+:	        radio.startRx(Device.TIMED, Time.toTickSpan(Time.MILLISECS, 5), Time.currentTicks()+0x7FFFFFFF);
 :	        currentChannel = channel;
-:	        
 :		}
 :	
 :	
@@ -305,10 +332,10 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/SinkParameters.java
 :	    private int N;
 :	    private int T;
 :	    
-:	    public SinkParameters(int channel, int panid, int address){
-:	    	this.channel = (byte) channel;
-:	    	this.panid = (byte) panid;
-:	    	this.address = (byte) address;
+:	    public SinkParameters(byte channel, byte panid, byte address){
+:	    	this.channel =  channel;
+:	    	this.panid =  panid;
+:	    	this.address =  address;
 :	    }
 :	
 :		public void setN(int n) {this.N = n;}

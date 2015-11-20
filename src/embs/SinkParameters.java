@@ -8,10 +8,10 @@ public class SinkParameters {
     private int N;
     private int T;
     
-    public SinkParameters(int channel, int panid, int address){
-    	this.channel = (byte) channel;
-    	this.panid = (byte) panid;
-    	this.address = (byte) address;
+    public SinkParameters(byte channel, byte panid, byte address){
+    	this.channel =  channel;
+    	this.panid =  panid;
+    	this.address =  address;
     }
 
 	public void setN(int n) {this.N = n;}

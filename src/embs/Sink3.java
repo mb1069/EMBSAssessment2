@@ -18,7 +18,7 @@ public class Sink3 {
     private static int t = 600; // milliseconds between beacons - sample only, assessment will use unknown values 
     
     // settings for sink A
-    private static byte channel = 3; // channel 11
+    private static byte channel = 13; // channel 11
     private static byte panid = 0x13;
     private static byte address = 0x13;
 
@@ -40,7 +40,7 @@ public class Sink3 {
         xmit = new byte[12];
         xmit[0] = Radio.FCF_BEACON;
         xmit[1] = Radio.FCA_SRC_SADDR|Radio.FCA_DST_SADDR;
-        Util.set16le(xmit, 3, 14); // destination PAN address 
+        Util.set16le(xmit, 3, panid); // destination PAN address 
         Util.set16le(xmit, 5, 0xFFFF); // broadcast address 
         Util.set16le(xmit, 7, panid); // own PAN address 
         Util.set16le(xmit, 9, address); // own short address 

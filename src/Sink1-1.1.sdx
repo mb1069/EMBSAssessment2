@@ -1,4 +1,4 @@
-A!	Sink1-1.1.10057	2.0	Java
+A!	Sink1-1.1.16723	2.0	Java
 
 X	c:01/000	com.ibm.saguaro.system.Assembly
 X	c:01/001	com.ibm.saguaro.system.Util
@@ -70,28 +70,28 @@ c	00031	0	14	0	14	0	m:0010
 c	0003B	0	15	0	15	0	m:0010
 c	00040	0	18	0	18	0	m:0010
 c	00046	0	21	0	21	0	m:0010
-c	0004A	0	22	0	22	0	m:0010
-c	0004F	0	23	0	23	0	m:0010
-c	00054	0	27	0	27	0	m:0010
-c	00060	0	31	0	31	0	m:0010
-c	00069	0	35	0	35	0	m:0010
-c	00073	0	36	0	36	0	m:0010
-c	0007C	0	40	0	40	0	m:0010
-c	00082	0	41	0	41	0	m:0010
-c	00088	0	42	0	42	0	m:0010
-c	00090	0	43	0	43	0	m:0010
-c	0009B	0	44	0	44	0	m:0010
-c	000A4	0	45	0	45	0	m:0010
-c	000B0	0	46	0	46	0	m:0010
-c	000BC	0	48	0	48	0	m:0010
-c	000C6	0	51	0	51	0	m:0010
-c	000D0	0	60	0	60	0	m:0010
-c	000DA	0	61	0	61	0	m:0010
-c	000E4	0	71	0	71	0	m:0010
-c	000EE	0	72	0	72	0	m:0010
-c	000F8	0	80	0	80	0	m:0010
-c	00103	0	83	0	83	0	m:0010
-c	00112	0	87	0	87	0	m:0010
+c	0004B	0	22	0	22	0	m:0010
+c	00050	0	23	0	23	0	m:0010
+c	00055	0	27	0	27	0	m:0010
+c	00061	0	31	0	31	0	m:0010
+c	0006A	0	35	0	35	0	m:0010
+c	00074	0	36	0	36	0	m:0010
+c	0007D	0	40	0	40	0	m:0010
+c	00083	0	41	0	41	0	m:0010
+c	00089	0	42	0	42	0	m:0010
+c	00091	0	43	0	43	0	m:0010
+c	0009C	0	44	0	44	0	m:0010
+c	000A5	0	45	0	45	0	m:0010
+c	000B1	0	46	0	46	0	m:0010
+c	000BD	0	48	0	48	0	m:0010
+c	000C7	0	51	0	51	0	m:0010
+c	000D1	0	60	0	60	0	m:0010
+c	000DB	0	61	0	61	0	m:0010
+c	000E5	0	71	0	71	0	m:0010
+c	000EF	0	72	0	72	0	m:0010
+c	000F9	0	80	0	80	0	m:0010
+c	00104	0	83	0	83	0	m:0010
+c	00113	0	87	0	87	0	m:0010
 e	00114	m:0010
 c	00117	0	6	0	6	0	m:008A
 l!	00117	00118	r:embs.Sink1	this	m:008A	0
@@ -158,12 +158,12 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/Sink1.java
 :	    private static int n = 10; // number of beacons of sync phase - sample only, assessment will use unknown values
 :	    private static int nc;
 :	    
-:	    private static int t = 500; // milliseconds between beacons - sample only, assessment will use unknown values 
+:	    private static int t = 1500; // milliseconds between beacons - sample only, assessment will use unknown values 
 :	    
 :	    // settings for sink A
-:	    private static byte channel = 1; // channel 11
-:	    private static byte panid = (byte) 0x11;
-:	    private static byte address = (byte) 0x11;
+:	    private static byte channel = 11; // channel 11
+:	    private static byte panid = 0x11;
+:	    private static byte address = 0x11;
 :	
 :	    static {
 :	        // Open the default radio
