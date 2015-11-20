@@ -9,8 +9,6 @@ public class SourceNode {
 
     private static Timer  tsend;
     private static Timer  tstart;
-    private static boolean light=false;
-    
     private static byte[] xmit;
     private static long   wait;
     static Radio radio = new Radio();
@@ -35,7 +33,7 @@ public class SourceNode {
 
         
         // Set channel 
-        radio.setChannel((byte) 12);
+        radio.setChannel((byte) currentChannel);
         // Set the PAN ID and the short address
         radio.setPanId(sinks[currentChannel].getPanid(), true);
         radio.setShortAddr(sinks[currentChannel].getAddress());
@@ -71,6 +69,9 @@ public class SourceNode {
             return 0;
         }
         int n = data[11];
+        long currentTime = Time.currentTime(Time.MILLISECS);
+        sinks[currentChannel].addBeacon(n, currentTime);
+        
     	Logger.appendString(csr.s2b("Current n: "));
     	Logger.appendInt(n);
     	Logger.flush(Mote.ERROR);
@@ -85,6 +86,7 @@ public class SourceNode {
         return 0;
         
     }
+    
     
     private static void toggleLed(int led){
     	int ledState = LED.getState((byte) led);
