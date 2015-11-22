@@ -18,7 +18,7 @@ public class SourceNode {
     	new SinkParameters((byte) 12, (byte) 0x12, (byte) 0x12),
     	new SinkParameters((byte) 13, (byte) 0x13, (byte) 0x13)};
     // settings for SourceNode A
-    private static int currentChannel = 1;
+    private static int currentChannel = 0;
     private static byte ownPanId = 0x11;
     private static byte ownShortAddr = 0x1;
     
@@ -27,13 +27,20 @@ public class SourceNode {
     private static byte GREEN_LED = (byte) 1;
     private static byte RED_LED = (byte) 2;
     
+    private static int N_MIN = 2;
+    private static int N_MAX = 10;
+    private static long T_MIN = 250;
+    private static long T_MAX = 1500;
+    
     static {
         // Open the default radio
         radio.open(Radio.DID, null, 0, 0);
 
-        
+        LED.setState((byte) 0, (byte) 1);
+        LED.setState((byte) 1, (byte) 1);
+        LED.setState((byte) 2, (byte) 1);
         // Set channel 
-        radio.setChannel((byte) currentChannel);
+        radio.setChannel((byte) sinks[currentChannel].getChannel());
         // Set the PAN ID and the short address
         radio.setPanId(sinks[currentChannel].getPanid(), true);
         radio.setShortAddr(sinks[currentChannel].getAddress());
@@ -53,7 +60,7 @@ public class SourceNode {
                     return  SourceNode.onReceive(flags, data, len, info, time);
                 }
             });
-
+        radio.setRxMode(Radio.RXMODE_PROMISCUOUS);
         radio.startRx(Device.ASAP, 0, Time.currentTicks()+0x7FFFFFFF);
     }
 
@@ -71,16 +78,25 @@ public class SourceNode {
         int n = data[11];
         long currentTime = Time.currentTime(Time.MILLISECS);
         sinks[currentChannel].addBeacon(n, currentTime);
-        
-    	Logger.appendString(csr.s2b("Current n: "));
-    	Logger.appendInt(n);
+        int numBeacons = sinks[currentChannel].getNumBeacons();
+        if (numBeacons>1){
+        	int diffN = getDiffN(sinks[currentChannel].getBeaconN(), sinks[currentChannel].getNumBeacons());
+        	long diffT = getDiffT(sinks[currentChannel].getBeaconT(), sinks[currentChannel].getNumBeacons());
+        	if (diffN>0 && diffT<=(T_MAX*diffN)){
+        		long t = diffT/diffN;
+        		createNextBroadcast(sinks[currentChannel].getBeaconN()[numBeacons-1], sinks[currentChannel].getBeaconT()[numBeacons-1], currentChannel, t, currentTime);
+        	}
+        }
+    	Logger.appendString(csr.s2b("Current channel: "));
+    	Logger.appendInt(currentChannel);
     	Logger.flush(Mote.ERROR);
 		// frame received, so blink red LED and log its payload
         toggleLed(currentChannel);
-        if (n==1){
-	        int nextChannel = (currentChannel+1) % 3;
-	        setChannel(nextChannel);
-        }
+//        if (n==1){
+//	        int nextChannel = (currentChannel+1) % 3;
+//	        setChannel(nextChannel);
+//        }
+        
 		Logger.appendByte(data[11]);
         Logger.flush(Mote.WARN);
         return 0;
@@ -88,7 +104,32 @@ public class SourceNode {
     }
     
     
-    private static void toggleLed(int led){
+    private static int getDiffN(int[] beaconN, int numBeacons) {
+		return beaconN[numBeacons-2]-beaconN[numBeacons-1];
+	}
+    
+    private static long getDiffT(long[] beaconT, int numBeacons) {
+		long diffT = beaconT[numBeacons-1]-beaconT[numBeacons-2];
+		Math.abs(diffT);
+		return (diffT < 0) ? -diffT : diffT;
+	}
+
+
+	private static long createNextBroadcast(int beaconN, long beaconT, int channel, long t, long currentTime) {
+        long broadcastTime = (t  * beaconN) + currentTime;
+        long deadline = broadcastTime + T_MIN;
+        setupBroadcastAndCallBack(broadcastTime + (T_MIN/2), deadline, channel);
+        System.out.println("  1st broadcast.");
+        return broadcastTime;
+	}
+
+	private static boolean setupBroadcastAndCallBack(long broadcastTime, long deadline, int channel){
+		Broadcast b = new Broadcast(channel, broadcastTime, deadline);
+		//TODO set timer and callback etc
+	}
+	
+	
+	private static void toggleLed(int led){
     	int ledState = LED.getState((byte) led);
     	if (ledState==0){
     		LED.setState((byte) led, (byte) 1);

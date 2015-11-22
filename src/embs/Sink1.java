@@ -7,6 +7,7 @@ public class Sink1 {
 
     private static Timer  tsend;
     private static Timer  tstart;
+    
     private static boolean light=false;
     
     private static byte[] xmit;
@@ -46,7 +47,8 @@ public class Sink1 {
         Util.set16le(xmit, 9, address); // own short address 
 
         xmit[11] = (byte)n;
-
+        
+        
 		// register delegate for received frames
         radio.setRxHandler(new DevCallback(null){
                 public int invoke (int flags, byte[] data, int len, int info, long time) {

@@ -32,5 +32,31 @@ public class SinkParameters {
 	public byte getChannel() {return channel;}
 	public byte getPanid() {return panid;}
 	public byte getAddress() {return address;}
+
+	public int getNumBeacons() {
+		return numBeacons;
+	}
+	public void setNumBeacons(int numBeacons) {this.numBeacons = numBeacons;
+
+	}
+
+	public int[] getBeaconN() {
+		return beaconN;
+	}
+
+	public void setBeaconN(int[] beaconN) {
+
+		this.beaconN = beaconN;
+	}
+
+	public long[] getBeaconT() {
+		return beaconT;
+	}
+
+	public void setBeaconT(long[] beaconT) {
+
+		this.beaconT = beaconT;
+	}
     
+	
 }
