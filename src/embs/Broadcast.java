@@ -3,22 +3,13 @@ package embs;
 /**
  * Represents a scheduled broadcast
  */
-public class Broadcast implements Comparable{
-    private int channel; // channel: channel on which to send a packet
+public class Broadcast{
     private long broadcastTime; // broadcastTime: time at which to broadcast
     private long deadline; // deadline: time at which
 
-    public Broadcast(int channel, long broadcastTime, long cutoffTime) {
-        this.channel = channel;
+    public Broadcast(long broadcastTime, long cutoffTime) {
         this.broadcastTime = broadcastTime;
         this.deadline = cutoffTime;
-    }
-
-    public int getChannel() {
-        return channel;
-    }
-    public void setChannel(int channel) {
-        this.channel = channel;
     }
 
     public long getBroadcastTime() {
@@ -33,11 +24,5 @@ public class Broadcast implements Comparable{
     }
     public void setDeadline(long deadline) {
         this.deadline = deadline;
-    }
-
-    @Override
-    public int compareTo(Object o) {
-        Broadcast b = (Broadcast) o;
-        return (int) Math.ceil(b.deadline -b.deadline);
     }
 }

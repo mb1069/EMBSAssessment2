@@ -1,0 +1,83 @@
+.sxp-version 2.0
+
+.assembly SourceNode-7.6
+
+
+.namespace embs
+
+.class#0 public SourceNode
+
+	.method#0 static public SourceNode(r:embs.SourceNode this)v
+
+	.method#1 static protected broadcastToSink(c param, l time)v
+
+	.method#2 static protected getChannelSwitch(l cs, r:embs.ChannelSwitch[] time)c
+
+	.method#6 static protected startListening(c param, l time)v
+.end
+
+
+.class#1 public SinkParameters
+
+	.method#0 public addBeacon(i n, l t)v
+
+	.method#1 public setN(i n)v
+
+	.method#2 public getT()i
+
+	.method#3 public setT(i t)v
+
+	.method#4 public getN()i
+
+	.method#5 public getChannel()c
+
+	.method#6 public getPanid()c
+
+	.method#7 public getAddress()c
+
+	.method#8 public getNumBeacons()i
+
+	.method#9 public setNumBeacons(i numBeacons)v
+
+	.method#10 public getBeaconN()i[]
+
+	.method#11 public setBeaconN(i[] beaconN)v
+
+	.method#12 public getBeaconT()l[]
+
+	.method#13 public setBeaconT(l[] beaconT)v
+
+	.method#3 static public SinkParameters(r:embs.SinkParameters this, c channel,c panid,c address)v
+.end
+
+
+;;! Class used to represent channel switch events
+.class#2 public ChannelSwitch
+
+	.method#0 public getTime()l
+
+	.method#1 public setTime(l time)v
+
+	.method#2 public setChannel(c channel)v
+
+	.method#3 public getChannel()c
+
+	.method#4 static public ChannelSwitch(r:embs.ChannelSwitch this, l time,c channel)v
+.end
+
+
+;;! Represents a scheduled broadcast
+.class#3 public Broadcast
+
+	.method#0 public getBroadcastTime()l
+
+	.method#1 public setBroadcastTime(l broadcastTime)v
+
+	.method#2 public getDeadline()l
+
+	.method#3 public setDeadline(l deadline)v
+
+	.method#5 static public Broadcast(r:embs.Broadcast this, l broadcastTime,l cutoffTime)v
+.end
+
+.end

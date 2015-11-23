@@ -5,8 +5,8 @@ public class SinkParameters {
     private byte panid;
     private byte address;
     
-    private int N;
-    private int T;
+    private int N = -1;
+    private long T = -1;
     private int[] beaconN = new int[3];
     private long[] beaconT = new long[3];
     private int numBeacons = 0;
@@ -26,8 +26,8 @@ public class SinkParameters {
     }
     
 	public void setN(int n) {this.N = n;}
-	public int getT() {return T;}
-	public void setT(int t) {this.T = t;}
+	public long getT() {return T;}
+	public void setT(long t) {this.T = t;}
 	public int getN() {return N;}
 	public byte getChannel() {return channel;}
 	public byte getPanid() {return panid;}

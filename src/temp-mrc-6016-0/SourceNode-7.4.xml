@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<doc>
+	<assembly>
+		<name>
+		temp-mrc-6016-0/SourceNode-7.4
+		</name>
+	</assembly>
+	<members>
+		<member name="T:embs.SourceNode">
+		</member>
+		<member name="T:embs.SinkParameters">
+		</member>
+		<member name="T:embs.ChannelSwitch">
+			<summary>
+			Class used to represent channel switch events
+			</summary>
+		</member>
+		<member name="T:embs.Broadcast">
+			<summary>
+			Represents a scheduled broadcast
+			</summary>
+		</member>
+		<member name="M:embs.SourceNode.#ctor">
+		</member>
+		<member name="M:embs.SourceNode.startListening(byte, long)">
+		</member>
+		<member name="M:embs.SourceNode.broadcastToSink(byte, long)">
+		</member>
+		<member name="M:embs.SourceNode.getChannelSwitch(long, embs.ChannelSwitch[])">
+		</member>
+		<member name="M:embs.SinkParameters.#ctor">
+		</member>
+		<member name="M:embs.SinkParameters.addBeacon(int, long)">
+		</member>
+		<member name="M:embs.SinkParameters.setN(int)">
+		</member>
+		<member name="M:embs.SinkParameters.getT()">
+		</member>
+		<member name="M:embs.SinkParameters.setT(int)">
+		</member>
+		<member name="M:embs.SinkParameters.getN()">
+		</member>
+		<member name="M:embs.SinkParameters.getChannel()">
+		</member>
+		<member name="M:embs.SinkParameters.getPanid()">
+		</member>
+		<member name="M:embs.SinkParameters.getAddress()">
+		</member>
+		<member name="M:embs.SinkParameters.getNumBeacons()">
+		</member>
+		<member name="M:embs.SinkParameters.setNumBeacons(int)">
+		</member>
+		<member name="M:embs.SinkParameters.getBeaconN()">
+		</member>
+		<member name="M:embs.SinkParameters.setBeaconN(int[])">
+		</member>
+		<member name="M:embs.SinkParameters.getBeaconT()">
+		</member>
+		<member name="M:embs.SinkParameters.setBeaconT(long[])">
+		</member>
+		<member name="M:embs.ChannelSwitch.#ctor">
+		</member>
+		<member name="M:embs.ChannelSwitch.getTime()">
+		</member>
+		<member name="M:embs.ChannelSwitch.setTime(long)">
+		</member>
+		<member name="M:embs.ChannelSwitch.setChannel(byte)">
+		</member>
+		<member name="M:embs.ChannelSwitch.getChannel()">
+		</member>
+		<member name="M:embs.Broadcast.#ctor">
+		</member>
+		<member name="M:embs.Broadcast.getBroadcastTime()">
+		</member>
+		<member name="M:embs.Broadcast.setBroadcastTime(long)">
+		</member>
+		<member name="M:embs.Broadcast.getDeadline()">
+		</member>
+		<member name="M:embs.Broadcast.setDeadline(long)">
+		</member>
+	</members>
+</doc>
