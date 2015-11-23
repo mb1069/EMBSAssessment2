@@ -1,4 +1,4 @@
-A!	Sink1-1.4.13489	2.0	Java
+A!	Sink1-1.5.17061	2.0	Java
 
 X	c:01/000	com.ibm.saguaro.system.Assembly
 X	c:01/001	com.ibm.saguaro.system.Util
@@ -45,13 +45,13 @@ F	channel	c	0	6
 F	panid	c	0	7
 F	address	c	0	8
 H	Finished_listening$UTF8	b[]	0	70,105,110,105,115,104,101,100,32,108,105,115,116,101,110,105,110,103
-H	RECEIVED$UTF8	b[]	0	82,69,67,69,73,86,69,68,33,33,33,33
+H	RECEIVED$UTF8	b[]	0	82,69,67,69,73,86,69,68,33,33,33,33,58,32
 H	Started_listening$UTF8	b[]	0	83,116,97,114,116,101,100,32,108,105,115,116,101,110,105,110,103
-M!	Sink1(r:embs.Sink1)v	-1	m:008A	00114	4
-M	access$000(i,c[],i,i,l)i	-1	m:008C	00118	14
-M	onReceive(i,c[],i,i,l)i	-1	m:0093	00126	102
-M!	periodicSend(c,l)v	-1	m:00C6	0018C	98
-M!	restart(c,l)v	-1	m:00F7	001EE	32
+M!	Sink1(r:embs.Sink1)v	-1	m:0089	00112	4
+M	access$000(i,c[],i,i,l)i	-1	m:008B	00116	14
+M	onReceive(i,c[],i,i,l)i	-1	m:0092	00124	102
+M!	periodicSend(c,l)v	-1	m:00C5	0018A	102
+M!	restart(c,l)v	-1	m:00F8	001F0	32
 
 C	c:006	com.ibm.saguaro.system.$tatics	-1	-1	c:01/000
 r	embs.Sink1.tsend	r:com.ibm.saguaro.system.Timer	-1	0
@@ -66,90 +66,91 @@ f	embs.Sink1.t	i	-1	5
 f	embs.Sink1.channel	c	-1	6
 f	embs.Sink1.panid	c	-1	7
 f	embs.Sink1.address	c	-1	8
-M	__init()v	-1	m:0010	00020	244
+M	__init()v	-1	m:0010	00020	242
 
 c	0002D	0	11	0	11	0	m:0010
 c	00031	0	15	0	15	0	m:0010
 c	0003B	0	16	0	16	0	m:0010
 c	0003F	0	19	0	19	0	m:0010
 c	00045	0	22	0	22	0	m:0010
-c	0004A	0	23	0	23	0	m:0010
-c	0004F	0	24	0	24	0	m:0010
-c	00054	0	28	0	28	0	m:0010
-c	00060	0	32	0	32	0	m:0010
-c	00069	0	36	0	36	0	m:0010
-c	00073	0	37	0	37	0	m:0010
-c	0007C	0	41	0	41	0	m:0010
-c	00082	0	42	0	42	0	m:0010
-c	00088	0	43	0	43	0	m:0010
-c	00090	0	44	0	44	0	m:0010
-c	0009B	0	45	0	45	0	m:0010
-c	000A4	0	46	0	46	0	m:0010
-c	000B0	0	47	0	47	0	m:0010
-c	000BC	0	49	0	49	0	m:0010
-c	000C6	0	53	0	53	0	m:0010
-c	000D0	0	60	0	60	0	m:0010
-c	000DA	0	61	0	61	0	m:0010
-c	000E4	0	68	0	68	0	m:0010
-c	000EE	0	69	0	69	0	m:0010
-c	000F8	0	76	0	76	0	m:0010
-c	00103	0	78	0	78	0	m:0010
-c	00112	0	80	0	80	0	m:0010
-e	00114	m:0010
-c	00117	0	6	0	6	0	m:008A
-l!	00117	00118	r:embs.Sink1	this	m:008A	0
-e!	00118	m:008A
-c	0011B	0	6	0	6	0	m:008C
-l	0011B	00125	i	x0	m:008C	0
-l	0011B	00125	c[]	x1	m:008C	1
-l	0011B	00125	i	x2	m:008C	2
-l	0011B	00125	i	x3	m:008C	3
-l	0011B	00125	l	x4	m:008C	4
-e	00126	m:008C
-c	00129	0	84	0	84	0	m:0093
-l	00129	0018C	i	flags	m:0093	0
-l	00129	0018C	c[]	data	m:0093	1
-l	00129	0018C	i	len	m:0093	2
-l	00129	0018C	i	info	m:0093	3
-l	00129	0018C	l	time	m:0093	4
-c	0012C	0	86	0	86	0	m:0093
-c	00131	0	87	0	87	0	m:0093
-c	00136	0	89	0	89	0	m:0093
-c	00145	0	90	0	90	0	m:0093
-c	0014B	0	91	0	91	0	m:0093
-c	0014D	0	94	0	94	0	m:0093
-c	00152	0	95	0	95	0	m:0093
-c	00157	0	97	0	97	0	m:0093
-c	0015C	0	98	0	98	0	m:0093
-c	00163	0	101	0	101	0	m:0093
-c	00168	0	103	0	103	0	m:0093
-c	00174	0	104	0	104	0	m:0093
-c	0017A	0	105	0	105	0	m:0093
-c	0017E	0	107	0	107	0	m:0093
-c	00186	0	108	0	108	0	m:0093
-c	0018A	0	109	0	109	0	m:0093
-e	0018C	m:0093
-c	0018F	0	117	0	117	0	m:00C6
-l!	0018F	001EE	c	param	m:00C6	0
-l!	0018F	001EE	l	time	m:00C6	1
-c	00194	0	118	0	118	0	m:00C6
-c	00199	0	120	0	120	0	m:00C6
-c	001AB	0	122	0	122	0	m:00C6
-c	001B4	0	123	0	123	0	m:00C6
-c	001BC	0	124	0	124	0	m:00C6
-c	001CA	0	127	0	127	0	m:00C6
-c	001CF	0	129	0	129	0	m:00C6
-c	001E2	0	131	0	131	0	m:00C6
-c	001E7	0	132	0	132	0	m:00C6
-c	001ED	0	135	0	135	0	m:00C6
-e!	001EE	m:00C6
-c	001F1	0	141	0	141	0	m:00F7
-l!	001F1	0020D	c	param	m:00F7	0
-l!	001F1	0020D	l	time	m:00F7	1
-c	001F7	0	142	0	142	0	m:00F7
-c	00201	0	143	0	143	0	m:00F7
-c	0020C	0	145	0	145	0	m:00F7
-e!	0020E	m:00F7
+c	00049	0	23	0	23	0	m:0010
+c	0004E	0	24	0	24	0	m:0010
+c	00053	0	28	0	28	0	m:0010
+c	0005F	0	32	0	32	0	m:0010
+c	00068	0	36	0	36	0	m:0010
+c	00072	0	37	0	37	0	m:0010
+c	0007B	0	41	0	41	0	m:0010
+c	00081	0	42	0	42	0	m:0010
+c	00087	0	43	0	43	0	m:0010
+c	0008F	0	44	0	44	0	m:0010
+c	0009A	0	45	0	45	0	m:0010
+c	000A3	0	46	0	46	0	m:0010
+c	000AF	0	47	0	47	0	m:0010
+c	000BB	0	49	0	49	0	m:0010
+c	000C5	0	53	0	53	0	m:0010
+c	000CF	0	60	0	60	0	m:0010
+c	000D9	0	61	0	61	0	m:0010
+c	000E3	0	68	0	68	0	m:0010
+c	000ED	0	69	0	69	0	m:0010
+c	000F7	0	76	0	76	0	m:0010
+c	00102	0	78	0	78	0	m:0010
+c	00111	0	80	0	80	0	m:0010
+e	00112	m:0010
+c	00115	0	6	0	6	0	m:0089
+l!	00115	00116	r:embs.Sink1	this	m:0089	0
+e!	00116	m:0089
+c	00119	0	6	0	6	0	m:008B
+l	00119	00123	i	x0	m:008B	0
+l	00119	00123	c[]	x1	m:008B	1
+l	00119	00123	i	x2	m:008B	2
+l	00119	00123	i	x3	m:008B	3
+l	00119	00123	l	x4	m:008B	4
+e	00124	m:008B
+c	00127	0	84	0	84	0	m:0092
+l	00127	0018A	i	flags	m:0092	0
+l	00127	0018A	c[]	data	m:0092	1
+l	00127	0018A	i	len	m:0092	2
+l	00127	0018A	i	info	m:0092	3
+l	00127	0018A	l	time	m:0092	4
+c	0012A	0	86	0	86	0	m:0092
+c	0012F	0	87	0	87	0	m:0092
+c	00134	0	89	0	89	0	m:0092
+c	00143	0	90	0	90	0	m:0092
+c	00149	0	91	0	91	0	m:0092
+c	0014D	0	92	0	92	0	m:0092
+c	0014F	0	95	0	95	0	m:0092
+c	00154	0	96	0	96	0	m:0092
+c	00159	0	98	0	98	0	m:0092
+c	0015E	0	99	0	99	0	m:0092
+c	00165	0	102	0	102	0	m:0092
+c	0016A	0	104	0	104	0	m:0092
+c	00176	0	105	0	105	0	m:0092
+c	0017C	0	106	0	106	0	m:0092
+c	00184	0	107	0	107	0	m:0092
+c	00188	0	108	0	108	0	m:0092
+e	0018A	m:0092
+c	0018D	0	116	0	116	0	m:00C5
+l!	0018D	001F0	c	param	m:00C5	0
+l!	0018D	001F0	l	time	m:00C5	1
+c	00192	0	117	0	117	0	m:00C5
+c	00197	0	119	0	119	0	m:00C5
+c	001A9	0	121	0	121	0	m:00C5
+c	001B2	0	122	0	122	0	m:00C5
+c	001BA	0	123	0	123	0	m:00C5
+c	001C8	0	126	0	126	0	m:00C5
+c	001CD	0	128	0	128	0	m:00C5
+c	001E0	0	130	0	130	0	m:00C5
+c	001E5	0	131	0	131	0	m:00C5
+c	001EB	0	132	0	132	0	m:00C5
+c	001EF	0	135	0	135	0	m:00C5
+e!	001F0	m:00C5
+c	001F3	0	141	0	141	0	m:00F8
+l!	001F3	0020F	c	param	m:00F8	0
+l!	001F3	0020F	l	time	m:00F8	1
+c	001F9	0	142	0	142	0	m:00F8
+c	00203	0	143	0	143	0	m:00F8
+c	0020E	0	145	0	145	0	m:00F8
+e!	00210	m:00F8
 S	M:/EMBS/EMBS_assessment2/part2/src/embs/Sink1.java
 :	package embs;
 :	
@@ -172,7 +173,7 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/Sink1.java
 :	    private static int t = 1500; // milliseconds between beacons - sample only, assessment will use unknown values 
 :	    
 :	    // settings for sink A
-:	    private static byte channel = 11; // channel 11
+:	    private static byte channel = 3; // channel 11
 :	    private static byte panid = 0x11;
 :	    private static byte address = 0x11;
 :	
@@ -241,6 +242,7 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/Sink1.java
 :		        //set alarm to restart protocol
 :		    	tstart.setAlarmBySpan(10*wait);
 :		    	Logger.appendString(csr.s2b("Finished listening"));
+:		    	Logger.flush(Mote.INFO);
 :	            return 0;
 :	        }
 :	
@@ -254,11 +256,9 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/Sink1.java
 :	        	LED.setState((byte)2, (byte)0);
 :			}
 :			light=!light;
-:			Logger.appendString(csr.s2b("RECEIVED!!!!"));
-:			Logger.flush(Mote.ERROR);
-:			
+:			Logger.appendString(csr.s2b("RECEIVED!!!!: "));
 :			Logger.appendByte(data[11]);
-:	        Logger.flush(Mote.WARN);
+:			Logger.flush(Mote.ERROR);
 :	        return 0;
 :	        
 :	    }
@@ -283,6 +283,7 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/Sink1.java
 :		        // turn green LED on 
 :		        LED.setState((byte)1, (byte)1);
 :		        Logger.appendString(csr.s2b("Started listening"));
+:		        Logger.flush(Mote.INFO);
 :	        }
 :	        
 :	    }

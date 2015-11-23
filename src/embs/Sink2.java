@@ -18,7 +18,7 @@ public class Sink2 {
 	private static int t = 500; // milliseconds between beacons - sample only, assessment will use unknown values 
 
 	// settings for sink B
-    private static byte channel = (byte) 12; // channel 11
+    private static byte channel = 4; // channel 11
     private static byte panid = 0x12;
     private static byte address = 0x12;
 
