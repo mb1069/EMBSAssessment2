@@ -13,7 +13,7 @@ public class Sink1 {
     private static byte[] xmit;
     private static long   wait;
     static Radio radio = new Radio();
-    private static int n = 5; // number of beacons of sync phase - sample only, assessment will use unknown values
+    private static int n = 10; // number of beacons of sync phase - sample only, assessment will use unknown values
     private static int nc;
     
     private static int t = 1500; // milliseconds between beacons - sample only, assessment will use unknown values 
@@ -55,6 +55,8 @@ public class Sink1 {
                     return  Sink1.onReceive(flags, data, len, info, time);
                 }
             });
+
+
         
         // Setup a periodic timer callback for beacon transmissions
         tsend = new Timer();
@@ -63,6 +65,9 @@ public class Sink1 {
                     Sink1.periodicSend(param, time);
                 }
             });
+            
+            
+        
         
         // Setup a periodic timer callback to restart the protocol
         tstart = new Timer();
@@ -71,11 +76,15 @@ public class Sink1 {
                     Sink1.restart(param, time);
                 }
             });
+
             
         // Convert the periodic delay from ms to platform ticks
         wait = Time.toTickSpan(Time.MILLISECS, t);
         
+        
         tstart.setAlarmBySpan(Time.toTickSpan(Time.SECONDS, 5)); //starts the protocol 5 seconds after constructing the assembly
+        
+        
         
     }
 
@@ -84,25 +93,22 @@ public class Sink1 {
         if (data == null) { // marks end of reception period
             // turn green LED off 
 	        LED.setState((byte)1, (byte)0);
-	        LED.setState((byte)2, (byte)0);
+	        
 	        //set alarm to restart protocol
 	    	tstart.setAlarmBySpan(10*wait);
-	    	Logger.appendString(csr.s2b("Finished listening"));
+                    
             return 0;
         }
 
-        LED.setState((byte)2, (byte)1);
-        LED.setState((byte)1, (byte)1);
+
 		// frame received, so blink red LED and log its payload
+
         if(light){
          	LED.setState((byte)2, (byte)1);
         }
         else{
         	LED.setState((byte)2, (byte)0);
 		}
-		light=!light;
-		Logger.appendString(csr.s2b("RECEIVED!!!!"));
-		Logger.flush(Mote.ERROR);
 		light=!light;
 		
 		Logger.appendByte(data[11]);
@@ -130,7 +136,7 @@ public class Sink1 {
 	        radio.startRx(Device.ASAP, 0, Time.currentTicks()+wait);
 	        // turn green LED on 
 	        LED.setState((byte)1, (byte)1);
-	        Logger.appendString(csr.s2b("Started listening"));
+	        
         }
         
     }
