@@ -5,11 +5,9 @@ package embs;
  */
 public class Broadcast{
     private long broadcastTime; // broadcastTime: time at which to broadcast
-    private long deadline; // deadline: time at which
 
-    public Broadcast(long broadcastTime, long cutoffTime) {
+    public Broadcast(long broadcastTime) {
         this.broadcastTime = broadcastTime;
-        this.deadline = cutoffTime;
     }
 
     public long getBroadcastTime() {
@@ -17,12 +15,5 @@ public class Broadcast{
     }
     public void setBroadcastTime(long broadcastTime) {
         this.broadcastTime = broadcastTime;
-    }
-
-    public long getDeadline() {
-        return deadline;
-    }
-    public void setDeadline(long deadline) {
-        this.deadline = deadline;
     }
 }
