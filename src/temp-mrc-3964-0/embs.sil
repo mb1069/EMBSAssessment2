@@ -1,0 +1,390 @@
+; -*- asm -*-
+.sil-version 2.0
+.assembly Sink1-1.5
+.requires logger-11.0 saguaro-system-11.0
+.namespace embs
+
+.class public Sink1 ;; /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java
+
+	.field private static r:com.ibm.saguaro.system.Timer tsend
+	.field private static r:com.ibm.saguaro.system.Timer tstart
+	.field private static r:com.ibm.saguaro.system.Timer flashTimer
+	.field private static z light
+	.field private static c[] xmit
+	.field private static l wait
+	.field static r:com.ibm.saguaro.system.Radio radio
+	.field private static i n
+	.field private static i nc
+	.field private static i t
+	.field private static c channel
+	.field private static c panid
+	.field private static c address
+	.field private static i okCount
+	.field private static i okCountTemp
+	.field private static final b[] sink11_end_receive$UTF8,{115 105 110 107 49 49 32 101 110 100 32 114 101 99 101 105 118 101}
+	.field private static final b[] sink11_receiving$UTF8,{115 105 110 107 49 49 32 114 101 99 101 105 118 105 110 103}
+
+
+	.method public static Sink1(r:embs.Sink1 this)v					 ;; /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java
+			.limit stack,0
+			.limit local,0
+
+			.lvar 0,r:embs.Sink1,this
+	L1664764237:	ret								;; 7  		[]
+			.lvar 0
+	L128094496:									;; 		[]
+	.end
+
+	.method private static flash(c param,l time)v					 ;; /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java
+			.limit stack,4
+			.limit local,0
+
+			.lvar 0,c,param
+			.lvar 1,l,time
+	L1105579978:	ldf.asm		embs.Sink1.okCountTemp				;; 101  	[i]
+			dup								;; 		[i,i]
+			ldc.1								;; 		[i,i,i]
+			sub								;; 		[i,i]
+			stf.asm		embs.Sink1.okCountTemp				;; 		[i]
+			bzle		L1771715958					;; 		[]
+	L1385660009:	ldc.2								;; 102  	[i]
+			ldc.2								;; 		[i,i]
+			call.asm	com.ibm.saguaro.system.LED.getState(b)		;; 		[i,i]
+			ldc.1								;; 		[i,i,i]
+			bne		L1475103195					;; 		[i]
+			ldc.0								;; 		[i,i]
+			goto		L1508177397					;; 		[i,i]
+	L1475103195:	ldc.1								;; 		[i,i]
+	L1508177397:	call.asm	com.ibm.saguaro.system.LED.setState(b,b)	;; 		[]
+	L1188025838:	ldf.r.asm	embs.Sink1.flashTimer				;; 103  	[r]
+			ldc.1								;; 		[r,i]
+			ldc.l		300						;; 		[r,i,ll]
+			call.asm	com.ibm.saguaro.system.Time.toTickSpan(u,l)	;; 		[r,ll]
+			call.asm	com.ibm.saguaro.system.Timer.non_virt$setAlarmBySpan(r:com.ibm.saguaro.system.Timer,l);; 		[]
+	L1771715958:	ret								;; 105  	[]
+			.lvar 0
+			.lvar 1
+	L1994793107:									;; 		[]
+	.end
+
+	.method private static onReceive(i flags,c[] data,i len,i info,l time)i		 ;; /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java
+			.limit stack,5
+			.limit local,0
+
+			.lvar 0,i,flags
+			.lvar 1,c[],data
+			.lvar 2,i,len
+			.lvar 3,i,info
+			.lvar 4,l,time
+	L2120536032:	ld.r.1								;; 109  	[r]
+			bzne		L210484212					;; 		[]
+	L702584475:	ldc.0								;; 111  	[i]
+			ldc.0								;; 		[i,i]
+			call.asm	com.ibm.saguaro.system.LED.setState(b,b)	;; 		[]
+	L1472180119:	ldc.1								;; 112  	[i]
+			ldc.0								;; 		[i,i]
+			call.asm	com.ibm.saguaro.system.LED.setState(b,b)	;; 		[]
+	L1772162946:	ldc.2								;; 113  	[i]
+			ldc.0								;; 		[i,i]
+			call.asm	com.ibm.saguaro.system.LED.setState(b,b)	;; 		[]
+	L1291933179:	ldf.r.asm	embs.Sink1.sink11_end_receive$UTF8		;; 116  	[r]
+			call.asm	com.ibm.saguaro.logger.Logger.appendString(b[])	;; 		[]
+			ldc.3								;; 		[i]
+			call.asm	com.ibm.saguaro.logger.Logger.flush(b)		;; 		[]
+	L2114479448:	ldf.r.asm	embs.Sink1.tstart				;; 117  	[r]
+			ldc.l		10						;; 		[r,ll]
+			ldf.l.asm	embs.Sink1.wait					;; 		[r,ll,ll]
+			mul.l								;; 		[r,ll]
+			call.asm	com.ibm.saguaro.system.Timer.non_virt$setAlarmBySpan(r:com.ibm.saguaro.system.Timer,l);; 		[]
+	L1496691980:	ldf.asm		embs.Sink1.okCount				;; 119  	[i]
+			ldc.1								;; 		[i,i]
+			shl								;; 		[i]
+			stf.asm		embs.Sink1.okCountTemp				;; 		[]
+	L1426150549:	ldf.r.asm	embs.Sink1.flashTimer				;; 120  	[r]
+			ldf.l.asm	embs.Sink1.wait					;; 		[r,ll]
+			call.asm	com.ibm.saguaro.system.Timer.non_virt$setAlarmBySpan(r:com.ibm.saguaro.system.Timer,l);; 		[]
+	L1247292876:	ldc.0								;; 122  	[i]
+			ret.i								;; 		[]
+	L210484212:	ldf.asm		embs.Sink1.light				;; 128  	[i]
+			bzeq		L1663488565					;; 		[]
+	L162711662:	ldc.2								;; 129  	[i]
+			ldc.1								;; 		[i,i]
+			call.asm	com.ibm.saguaro.system.LED.setState(b,b)	;; 		[]
+			goto		L948220603					;; 		[]
+	L1663488565:	ldc.2								;; 132  	[i]
+			ldc.0								;; 		[i,i]
+			call.asm	com.ibm.saguaro.system.LED.setState(b,b)	;; 		[]
+	L948220603:	ldf.asm		embs.Sink1.light				;; 134  	[i]
+			bzne		L267530234					;; 		[]
+			ldc.1								;; 		[i]
+			goto		L1697369667					;; 		[i]
+	L267530234:	ldc.0								;; 		[i]
+	L1697369667:	stf.asm		embs.Sink1.light				;; 		[]
+	L519226521:	ld.r.1								;; 136  	[r]
+			ldc.b		11						;; 		[r,i]
+			lda.b								;; 		[i]
+			sxb								;; 		[i]
+			call.asm	com.ibm.saguaro.logger.Logger.appendByte(b)	;; 		[]
+	L1644369694:	ldc.4								;; 137  	[i]
+			call.asm	com.ibm.saguaro.logger.Logger.flush(b)		;; 		[]
+	L954393815:	ldf.asm		embs.Sink1.okCount				;; 138  	[i]
+			ldc.1								;; 		[i,i]
+			add								;; 		[i]
+			stf.asm		embs.Sink1.okCount				;; 		[]
+	L941489262:	ldc.0								;; 140  	[i]
+			ret.i								;; 		[]
+			.lvar 0
+			.lvar 1
+			.lvar 2
+			.lvar 3
+			.lvar 4
+	L950515338:									;; 		[]
+	.end
+
+	.method public static periodicSend(c param,l time)v				 ;; /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java
+			.limit stack,8
+			.limit local,0
+
+			.lvar 0,c,param
+			.lvar 1,l,time
+	L180435733:	ldf.asm		embs.Sink1.nc					;; 148  	[i]
+			bzle		L336454967					;; 		[]
+	L474187818:	ldf.r.asm	embs.Sink1.radio				;; 150  	[r]
+			ldc.1								;; 		[r,i]
+			ldf.r.asm	embs.Sink1.xmit					;; 		[r,i,r]
+			ldc.0								;; 		[r,i,r,i]
+			ldc.b		12						;; 		[r,i,r,i,i]
+			ldc.l		0						;; 		[r,i,r,i,i,ll]
+			call.virt	com.ibm.saguaro.system.CDev.transmit(u,b[],u,u,l);; 		[]
+	L362843109:	ldf.r.asm	embs.Sink1.tsend				;; 152  	[r]
+			ldf.l.asm	embs.Sink1.wait					;; 		[r,ll]
+			call.asm	com.ibm.saguaro.system.Timer.non_virt$setAlarmBySpan(r:com.ibm.saguaro.system.Timer,l);; 		[]
+	L1598059130:	ldf.asm		embs.Sink1.nc					;; 153  	[i]
+			ldc.1								;; 		[i,i]
+			sub								;; 		[i]
+			stf.asm		embs.Sink1.nc					;; 		[]
+	L1824881:	ldf.r.asm	embs.Sink1.xmit					;; 154  	[r]
+			ldc.b		11						;; 		[r,i]
+			dup2								;; 		[r,i,r,i]
+			lda.b								;; 		[r,i,i]
+			sxb								;; 		[r,i,i]
+			ldc.1								;; 		[r,i,i,i]
+			sub								;; 		[r,i,i]
+			sxb								;; 		[r,i,i]
+			sta.b								;; 		[]
+			goto		L606003909					;; 		[]
+	L336454967:	ldf.r.asm	embs.Sink1.sink11_receiving$UTF8		;; 158  	[r]
+			call.asm	com.ibm.saguaro.logger.Logger.appendString(b[])	;; 		[]
+			ldc.3								;; 		[i]
+			call.asm	com.ibm.saguaro.logger.Logger.flush(b)		;; 		[]
+	L1740244489:	ldf.r.asm	embs.Sink1.radio				;; 159  	[r]
+			ldc.1								;; 		[r,i]
+			ldc.l		0						;; 		[r,i,ll]
+			call.asm	com.ibm.saguaro.system.Time.currentTicks()	;; 		[r,i,ll,ll]
+			ldf.l.asm	embs.Sink1.wait					;; 		[r,i,ll,ll,ll]
+			add.l								;; 		[r,i,ll,ll]
+			call.virt	com.ibm.saguaro.system.CDev.startRx(u,l,l)	;; 		[]
+	L1709338130:	ldc.0								;; 161  	[i]
+			ldc.0								;; 		[i,i]
+			call.asm	com.ibm.saguaro.system.LED.setState(b,b)	;; 		[]
+	L1957204991:	ldc.1								;; 162  	[i]
+			ldc.1								;; 		[i,i]
+			call.asm	com.ibm.saguaro.system.LED.setState(b,b)	;; 		[]
+	L1737262638:	ldc.2								;; 163  	[i]
+			ldc.0								;; 		[i,i]
+			call.asm	com.ibm.saguaro.system.LED.setState(b,b)	;; 		[]
+	L606003909:	ret								;; 167  	[]
+			.lvar 0
+			.lvar 1
+	L985492254:									;; 		[]
+	.end
+
+	.method public static restart(c param,l time)v					 ;; /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java
+			.limit stack,3
+			.limit local,0
+
+			.lvar 0,c,param
+			.lvar 1,l,time
+	L1774427314:	ldf.asm		embs.Sink1.n					;; 173  	[i]
+			stf.asm		embs.Sink1.nc					;; 		[]
+	L694460509:	ldf.r.asm	embs.Sink1.xmit					;; 174  	[r]
+			ldc.b		11						;; 		[r,i]
+			ldf.asm		embs.Sink1.n					;; 		[r,i,i]
+			sxb								;; 		[r,i,i]
+			sta.b								;; 		[]
+	L224153318:	ldf.r.asm	embs.Sink1.tsend				;; 175  	[r]
+			ldc.l		0						;; 		[r,ll]
+			call.asm	com.ibm.saguaro.system.Timer.non_virt$setAlarmBySpan(r:com.ibm.saguaro.system.Timer,l);; 		[]
+	L658498788:	ldc.0								;; 177  	[i]
+			ldc.1								;; 		[i,i]
+			call.asm	com.ibm.saguaro.system.LED.setState(b,b)	;; 		[]
+	L1405896925:	ldc.1								;; 178  	[i]
+			ldc.0								;; 		[i,i]
+			call.asm	com.ibm.saguaro.system.LED.setState(b,b)	;; 		[]
+	L147050534:	ldc.2								;; 179  	[i]
+			ldc.0								;; 		[i,i]
+			call.asm	com.ibm.saguaro.system.LED.setState(b,b)	;; 		[]
+	L1872130888:	ret								;; 180  	[]
+			.lvar 0
+			.lvar 1
+	L2120922419:									;; 		[]
+	.end
+
+	.method static access$000(i x0,c[] x1,i x2,i x3,l x4)i				 ;; /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java
+			.limit stack,6
+			.limit local,0
+
+			.lvar 0,i,x0
+			.lvar 1,c[],x1
+			.lvar 2,i,x2
+			.lvar 3,i,x3
+			.lvar 4,l,x4
+	L262039580:	ld.0								;; 7  		[i]
+			ld.r.1								;; 		[i,r]
+			ld.2								;; 		[i,r,i]
+			ld.3								;; 		[i,r,i,i]
+			ld.l		4						;; 		[i,r,i,i,ll]
+			call.asm	embs.Sink1.onReceive(i,c[],i,i,l)		;; 		[i]
+			ret.i								;; 		[]
+			.lvar 0
+			.lvar 1
+			.lvar 2
+			.lvar 3
+			.lvar 4
+	L1757744710:									;; 		[]
+	.end
+
+	.method static access$100(c x0,l x1)v						 ;; /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java
+			.limit stack,3
+			.limit local,0
+
+			.lvar 0,c,x0
+			.lvar 1,l,x1
+	L1630292838:	ld.0								;; 7  		[i]
+			ld.l.1								;; 		[i,ll]
+			call.asm	embs.Sink1.flash(c,l)				;; 		[]
+			ret								;; 		[]
+			.lvar 0
+			.lvar 1
+	L587876193:									;; 		[]
+	.end
+.end
+
+
+.init Sink115()
+			.limit stack,5
+			.limit local,0
+
+	L2010399551_Sink1:ldc.0								;; 12 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [i]
+			stf.asm		embs.Sink1.light				;; 		[]
+	L277551759_Sink1:new		r:com.ibm.saguaro.system.Radio			;; 16 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			dup								;; 		[r,r]
+			call.asm	com.ibm.saguaro.system.Radio.Radio(r:com.ibm.saguaro.system.Radio);; 		[r]
+			stf.r.asm	embs.Sink1.radio				;; 		[]
+	L191640028_Sink1:ldc.6								;; 17 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [i]
+			stf.asm		embs.Sink1.n					;; 		[]
+	L1815963743_Sink1:ldc		500						;; 20 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [i]
+			stf.asm		embs.Sink1.t					;; 		[]
+	L865037437_Sink1:ldc.b		11						;; 23 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [i]
+			stf.asm		embs.Sink1.channel				;; 		[]
+	L219913469_Sink1:ldc.b		17						;; 24 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [i]
+			stf.asm		embs.Sink1.panid				;; 		[]
+	L266316996_Sink1:ldc.b		17						;; 25 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [i]
+			stf.asm		embs.Sink1.address				;; 		[]
+	L633831424_Sink1:ldc.0								;; 27 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [i]
+			stf.asm		embs.Sink1.okCount				;; 		[]
+	L1285854048_Sink1:ldc.0								;; 28 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [i]
+			stf.asm		embs.Sink1.okCountTemp				;; 		[]
+	L1221044975_Sink1:ldf.r.asm	embs.Sink1.radio				;; 32 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldc		512						;; 		[r,i]
+			ldc.null							;; 		[r,i,r]
+			ldc.0								;; 		[r,i,r,i]
+			ldc.0								;; 		[r,i,r,i,i]
+			call.virt	com.ibm.saguaro.system.Device.open(u,b[],u,u)	;; 		[]
+	L749164093_Sink1:ldf.r.asm	embs.Sink1.radio				;; 36 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldf.asm		embs.Sink1.channel				;; 		[r,i]
+			call.asm	com.ibm.saguaro.system.Radio.non_virt$setChannel(r:com.ibm.saguaro.system.Radio,b);; 		[]
+	L504288690_Sink1:ldf.r.asm	embs.Sink1.radio				;; 40 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldf.asm		embs.Sink1.panid				;; 		[r,i]
+			ldc.1								;; 		[r,i,i]
+			call.asm	com.ibm.saguaro.system.Radio.non_virt$setPanId(r:com.ibm.saguaro.system.Radio,u,z);; 		[]
+	L1609541768_Sink1:ldf.r.asm	embs.Sink1.radio				;; 41 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldf.asm		embs.Sink1.address				;; 		[r,i]
+			call.asm	com.ibm.saguaro.system.Radio.non_virt$setShortAddr(r:com.ibm.saguaro.system.Radio,u);; 		[]
+	L1864477164_Sink1:ldc.b		12						;; 45 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [i]
+			newa.b								;; 		[r]
+			stf.r.asm	embs.Sink1.xmit					;; 		[]
+	L186318324_Sink1:ldf.r.asm	embs.Sink1.xmit					;; 46 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldc.0								;; 		[r,i]
+			ldc.0								;; 		[r,i,i]
+			sta.b								;; 		[]
+	L420914142_Sink1:ldf.r.asm	embs.Sink1.xmit					;; 47 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldc.1								;; 		[r,i]
+			ldc		-120						;; 		[r,i,i]
+			sta.b								;; 		[]
+	L492851376_Sink1:ldf.r.asm	embs.Sink1.xmit					;; 48 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldc.3								;; 		[r,i]
+			ldf.asm		embs.Sink1.panid				;; 		[r,i,i]
+			call.asm	com.ibm.saguaro.system.Util.set16le(b[],u,u)	;; 		[i]
+			pop								;; 		[]
+	L508649953_Sink1:ldf.r.asm	embs.Sink1.xmit					;; 49 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldc.5								;; 		[r,i]
+			ldc.m1								;; 		[r,i,i]
+			call.asm	com.ibm.saguaro.system.Util.set16le(b[],u,u)	;; 		[i]
+			pop								;; 		[]
+	L1894845011_Sink1:ldf.r.asm	embs.Sink1.xmit					;; 50 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldc.b		7						;; 		[r,i]
+			ldf.asm		embs.Sink1.panid				;; 		[r,i,i]
+			call.asm	com.ibm.saguaro.system.Util.set16le(b[],u,u)	;; 		[i]
+			pop								;; 		[]
+	L1625098514_Sink1:ldf.r.asm	embs.Sink1.xmit					;; 51 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldc.b		9						;; 		[r,i]
+			ldf.asm		embs.Sink1.address				;; 		[r,i,i]
+			call.asm	com.ibm.saguaro.system.Util.set16le(b[],u,u)	;; 		[i]
+			pop								;; 		[]
+	L1333702252_Sink1:ldf.r.asm	embs.Sink1.xmit					;; 53 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldc.b		11						;; 		[r,i]
+			ldf.asm		embs.Sink1.n					;; 		[r,i,i]
+			sxb								;; 		[r,i,i]
+			sta.b								;; 		[]
+	L99441978_Sink1:ldf.r.asm	embs.Sink1.radio				;; 56 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldc.null							;; 		[r,r]
+			del.asm		embs.Sink1.access$000(i,c[],i,i,l)		;; 		[r,dd]
+			call.virt	com.ibm.saguaro.system.CDev.setRxHandler(d:com.ibm.saguaro.system.DevCallback);; 		[]
+	L579046880_Sink1:new		r:com.ibm.saguaro.system.Timer			;; 65 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			dup								;; 		[r,r]
+			call.asm	com.ibm.saguaro.system.Timer.Timer(r:com.ibm.saguaro.system.Timer);; 		[r]
+			stf.r.asm	embs.Sink1.tsend				;; 		[]
+	L1792507603_Sink1:ldf.r.asm	embs.Sink1.tsend				;; 66 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldc.null							;; 		[r,r]
+			del.asm		embs.Sink1.periodicSend(c,l)			;; 		[r,dd]
+			call.asm	com.ibm.saguaro.system.Timer.non_virt$setCallback(r:com.ibm.saguaro.system.Timer,d:com.ibm.saguaro.system.TimerEvent);; 		[]
+	L1774683505_Sink1:new		r:com.ibm.saguaro.system.Timer			;; 72 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			dup								;; 		[r,r]
+			call.asm	com.ibm.saguaro.system.Timer.Timer(r:com.ibm.saguaro.system.Timer);; 		[r]
+			stf.r.asm	embs.Sink1.flashTimer				;; 		[]
+	L705295352_Sink1:ldf.r.asm	embs.Sink1.flashTimer				;; 73 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldc.null							;; 		[r,r]
+			del.asm		embs.Sink1.access$100(c,l)			;; 		[r,dd]
+			call.asm	com.ibm.saguaro.system.Timer.non_virt$setCallback(r:com.ibm.saguaro.system.Timer,d:com.ibm.saguaro.system.TimerEvent);; 		[]
+	L1936733271_Sink1:new		r:com.ibm.saguaro.system.Timer			;; 82 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			dup								;; 		[r,r]
+			call.asm	com.ibm.saguaro.system.Timer.Timer(r:com.ibm.saguaro.system.Timer);; 		[r]
+			stf.r.asm	embs.Sink1.tstart				;; 		[]
+	L1266448118_Sink1:ldf.r.asm	embs.Sink1.tstart				;; 83 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldc.null							;; 		[r,r]
+			del.asm		embs.Sink1.restart(c,l)				;; 		[r,dd]
+			call.asm	com.ibm.saguaro.system.Timer.non_virt$setCallback(r:com.ibm.saguaro.system.Timer,d:com.ibm.saguaro.system.TimerEvent);; 		[]
+	L1483093809_Sink1:ldc.1								;; 91 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [i]
+			ldf.asm		embs.Sink1.t					;; 		[i,i]
+			sxi								;; 		[i,ll]
+			call.asm	com.ibm.saguaro.system.Time.toTickSpan(u,l)	;; 		[ll]
+			stf.l.asm	embs.Sink1.wait					;; 		[]
+	L514957134_Sink1:ldf.r.asm	embs.Sink1.tstart				;; 94 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java [r]
+			ldc.2								;; 		[r,i]
+			ldc.l		1						;; 		[r,i,ll]
+			call.asm	com.ibm.saguaro.system.Time.toTickSpan(u,l)	;; 		[r,ll]
+			call.asm	com.ibm.saguaro.system.Timer.non_virt$setAlarmBySpan(r:com.ibm.saguaro.system.Timer,l);; 		[]
+	L525453728_Sink1:ret								;; 98 /home/miguel/workspace/EMBSAssessment2/src/embs/Sink1.java []
+.end
+.end
