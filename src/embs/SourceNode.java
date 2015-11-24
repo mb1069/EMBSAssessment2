@@ -1,33 +1,21 @@
 package embs;
 
-import com.ibm.saguaro.logger.Logger;
-import com.ibm.saguaro.system.DevCallback;
-import com.ibm.saguaro.system.Device;
-import com.ibm.saguaro.system.LED;
-import com.ibm.saguaro.system.Mote;
-import com.ibm.saguaro.system.Radio;
-import com.ibm.saguaro.system.Time;
-import com.ibm.saguaro.system.Timer;
-import com.ibm.saguaro.system.TimerEvent;
-import com.ibm.saguaro.system.Util;
-import com.ibm.saguaro.system.csr;
+import com.ibm.saguaro.system.*;
+import com.ibm.saguaro.logger.*;
 //import embs.SinkParameter;
 
 
 public class SourceNode {
 
-
-	static Timer  timer0;
 	static Timer  timer1;
-	static Timer  timer2;
 	static byte[] xmit;
 	static long   wait;
 	static Radio radio = new Radio();
 
 	private static SinkParameters[] sinks = {
-		new SinkParameters((byte) 3,(byte)  0x11,(byte)  0x11), 
-		new SinkParameters((byte) 4, (byte) 0x12, (byte) 0x12),
-		new SinkParameters((byte) 5, (byte) 0x13, (byte) 0x13)};
+		new SinkParameters((byte) 11,(byte)  0x11,(byte)  0x11), 
+		new SinkParameters((byte) 12, (byte) 0x12, (byte) 0x12),
+		new SinkParameters((byte) 13, (byte) 0x13, (byte) 0x13)};
 	// settings for SourceNode A
 	static int currentChannel = 0;
 	static byte ownPanId = 0x11;
@@ -42,13 +30,13 @@ public class SourceNode {
 	static int N_MAX = 10;
 	static long T_MIN = 250;
 	static long T_MAX = 1500;
-
+	
 
 	static ChannelSwitch[] channelSwitches = new ChannelSwitch[5];
 
 	static byte previousChannel;
 	static boolean broadcastSet = false;
-
+	
 	static {
 		// Open the default radio
 		radio.open(Radio.DID, null, 0, 0);
@@ -57,31 +45,12 @@ public class SourceNode {
 		LED.setState((byte) 1, (byte) 1);
 		LED.setState((byte) 2, (byte) 1);
 
-		timer0 = new Timer();
-		timer0.setParam((byte) 0);
-		timer0.setCallback(new TimerEvent(null){
-			public void invoke(byte param, long time){
-				SourceNode.broadcastToSink(param, time);
-			}
-		});
-
 		timer1 = new Timer();
-		timer1.setParam((byte) 1);
 		timer1.setCallback(new TimerEvent(null){
 			public void invoke(byte param, long time){
 				SourceNode.broadcastToSink(param, time);
 			}
 		});
-
-		timer2 = new Timer();
-		timer2.setParam((byte) 2);
-		timer2.setCallback(new TimerEvent(null){
-			public void invoke(byte param, long time){
-				SourceNode.broadcastToSink(param, time);
-			}
-		});
-
-
 
 		// Set channel 
 		radio.setChannel((byte) sinks[currentChannel].getChannel());
@@ -116,6 +85,7 @@ public class SourceNode {
 
 	private static int onTransmit(int flags, byte[] data, int len, int info, long time) {
 		broadcastSet = false;
+		
 		if (radio.getState()==Device.S_RXEN){
 			radio.stopRx();
 		}
@@ -123,8 +93,11 @@ public class SourceNode {
 		if (radio.getState()!=Device.S_RXEN){
 			radio.startRx(Device.TIMED, Time.currentTicks()+Time.toTickSpan(Time.MILLISECS, 10), Time.currentTicks()+0x7FFFFFFF);
 		}
-		//		Logger.appendString(csr.s2b("Turned on radio:"));
-		//		Logger.flush(Mote.INFO);
+//		Logger.appendString(csr.s2b("Turned on radio:"));
+//		Logger.flush(Mote.INFO);
+		sinks[currentChannel].setBeaconN(new int[3]);
+		sinks[currentChannel].setBeaconT(new long[3]);
+		sinks[currentChannel].setNumBeacons(0);
 		return 0;
 	}
 
@@ -135,14 +108,14 @@ public class SourceNode {
 		if (data == null) { // marks end of reception period
 			// turn green LED off 
 			LED.setState((byte)1, (byte)0);
-
+			
 			return 0;
 		}
 		int n = data[11];
 		long currentTime = Time.currentTime(Time.MILLISECS);
 		//If T is known for sink
 		if (sinks[currentChannel].getT()!=-1){
-			createNextBroadcast(n, currentChannel, sinks[currentChannel].getT(), currentTime);
+			createNextBroadcast(n, currentTime, currentChannel, sinks[currentChannel].getT(), currentTime);
 		} else {
 			sinks[currentChannel].addBeacon(n, currentTime);
 			int numBeacons = sinks[currentChannel].getNumBeacons();
@@ -156,7 +129,7 @@ public class SourceNode {
 					Logger.appendString(csr.s2b("Calculated T: "));
 					Logger.appendLong(t);
 					Logger.flush(Mote.WARN);
-					createNextBroadcast(sinks[currentChannel].getBeaconN()[numBeacons-1], currentChannel, t, currentTime);
+					createNextBroadcast(sinks[currentChannel].getBeaconN()[numBeacons-1], sinks[currentChannel].getBeaconT()[numBeacons-1], currentChannel, t, currentTime);
 				}
 			}
 		}
@@ -167,21 +140,21 @@ public class SourceNode {
 		return 0;
 	}
 
-	protected static long calculateCallback(long currentTime, int maxObservedN, long channelT){
-		return currentTime+((maxObservedN+11) * channelT);
-	}
 
-	protected static void broadcastToSink(byte channel, long time){
+	protected static void broadcastToSink(byte param, long time){
+		
 		LED.setState((byte) 2, (byte) 1);
 		Logger.appendString(csr.s2b("BROADCASTING!"));
 		Logger.flush(Mote.WARN);
+		
 		radio.stopRx();
 		toggleLed(2);
-		Logger.appendString(csr.s2b("Got channelNum: "));
-		Logger.appendByte((byte) channel);
-		Logger.flush(Mote.INFO);
+		byte channelNum = getChannelSwitch(time, channelSwitches);
+//		Logger.appendString(csr.s2b("Got channelNum: "));
+//		Logger.appendByte(channelNum);
+//		Logger.flush(Mote.INFO);
 		previousChannel = radio.getChannel();
-		radio.setChannel((byte) channel);
+		radio.setChannel(channelNum);
 		radio.transmit(Device.ASAP|Radio.TXMODE_POWER_MAX, xmit, 0, 12, 0);
 		Logger.appendString(csr.s2b("Transmitted."));
 		Logger.flush(Mote.INFO);
@@ -196,14 +169,14 @@ public class SourceNode {
 		return sinks[currentChannel].getChannel();
 	}
 
-	private static void createNextBroadcast(int beaconN, int channel, long t, long currentTimeMS) {
+	private static void createNextBroadcast(int beaconN, long beaconT, int channel, long t, long currentTimeMS) {
 		long broadcastTime = (t  * beaconN) + currentTimeMS;
 		long deadline = broadcastTime + T_MIN;
-		setupBroadcastAndCallBack(broadcastTime + (T_MIN>>1), deadline, channel, currentTimeMS);
+		setupBroadcastAndCallBack(broadcastTime + (T_MIN/2), deadline, channel, currentTimeMS);
 	}
 
 	private static void setupBroadcastAndCallBack(long broadcastTime, long deadline, int sinkIndex, long currentTimeMS){
-		broadcastTime+= T_MIN>>2;
+		broadcastTime+= T_MIN/4;
 		LED.setState((byte) 2, (byte) 0);
 		ChannelSwitch cs = new ChannelSwitch(broadcastTime, sinks[sinkIndex].getChannel());
 		for (ChannelSwitch c: channelSwitches){
@@ -211,25 +184,15 @@ public class SourceNode {
 				return;
 			}
 		}
-
+		
 		Logger.appendString(csr.s2b("PREPARING BROADCAST! for time: "));
 		Logger.appendLong(broadcastTime);
 		Logger.flush(Mote.WARN);
 		channelSwitches = insertChannelSwitchInBuffer(channelSwitches, cs);
-		switch (currentChannel){
-		case 0: 
-			timer0.setAlarmBySpan(Time.toTickSpan(Time.MILLISECS, broadcastTime-currentTimeMS));
-			break;
-		case 1: 
-			timer1.setAlarmBySpan(Time.toTickSpan(Time.MILLISECS, broadcastTime-currentTimeMS));
-			break;
-		case 2: 
-			timer2.setAlarmBySpan(Time.toTickSpan(Time.MILLISECS, broadcastTime-currentTimeMS));
-			break;
-		}
+		timer1.setAlarmBySpan(Time.toTickSpan(Time.MILLISECS, broadcastTime-currentTimeMS));
 	}
-
-
+	
+	
 	private static ChannelSwitch[] insertChannelSwitchInBuffer(ChannelSwitch[] css, ChannelSwitch cs){
 		// If space available in buffer
 		int x;

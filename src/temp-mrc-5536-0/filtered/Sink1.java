@@ -1,3 +1,4 @@
+//line 1 "M:/EMBS/EMBS_assessment2/part2/src/embs/Sink1.java"
 package embs;
 
 import com.ibm.saguaro.system.*;
@@ -19,7 +20,7 @@ public class Sink1 {
     private static int t = 1500; // milliseconds between beacons - sample only, assessment will use unknown values 
     
     // settings for sink A
-    private static byte channel = 11; // channel 11
+    private static byte channel = 3; // channel 11
     private static byte panid = 0x11;
     private static byte address = 0x11;
 
@@ -88,6 +89,7 @@ public class Sink1 {
 	        //set alarm to restart protocol
 	    	tstart.setAlarmBySpan(10*wait);
 	    	Logger.appendString(csr.s2b("Finished listening"));
+	    	Logger.flush(Mote.INFO);
             return 0;
         }
 
@@ -101,12 +103,9 @@ public class Sink1 {
         	LED.setState((byte)2, (byte)0);
 		}
 		light=!light;
-		Logger.appendString(csr.s2b("RECEIVED!!!!"));
-		Logger.flush(Mote.ERROR);
-		light=!light;
-		
+		Logger.appendString(csr.s2b("RECEIVED!!!!: "));
 		Logger.appendByte(data[11]);
-        Logger.flush(Mote.WARN);
+		Logger.flush(Mote.ERROR);
         return 0;
         
     }
@@ -131,6 +130,7 @@ public class Sink1 {
 	        // turn green LED on 
 	        LED.setState((byte)1, (byte)1);
 	        Logger.appendString(csr.s2b("Started listening"));
+	        Logger.flush(Mote.INFO);
         }
         
     }
