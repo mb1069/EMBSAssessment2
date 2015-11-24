@@ -39,7 +39,6 @@ public class SourceNode {
 	static Broadcast[] broadcasts = new Broadcast[3];
 
 	static byte previousChannel;
-	static boolean broadcastSet = false;
 	static long TIME_ADJUSTMENT = 3;
 	static long lastChannelSwitch = 0;
 	
@@ -129,8 +128,7 @@ public class SourceNode {
 			if (sinks[currentSinkIndex].getT()!=-1){
 				createNextBroadcast(n, currentTime, currentSinkIndex, sinks[currentSinkIndex].getT(), currentTime);
 			} else {
-				if (sinks[currentSinkIndex].getBeaconT()!=-1 && sinks[currentSinkIndex].getBeaconN()!=-1 &&!broadcastSet){
-					broadcastSet  = true;
+				if (sinks[currentSinkIndex].getBeaconT()!=-1 && sinks[currentSinkIndex].getBeaconN()!=-1){
 					int diffN = getDiffN(sinks[currentSinkIndex].getBeaconN(), n);
 					long diffT = getDiffT(sinks[currentSinkIndex].getBeaconT(), currentTime);
 					if (diffN>0 && diffT-TIME_ADJUSTMENT <=(T_MAX*diffN)){
@@ -162,7 +160,7 @@ public class SourceNode {
 		previousChannel = radio.getChannel();
 		radio.setChannel((byte) channelNum);
 		radio.transmit(Device.ASAP|Radio.TXMODE_POWER_MAX, xmit, 0, 12, 0);
-		Logger.appendString(csr.s2b("Transmitted"));
+		Logger.appendString(csr.s2b("Finished broadcast."));
 		Logger.flush(Mote.INFO);
 		
 	}
@@ -177,13 +175,8 @@ public class SourceNode {
 				break;
 			}
 		}
-		if (currentSink.getN()!=-1){
-			//TODO schedule channel switch callback AND broadcast
-	
-		} else {
-			//TODO schedule listen event
-		}
-		broadcastSet = false;
+		//TODO schedule listen event
+
 		
 		setChannel(previousChannel);
 		return 0;
@@ -199,6 +192,9 @@ public class SourceNode {
 	
 	
 	private static void setChannel(byte channel){
+		Logger.appendString(csr.s2b("Changed channel to: "));
+		Logger.appendByte(channel);
+		Logger.flush(Mote.WARN);
 		if (radio.getState()==Device.S_RXEN){
 			radio.stopRx();
 		}
@@ -218,9 +214,7 @@ public class SourceNode {
 
 		radio.startRx(Device.TIMED, Time.currentTicks()+Time.toTickSpan(Time.MILLISECS, 10), Time.currentTicks()+0x7FFFFFFF);
 		
-		Logger.appendString(csr.s2b("Changed channel to: "));
-		Logger.appendByte(channel);
-		Logger.flush(Mote.WARN);
+
 	}
 
 	
@@ -298,9 +292,9 @@ public class SourceNode {
 	private static void setLEDListening(byte led){
 		for (byte b: new byte[]{YELLOW_LED, RED_LED, GREEN_LED}){
 			if (b==led){
-				LED.setState(b, (byte) 0);
-			} else {
 				LED.setState(b, (byte) 1);
+			} else {
+				LED.setState(b, (byte) 0);
 			}
 		}
 	}

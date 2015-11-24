@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<doc>
+	<assembly>
+		<name>
+		temp-mrc-1100-0/Sink1-1.6
+		</name>
+	</assembly>
+	<members>
+		<member name="T:embs.Sink1">
+		</member>
+		<member name="M:embs.Sink1.#ctor">
+		</member>
+		<member name="M:embs.Sink1.periodicSend(byte, long)">
+		</member>
+		<member name="M:embs.Sink1.restart(byte, long)">
+		</member>
+	</members>
+</doc>
