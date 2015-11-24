@@ -1,3 +1,4 @@
+//line 1 "M:/EMBS/EMBS_assessment2/part2/src/embs/Sink2.java"
 package embs;
 
 import com.ibm.saguaro.system.*;
@@ -105,12 +106,10 @@ public class Sink2 {
         	LED.setState((byte)2, (byte)0);
 		}
 		light=!light;
-		Logger.appendString(csr.s2b("RECEIVED! c: 12 t:"));
+		Logger.appendString(csr.s2b("RECEIVED!!!!: "));
 		Logger.appendLong(time);
 		Logger.flush(Mote.ERROR);
-		Logger.appendString(csr.s2b("RECEIVED! c: 12 t:"));
-		Logger.appendLong(time);
-		Logger.flush(Mote.WARN);
+		light=!light;
 		
 		Logger.appendByte(data[11]);
         Logger.flush(Mote.WARN);
@@ -137,8 +136,8 @@ public class Sink2 {
 	        radio.startRx(Device.ASAP, 0, Time.currentTicks()+wait);
 	        // turn green LED on 
 	        LED.setState((byte)1, (byte)1);
-	        Logger.appendString(csr.s2b("Started listening: c:12 t:"));
-	        Logger.appendLong(time);
+	        Logger.appendString(csr.s2b("Started listening: "));
+		    Logger.appendLong(time);
 	        Logger.flush(Mote.INFO);
         }
         

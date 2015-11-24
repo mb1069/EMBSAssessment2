@@ -1,3 +1,4 @@
+//line 1 "M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java"
 package embs;
 
 import com.ibm.saguaro.system.*;
@@ -109,62 +110,65 @@ public class SourceNode {
 
 	// Called when a frame is received or at the end of a reception period 
 	private static int onReceive (int flags, byte[] data, int len, int info, long time) {
-
+		Logger.appendString(csr.s2b("Received packet"));
+		Logger.flush(Mote.INFO);
 		if (data == null) { // marks end of reception period
+			// turn green LED off 
+			LED.setState((byte)1, (byte)0);
 			return 0;
 		}
 			
 		
 		int n = data[11];
-		Logger.appendString(csr.s2b("Received packet c:"));
-		Logger.appendInt(currentSinkIndex);
-		Logger.appendString(csr.s2b(" n:"));
-		Logger.appendByte(data[11]);
-		Logger.flush(Mote.WARN);
 		long currentTime = Time.currentTime(Time.MILLISECS);
 		
+		if (currentTime-lastChannelSwitch>T_MIN){
+			long beaconT = sinks[currentSinkIndex].getBeaconT();
+			if (beaconT==-1 || (beaconT!=-1 && (currentTime-beaconT>T_MIN))){
+				sinks[currentSinkIndex].setN(n);
+			}
+		}
 
-		if (!sinks[currentSinkIndex].getBroadcastSet()){
-			//If T is known for sink
-			if (sinks[currentSinkIndex].getT()!=-1){
-				createNextBroadcast(n, currentTime, currentSinkIndex, sinks[currentSinkIndex].getT(), currentTime);
-			} else {
-				if (sinks[currentSinkIndex].getBeaconT()!=-1 && sinks[currentSinkIndex].getBeaconN()!=-1 &&!broadcastSet){
-					broadcastSet  = true;
-					int diffN = getDiffN(sinks[currentSinkIndex].getBeaconN(), n);
-					long diffT = getDiffT(sinks[currentSinkIndex].getBeaconT(), currentTime);
-					if (diffN>0 && diffT-TIME_ADJUSTMENT <=(T_MAX*diffN)){
-						long t = diffT/diffN;
-						sinks[currentSinkIndex].setT(t);
-						Logger.appendString(csr.s2b("Calculated T: "));
-						Logger.appendLong(t);
-						Logger.flush(Mote.WARN);
-						createNextBroadcast(n, currentTime, currentSinkIndex, t, currentTime);
-					}
+		//If T is known for sink
+		if (sinks[currentSinkIndex].getT()!=-1){
+			createNextBroadcast(n, currentTime, currentSinkIndex, sinks[currentSinkIndex].getT(), currentTime);
+		} else {
+			if (sinks[currentSinkIndex].getBeaconT()!=-1 && sinks[currentSinkIndex].getBeaconN()!=-1 &&!broadcastSet){
+				broadcastSet  = true;
+				int diffN = getDiffN(sinks[currentSinkIndex].getBeaconN(), n);
+				long diffT = getDiffT(sinks[currentSinkIndex].getBeaconT(), currentTime);
+				if (diffN>0 && diffT-TIME_ADJUSTMENT <=(T_MAX*diffN)){
+					long t = diffT/diffN;
+					sinks[currentSinkIndex].setT(t);
+					Logger.appendString(csr.s2b("Calculated T: "));
+					Logger.appendLong(t);
+					Logger.flush(Mote.WARN);
+					createNextBroadcast(sinks[currentSinkIndex].getBeaconN(), sinks[currentSinkIndex].getBeaconT(), currentSinkIndex, t, currentTime);
 				}
 			}
 		}
 		sinks[currentSinkIndex].setBeaconN(n);
 		sinks[currentSinkIndex].setBeaconT(currentTime);
+		Logger.appendString(csr.s2b("Current Beacon: "));
+		Logger.appendByte(data[11]);
+		Logger.flush(Mote.WARN);
+		toggleLed(2);
 		return 0;
 	}
 
 
 	protected static void broadcastToSink(byte channelNum, long time){
 		
-		Logger.appendString(csr.s2b("BROADCASTING! on channel: "));
-		Logger.appendByte(channelNum);
-		Logger.appendString(csr.s2b("at time: "));
-		Logger.appendLong(time);
+		toggleLed(currentSinkIndex);
+		Logger.appendString(csr.s2b("BROADCASTING!"));
 		Logger.flush(Mote.WARN);
 		
 		radio.stopRx();
 		previousChannel = radio.getChannel();
-		radio.setChannel((byte) channelNum);
+		radio.setChannel(channelNum);
 		radio.transmit(Device.ASAP|Radio.TXMODE_POWER_MAX, xmit, 0, 12, 0);
-		Logger.appendString(csr.s2b("Transmitted"));
+		Logger.appendString(csr.s2b("Transmitted."));
 		Logger.flush(Mote.INFO);
-		
 	}
 
 	private static int onTransmit(int flags, byte[] data, int len, int info, long time) {
@@ -173,7 +177,6 @@ public class SourceNode {
 		for (SinkParameters s: sinks){
 			if (channel == s.getChannel()){
 				currentSink = s;
-				s.setBroadcastSet(false);
 				break;
 			}
 		}
@@ -193,7 +196,7 @@ public class SourceNode {
 		if (currentSinkIndex==0){
 			return sinks[1].getChannel();
 		} else {
-			return sinks[1].getChannel();
+			return sinks[0].getChannel();
 		}
 	}
 	
@@ -202,37 +205,21 @@ public class SourceNode {
 		if (radio.getState()==Device.S_RXEN){
 			radio.stopRx();
 		}
-		int x = 0;
-		for (x =0; x<sinks.length; x++){
-			SinkParameters sp = sinks[x];
-			if (sp.getChannel()==channel){
-				radio.setPanId(sp.getPanid(), true);
-				radio.setShortAddr(sp.getAddress());
-				break;
-				
-			}
-		}
-		currentSinkIndex = x;
-		setLEDListening((byte) x);
 		radio.setChannel((byte) channel);
-
-		radio.startRx(Device.TIMED, Time.currentTicks()+Time.toTickSpan(Time.MILLISECS, 10), Time.currentTicks()+0x7FFFFFFF);
-		
-		Logger.appendString(csr.s2b("Changed channel to: "));
-		Logger.appendByte(channel);
-		Logger.flush(Mote.WARN);
+		if (radio.getState()!=Device.S_RXEN){
+			radio.startRx(Device.TIMED, Time.currentTicks()+Time.toTickSpan(Time.MILLISECS, 10), Time.currentTicks()+0x7FFFFFFF);
+		}
 	}
 
-	
 	private static void createNextBroadcast(int beaconN, long beaconT, int channel, long t, long currentTimeMS) {
-		long broadcastTimeByMSSpan = (t  * beaconN);
-		long deadline = broadcastTimeByMSSpan + T_MIN;
-		setupBroadcastAndCallBack(broadcastTimeByMSSpan, deadline, channel, currentTimeMS);
-		sinks[currentSinkIndex].setBroadcastSet(true);
+		long broadcastTime = (t  * beaconN) + currentTimeMS;
+		long deadline = broadcastTime + T_MIN;
+		setupBroadcastAndCallBack(broadcastTime + (T_MIN/2), deadline, channel, currentTimeMS);
 		setChannel(pickNextChannel());
 	}
 
 	private static void setupBroadcastAndCallBack(long broadcastTime, long deadline, int sinkIndex, long currentTimeMS){
+		LED.setState((byte) currentSinkIndex, (byte) 0);
 //		ChannelSwitch cs = new ChannelSwitch(broadcastTime, sinks[sinkIndex].getChannel());
 //		for (ChannelSwitch c: channelSwitches){
 //			if (c!=null && c.getTime()==broadcastTime){
@@ -241,19 +228,19 @@ public class SourceNode {
 //		}
 //		channelSwitches = insertChannelSwitchInBuffer(channelSwitches, cs);
 		
-		Logger.appendString(csr.s2b("PREPARING BROADCAST! for channel: "));
-		Logger.appendInt(sinkIndex);
+		Logger.appendString(csr.s2b("PREPARING BROADCAST! for time: "));
+		Logger.appendLong(broadcastTime);
 		Logger.flush(Mote.WARN);
 		
 		switch (sinkIndex){
 		case 0:
-			timer0.setAlarmBySpan(Time.toTickSpan(Time.MILLISECS, broadcastTime));
+			timer0.setAlarmBySpan(Time.toTickSpan(Time.MILLISECS, broadcastTime-currentTimeMS));
 			break;
 		case 1:
-			timer1.setAlarmBySpan(Time.toTickSpan(Time.MILLISECS, broadcastTime));
+			timer1.setAlarmBySpan(Time.toTickSpan(Time.MILLISECS, broadcastTime-currentTimeMS));
 			break;
 		case 2:
-			timer2.setAlarmBySpan(Time.toTickSpan(Time.MILLISECS, broadcastTime));
+			timer2.setAlarmBySpan(Time.toTickSpan(Time.MILLISECS, broadcastTime-currentTimeMS));
 			break;
 		}
 	}

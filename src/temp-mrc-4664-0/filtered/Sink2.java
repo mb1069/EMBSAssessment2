@@ -1,9 +1,10 @@
+//line 1 "M:/EMBS/EMBS_assessment2/part2/src/embs/Sink2.java"
 package embs;
 
 import com.ibm.saguaro.system.*;
 import com.ibm.saguaro.logger.*;
 
-public class Sink1 {
+public class Sink2 {
 
     private static Timer  tsend;
     private static Timer  tstart;
@@ -13,10 +14,10 @@ public class Sink1 {
     private static byte[] xmit;
     private static long   wait;
     static Radio radio = new Radio();
-    private static int n = 5; // number of beacons of sync phase - sample only, assessment will use unknown values
+    private static int n = 8; // number of beacons of sync phase - sample only, assessment will use unknown values
     private static int nc;
     
-    private static int t = 800; // milliseconds between beacons - sample only, assessment will use unknown values 
+    private static int t = 1000; // milliseconds between beacons - sample only, assessment will use unknown values 
     
     // settings for sink A
     private static byte channel = 11; // channel 11
@@ -52,7 +53,7 @@ public class Sink1 {
 		// register delegate for received frames
         radio.setRxHandler(new DevCallback(null){
                 public int invoke (int flags, byte[] data, int len, int info, long time) {
-                    return  Sink1.onReceive(flags, data, len, info, time);
+                    return  Sink2.onReceive(flags, data, len, info, time);
                 }
             });
         
@@ -60,7 +61,7 @@ public class Sink1 {
         tsend = new Timer();
         tsend.setCallback(new TimerEvent(null){
                 public void invoke(byte param, long time){
-                    Sink1.periodicSend(param, time);
+                    Sink2.periodicSend(param, time);
                 }
             });
         
@@ -68,7 +69,7 @@ public class Sink1 {
         tstart = new Timer();
         tstart.setCallback(new TimerEvent(null){
                 public void invoke(byte param, long time){
-                    Sink1.restart(param, time);
+                    Sink2.restart(param, time);
                 }
             });
             
@@ -87,8 +88,7 @@ public class Sink1 {
 	        LED.setState((byte)2, (byte)0);
 	        //set alarm to restart protocol
 	    	tstart.setAlarmBySpan(10*wait);
-	    	Logger.appendString(csr.s2b("Finished listening c:11 t: "));
-	    	Logger.appendLong(time);
+	    	Logger.appendString(csr.s2b("Finished listening"));
 	    	Logger.flush(Mote.INFO);
             return 0;
         }
@@ -103,12 +103,9 @@ public class Sink1 {
         	LED.setState((byte)2, (byte)0);
 		}
 		light=!light;
-		Logger.appendString(csr.s2b("RECEIVED! 11: "));
-		Logger.appendLong(time);
+		Logger.appendString(csr.s2b("RECEIVED!!!!"));
 		Logger.flush(Mote.ERROR);
-		Logger.appendString(csr.s2b("RECEIVED! 11: "));
-		Logger.appendLong(time);
-		Logger.flush(Mote.WARN);
+		light=!light;
 		
 		Logger.appendByte(data[11]);
         Logger.flush(Mote.WARN);
@@ -135,8 +132,7 @@ public class Sink1 {
 	        radio.startRx(Device.ASAP, 0, Time.currentTicks()+wait);
 	        // turn green LED on 
 	        LED.setState((byte)1, (byte)1);
-	        Logger.appendString(csr.s2b("Started listening: c:11 t:"));
-	        Logger.appendLong(time);
+	        Logger.appendString(csr.s2b("Started listening"));
 	        Logger.flush(Mote.INFO);
         }
         
