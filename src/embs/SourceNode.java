@@ -113,7 +113,6 @@ public class SourceNode {
 			return 0;
 		}
 			
-		
 		int n = data[11];
 		Logger.appendString(csr.s2b("Received packet c:"));
 		Logger.appendInt(currentSinkIndex);
@@ -149,35 +148,29 @@ public class SourceNode {
 
 
 	protected static void broadcastToSink(byte channelNum, long time){
-		
+		radio.stopRx();
+		radio.setChannel((byte) channelNum);
 		Logger.appendString(csr.s2b("BROADCASTING! on channel: "));
 		Logger.appendByte(channelNum);
 		Logger.appendString(csr.s2b("at time: "));
 		Logger.appendLong(time);
 		Logger.flush(Mote.WARN);
 		
-		radio.stopRx();
 		previousChannel = radio.getChannel();
-		radio.setChannel((byte) channelNum);
+		
 		radio.transmit(Device.ASAP|Radio.TXMODE_POWER_MAX, xmit, 0, 12, 0);
 		Logger.appendString(csr.s2b("Finished broadcast."));
 		Logger.flush(Mote.INFO);
 		
+		
 	}
 
 	private static int onTransmit(int flags, byte[] data, int len, int info, long time) {
-		byte channel = radio.getChannel();
-		SinkParameters currentSink = null;
-		for (SinkParameters s: sinks){
-			if (channel == s.getChannel()){
-				currentSink = s;
-				s.setBroadcastSet(false);
-				break;
-			}
-		}
-		//TODO schedule listen event
 
-		
+		//TODO schedule listen callback
+		Logger.appendInt(currentSinkIndex);
+		Logger.flush(Mote.ERROR);
+		sinks[currentSinkIndex].setBroadcastSet(false);
 		setChannel(previousChannel);
 		return 0;
 	}
@@ -186,7 +179,7 @@ public class SourceNode {
 		if (currentSinkIndex==0){
 			return sinks[1].getChannel();
 		} else {
-			return sinks[1].getChannel();
+			return sinks[0].getChannel();
 		}
 	}
 	
