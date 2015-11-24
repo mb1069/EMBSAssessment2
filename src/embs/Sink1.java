@@ -88,6 +88,7 @@ public class Sink1 {
 	        //set alarm to restart protocol
 	    	tstart.setAlarmBySpan(10*wait);
 	    	Logger.appendString(csr.s2b("Finished listening"));
+	    	Logger.flush(Mote.INFO);
             return 0;
         }
 
@@ -131,6 +132,7 @@ public class Sink1 {
 	        // turn green LED on 
 	        LED.setState((byte)1, (byte)1);
 	        Logger.appendString(csr.s2b("Started listening"));
+	        Logger.flush(Mote.INFO);
         }
         
     }
