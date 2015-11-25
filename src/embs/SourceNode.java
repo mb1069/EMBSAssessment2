@@ -115,6 +115,10 @@ public class SourceNode {
 		}
 			
 		int n = data[11];
+		
+		if (n>sinks[currentSinkIndex].getMaxObservedN()){
+			sinks[currentSinkIndex].setMaxObservedN(n);
+		}
 		Logger.appendString(csr.s2b("Received packet c:"));
 		Logger.appendByte(sinks[currentSinkIndex].getChannel());
 		Logger.appendString(csr.s2b(" n:"));
@@ -122,7 +126,13 @@ public class SourceNode {
 		Logger.flush(Mote.WARN);
 		long currentTime = Time.currentTime(Time.MILLISECS);
 		
-
+		//Case where first beacon received is n=1 and no previous known beacons, switch channel
+		if (sinks[currentSinkIndex].getBeaconN()==-1 && n==1){
+			sinks[currentSinkIndex].setNextBeaconTime(currentTime + (11*T_MIN));
+			setChannel(pickNextSink(currentSinkIndex));
+			startListening();
+			return 0;
+		}
 		if (!sinks[currentSinkIndex].getBroadcastSet()){
 			//If T is known for sink
 			if (sinks[currentSinkIndex].getT()!=-1){
@@ -149,11 +159,10 @@ public class SourceNode {
 
 
 	protected static void broadcastToSink(byte sinkIndex, long time){
-		radio.stopRx();
 		Logger.appendString(csr.s2b("BROADCASTING! on channel: "));
 		Logger.appendByte(sinks[sinkIndex].getChannel());
 		Logger.appendString(csr.s2b("at time: "));
-		Logger.appendLong(time);
+		Logger.appendLong(Time.currentTicks());
 		Logger.flush(Mote.WARN);
 		
 		setChannel((int) sinkIndex);
@@ -163,17 +172,15 @@ public class SourceNode {
 		radio.transmit(Device.TIMED, xmit, 0, 12, Time.currentTicks()+Time.toTickSpan(Time.MILLISECS, T_MIN/2));
 		Logger.appendString(csr.s2b("Finished broadcast."));
 		Logger.flush(Mote.INFO);
-		
-		
 	}
 
 	private static int onTransmit(int flags, byte[] data, int len, int info, long time) {
-
+		sinks[currentSinkIndex].setNextBeaconTime(Time.currentTime(Time.MILLISECS)+(sinks[currentSinkIndex].getT()*(11+sinks[currentSinkIndex].getMaxObservedN())));
 		//TODO schedule listen callback
 //		Logger.appendInt(currentSinkIndex);
 //		Logger.flush(Mote.ERROR);
 		sinks[currentSinkIndex].setBroadcastSet(false);
-		setChannel(pickNextChannel(currentSinkIndex));
+		setChannel(pickNextSink(currentSinkIndex));
 		startListening();
 		Logger.appendString(csr.s2b("Broadcast results: "));
 		Logger.appendInt(broadcasted[0]);
@@ -185,13 +192,28 @@ public class SourceNode {
 		return 0;
 	}
 	
-	private static byte pickNextChannel(int currSinkIndex){
-		if (currSinkIndex==0){
-			return 1;
-		} else if (currSinkIndex==1){
-			return 2;
+	private static int pickNextSink(int currSinkIndex){
+		int x = 0;
+		long nextBeaconTime = -1;
+		int nextBeaconSinkIndex = -1;
+		for (x=0; x<sinks.length;x++){
+			if (x!=currSinkIndex){
+				if (nextBeaconTime==-1 | sinks[x].getNextBeaconTime()<nextBeaconTime){
+					nextBeaconTime = sinks[x].getNextBeaconTime();
+					nextBeaconSinkIndex = x;
+				}
+			}
+		}
+		if (nextBeaconSinkIndex==-1){
+			return (currSinkIndex+1) % (sinks.length);
 		} else {
-			return 0;
+			Logger.appendString(csr.s2b("PICKED DIFFERENT CHANNEL!: "));
+			Logger.appendInt(nextBeaconSinkIndex);
+			if (((currSinkIndex+1) % (sinks.length))==nextBeaconSinkIndex){
+				Logger.appendString(csr.s2b("PAA!: "));
+			}
+			Logger.flush(Mote.ERROR);
+			return nextBeaconSinkIndex;
 		}
 	}
 	
@@ -229,7 +251,8 @@ public class SourceNode {
 		long deadline = broadcastTimeByMSSpan + T_MIN;
 		setupBroadcastAndCallBack(broadcastTimeByMSSpan, deadline, channel, currentTimeMS);
 		sinks[currentSinkIndex].setBroadcastSet(true);
-//		setChannel(pickNextChannel());
+		setChannel(pickNextSink(currentSinkIndex));
+		startListening();
 	}
 
 	private static void setupBroadcastAndCallBack(long broadcastTime, long deadline, int sinkIndex, long currentTimeMS){

@@ -1,3 +1,4 @@
+//line 1 "M:/EMBS/EMBS_assessment2/part2/src/embs/Sink3.java"
 package embs;
 
 import com.ibm.saguaro.logger.Logger;

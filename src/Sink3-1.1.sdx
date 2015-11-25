@@ -1,4 +1,4 @@
-A!	Sink3-1.1.37014	2.0	Java
+A!	Sink3-1.1.49828	2.0	Java
 
 X	c:01/000	com.ibm.saguaro.system.Assembly
 X	c:01/001	com.ibm.saguaro.system.Util
@@ -195,7 +195,7 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/Sink3.java
 :	    private static int n = 9; // number of beacons of sync phase - sample only, assessment will use unknown values
 :	    private static int nc;
 :	
-:	    private static int t = 900; // milliseconds between beacons - sample only, assessment will use unknown values
+:	    private static int t = 1400; // milliseconds between beacons - sample only, assessment will use unknown values
 :	
 :	    // settings for sink A
 :	    private static byte channel = 13; // channel 11

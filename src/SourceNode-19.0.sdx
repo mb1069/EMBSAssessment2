@@ -1,4 +1,4 @@
-A!	SourceNode-18.0.46405	2.0	Java
+A!	SourceNode-19.0.49840	2.0	Java
 
 X	c:01/000	com.ibm.saguaro.system.Assembly
 X	c:01/001	com.ibm.saguaro.system.Util
@@ -59,69 +59,74 @@ H	Broadcast_results$UTF8	b[]	0	66,114,111,97,100,99,97,115,116,32,114,101,115,11
 H	Calculated_T$UTF8	b[]	0	67,97,108,99,117,108,97,116,101,100,32,84,58,32
 H	Changed_channel_to$UTF8	b[]	0	67,104,97,110,103,101,100,32,99,104,97,110,110,101,108,32,116,111,58,32
 H	Finished_broadcast$UTF8	b[]	0	70,105,110,105,115,104,101,100,32,98,114,111,97,100,99,97,115,116,46
+H	PAA$UTF8	b[]	0	80,65,65,33,58,32
+H	PICKED_DIFFERENT_CHANNEL$UTF8	b[]	0	80,73,67,75,69,68,32,68,73,70,70,69,82,69,78,84,32,67,72,65,78,78,69,76,33,58,32
 H	PREPARING_BROADCAST_for_channel$UTF8	b[]	0	80,82,69,80,65,82,73,78,71,32,66,82,79,65,68,67,65,83,84,33,32,102,111,114,32,99,104,97,110,110,101,108,58,32
 H	Received_packet_c$UTF8	b[]	0	82,101,99,101,105,118,101,100,32,112,97,99,107,101,116,32,99,58
 H	at_time$UTF8	b[]	0	97,116,32,116,105,109,101,58,32
 H	at_time0$UTF8	b[]	0	32,97,116,32,116,105,109,101,58,32
 H	n$UTF8	b[]	0	32,110,58
 H	s$UTF8	b[]	0	47
-M!	SourceNode(r:embs.SourceNode)v	-1	m:0192	00324	4
-M	access$000(i,c[],i,i,l)i	-1	m:0194	00328	14
-M	access$100(i,c[],i,i,l)i	-1	m:019B	00336	14
-M!	broadcastToSink(c,l)v	-1	m:01A2	00344	92
-M	createNextBroadcast(i,l,i,l,l)v	-1	m:01D0	003A0	50
-M	getDiffN(i,i)i	-1	m:01E9	003D2	8
-M	getDiffT(l,l)l	-1	m:01ED	003DA	26
-M	onReceive(i,c[],i,i,l)i	-1	m:01FA	003F4	300
-M	onTransmit(i,c[],i,i,l)i	-1	m:0290	00520	74
-M	pickNextChannel(i)i	-1	m:02B5	0056A	12
-M	setChannel(i)v	-1	m:02BB	00576	128
-M	setLEDListening(c)v	-1	m:02FB	005F6	60
-M	setupBroadcastAndCallBack(l,l,i,l)v	-1	m:0319	00632	70
-M	startListening()v	-1	m:033C	00678	34
-M	toggleLed(i)v	-1	m:034D	0069A	28
+M!	SourceNode(r:embs.SourceNode)v	-1	m:019C	00338	4
+M	access$000(i,c[],i,i,l)i	-1	m:019E	0033C	14
+M	access$100(i,c[],i,i,l)i	-1	m:01A5	0034A	14
+M!	broadcastToSink(c,l)v	-1	m:01AC	00358	94
+M	createNextBroadcast(i,l,i,l,l)v	-1	m:01DB	003B6	52
+M	getDiffN(i,i)i	-1	m:01F5	003EA	8
+M	getDiffT(l,l)l	-1	m:01F9	003F2	26
+M	onReceive(i,c[],i,i,l)i	-1	m:0206	0040C	346
+M	onTransmit(i,c[],i,i,l)i	-1	m:02B3	00566	114
+M	pickNextSink(i)i	-1	m:02EC	005D8	118
+M	setChannel(i)v	-1	m:0327	0064E	128
+M	setLEDListening(c)v	-1	m:0367	006CE	60
+M	setupBroadcastAndCallBack(l,l,i,l)v	-1	m:0385	0070A	70
+M	startListening()v	-1	m:03A8	00750	34
+M	toggleLed(i)v	-1	m:03B9	00772	28
 
 C!	c:007	embs.SinkParameters	1	1	c:000
-f	broadcastSet	z	1	0
-f	beaconT	l	1	1
-f	beaconN	i	1	3
-f	T	l	1	4
-f	N	i	1	6
-f	address	c	1	7
-f	panid	c	1	8
-f	channel	c	1	9
-m!	addBeacon(i,l)v	1	m:0158	002B0	12	2
-m!	getAddress()c	1	m:015E	002BC	8	9
-m!	getBeaconN()i	1	m:0162	002C4	8	10
-m!	getBeaconT()l	1	m:0166	002CC	8	12
-m!	getBroadcastSet()z	1	m:016A	002D4	8	0
-m!	getChannel()c	1	m:016E	002DC	8	7
-m!	getN()i	1	m:0172	002E4	8	6
-m!	getPanid()c	1	m:0176	002EC	8	8
-m!	getT()l	1	m:017A	002F4	8	4
-m!	setBeaconN(i)v	1	m:017E	002FC	8	11
-m!	setBeaconT(l)v	1	m:0182	00304	8	13
-m!	setBroadcastSet(z)v	1	m:0186	0030C	8	1
-m!	setN(i)v	1	m:018A	00314	8	3
-m!	setT(l)v	1	m:018E	0031C	8	5
-M!	SinkParameters(r:embs.SinkParameters,c,c,c)v	1	m:0142	00284	44
+f	nextBeaconTime	l	1	0
+f	broadcastSet	z	1	2
+f	beaconT	l	1	3
+f	beaconN	i	1	5
+f	T	l	1	6
+f	maxObservedN	i	1	8
+f	address	c	1	9
+f	panid	c	1	10
+f	channel	c	1	11
+m!	addBeacon(i,l)v	1	m:015A	002B4	12	2
+m!	getAddress()c	1	m:0160	002C0	8	9
+m!	getBeaconN()i	1	m:0164	002C8	8	10
+m!	getBeaconT()l	1	m:0168	002D0	8	12
+m!	getBroadcastSet()z	1	m:016C	002D8	8	0
+m!	getChannel()c	1	m:0170	002E0	8	7
+m!	getMaxObservedN()i	1	m:0174	002E8	8	6
+m!	getNextBeaconTime()l	1	m:0178	002F0	8	15
+m!	getPanid()c	1	m:017C	002F8	8	8
+m!	getT()l	1	m:0180	00300	8	4
+m!	setBeaconN(i)v	1	m:0184	00308	8	11
+m!	setBeaconT(l)v	1	m:0188	00310	8	13
+m!	setBroadcastSet(z)v	1	m:018C	00318	8	1
+m!	setMaxObservedN(i)v	1	m:0190	00320	8	3
+m!	setNextBeaconTime(l)v	1	m:0194	00328	8	14
+m!	setT(l)v	1	m:0198	00330	8	5
+M!	SinkParameters(r:embs.SinkParameters,c,c,c)v	1	m:0144	00288	44
 
-C!	c:014	embs.ChannelSwitch	2	2	c:000
+C!	c:015	embs.ChannelSwitch	2	2	c:000
 f	channel	c	2	0
 f	time	l	2	1
-m!	getChannel()c	2	m:0132	00264	8	3
-m!	getTime()l	2	m:0136	0026C	8	0
-m!	setChannel(c)v	2	m:013A	00274	8	2
-m!	setTime(l)v	2	m:013E	0027C	8	1
-M!	ChannelSwitch(r:embs.ChannelSwitch,l,c)v	2	m:012C	00258	12
+m!	getChannel()c	2	m:0134	00268	8	3
+m!	getTime()l	2	m:0138	00270	8	0
+m!	setChannel(c)v	2	m:013C	00278	8	2
+m!	setTime(l)v	2	m:0140	00280	8	1
+M!	ChannelSwitch(r:embs.ChannelSwitch,l,c)v	2	m:012E	0025C	12
 
-C!	c:019	embs.Broadcast	3	3	c:000
+C!	c:01A	embs.Broadcast	3	3	c:000
 f	broadcastTime	l	3	0
-m!	getBroadcastTime()l	3	m:0124	00248	8	0
-m!	setBroadcastTime(l)v	3	m:0128	00250	8	1
-M!	Broadcast(r:embs.Broadcast,l)v	3	m:0120	00240	8
+m!	getBroadcastTime()l	3	m:0126	0024C	8	0
+m!	setBroadcastTime(l)v	3	m:012A	00254	8	1
+M!	Broadcast(r:embs.Broadcast,l)v	3	m:0122	00244	8
 
-C	c:01D	com.ibm.saguaro.system.$tatics	-1	-1	c:01/000
+C	c:01E	com.ibm.saguaro.system.$tatics	-1	-1	c:01/000
 r	embs.SourceNode.timer0	r:com.ibm.saguaro.system.Timer	-1	0
 r	embs.SourceNode.timer1	r:com.ibm.saguaro.system.Timer	-1	1
 r	embs.SourceNode.timer2	r:com.ibm.saguaro.system.Timer	-1	2
@@ -143,323 +148,354 @@ f	embs.SourceNode.T_MAX	l	-1	10
 f	embs.SourceNode.previousChannel	i	-1	12
 f	embs.SourceNode.TIME_ADJUSTMENT	l	-1	13
 f	embs.SourceNode.lastChannelSwitch	l	-1	15
-M	__init()v	-1	m:003E	0007C	452
+M	__init()v	-1	m:0040	00080	452
 
-c	00089	0	16	0	16	0	m:003E
-c	00093	0	18	0	18	0	m:003E
-c	000CA	0	23	0	23	0	m:003E
-c	000CE	0	24	0	24	0	m:003E
-c	000D3	0	25	0	25	0	m:003E
-c	000D7	0	28	0	28	0	m:003E
-c	000DB	0	29	0	29	0	m:003E
-c	000DF	0	30	0	30	0	m:003E
-c	000E3	0	32	0	32	0	m:003E
-c	000E7	0	33	0	33	0	m:003E
-c	000EC	0	34	0	34	0	m:003E
-c	000F4	0	35	0	35	0	m:003E
-c	000FC	0	37	0	37	0	m:003E
-c	0010D	0	40	0	40	0	m:003E
-c	00114	0	43	0	43	0	m:003E
-c	0011C	0	44	0	44	0	m:003E
-c	00124	0	49	0	49	0	m:003E
-c	00130	0	51	0	51	0	m:003E
-c	00135	0	52	0	52	0	m:003E
-c	0013A	0	53	0	53	0	m:003E
-c	0013F	0	55	0	55	0	m:003E
-c	00149	0	56	0	56	0	m:003E
-c	00150	0	57	0	57	0	m:003E
-c	0015A	0	63	0	63	0	m:003E
-c	00164	0	64	0	64	0	m:003E
-c	0016B	0	65	0	65	0	m:003E
-c	00175	0	71	0	71	0	m:003E
-c	0017F	0	72	0	72	0	m:003E
-c	00186	0	73	0	73	0	m:003E
-c	00190	0	80	0	80	0	m:003E
-c	001A0	0	82	0	82	0	m:003E
-c	001B1	0	83	0	83	0	m:003E
-c	001C1	0	86	0	86	0	m:003E
-c	001C7	0	87	0	87	0	m:003E
-c	001CD	0	88	0	88	0	m:003E
-c	001D5	0	89	0	89	0	m:003E
-c	001E7	0	90	0	90	0	m:003E
-c	001F0	0	91	0	91	0	m:003E
-c	00203	0	92	0	92	0	m:003E
-c	00216	0	95	0	95	0	m:003E
-c	00220	0	101	0	101	0	m:003E
-c	0022A	0	107	0	107	0	m:003E
-c	0023F	0	108	0	108	0	m:003E
-e	00240	m:003E
-c	00243	3	10	0	10	0	m:0120
-l!	00243	00248	r:embs.Broadcast	this	m:0120	0
-l!	00243	00248	l	broadcastTime	m:0120	1
-c	00247	3	11	0	11	0	m:0120
-e!	00248	m:0120
-c	0024B	3	14	0	14	0	m:0124
-l	0024B	0024F	r:embs.Broadcast	this	m:0124	0
-e!	00250	m:0124
-c	00253	3	17	0	17	0	m:0128
-l!	00253	00258	r:embs.Broadcast	this	m:0128	0
-l	00253	00258	l	broadcastTime	m:0128	1
-c	00257	3	18	0	18	0	m:0128
-e!	00258	m:0128
-c	0025B	2	15	0	15	0	m:012C
-l!	0025B	00264	r:embs.ChannelSwitch	this	m:012C	0
-l!	0025B	00264	l	time	m:012C	1
-l	0025B	00264	c	channel	m:012C	3
-c	0025F	2	16	0	16	0	m:012C
-c	00263	2	17	0	17	0	m:012C
-e!	00264	m:012C
-c	00267	2	30	0	30	0	m:0132
-l	00267	0026B	r:embs.ChannelSwitch	this	m:0132	0
-e!	0026C	m:0132
-c	0026F	2	20	0	20	0	m:0136
-l	0026F	00273	r:embs.ChannelSwitch	this	m:0136	0
-e!	00274	m:0136
-c	00277	2	27	0	27	0	m:013A
-l!	00277	0027C	r:embs.ChannelSwitch	this	m:013A	0
-l	00277	0027C	c	channel	m:013A	1
-c	0027B	2	28	0	28	0	m:013A
-e!	0027C	m:013A
-c	0027F	2	23	0	23	0	m:013E
-l!	0027F	00284	r:embs.ChannelSwitch	this	m:013E	0
-l	0027F	00284	l	time	m:013E	1
-c	00283	2	24	0	24	0	m:013E
-e!	00284	m:013E
-c	00287	1	10	0	10	0	m:0142
-l!	00287	002B0	r:embs.SinkParameters	this	m:0142	0
-l!	00287	002B0	c	channel	m:0142	1
-l!	00287	002B0	c	panid	m:0142	2
-l!	00287	002B0	c	address	m:0142	3
-c	0028B	1	11	0	11	0	m:0142
-c	00293	1	12	0	12	0	m:0142
-c	00297	1	13	0	13	0	m:0142
-c	0029F	1	14	0	14	0	m:0142
-c	002A3	1	17	0	17	0	m:0142
-c	002A7	1	18	0	18	0	m:0142
-c	002AB	1	19	0	19	0	m:0142
-c	002AF	1	20	0	20	0	m:0142
-e!	002B0	m:0142
-c	002B3	1	31	0	31	0	m:0158
-l!	002B3	002BC	r:embs.SinkParameters	this	m:0158	0
-l!	002B3	002BC	i	n	m:0158	1
-l	002B3	002BC	l	t	m:0158	2
-c	002B7	1	32	0	32	0	m:0158
-c	002BB	1	33	0	33	0	m:0158
-e!	002BC	m:0158
-c	002BF	1	41	0	41	0	m:015E
-l	002BF	002C3	r:embs.SinkParameters	this	m:015E	0
-e!	002C4	m:015E
-c	002C7	1	44	0	44	0	m:0162
-l	002C7	002CB	r:embs.SinkParameters	this	m:0162	0
-e!	002CC	m:0162
-c	002CF	1	50	0	50	0	m:0166
-l	002CF	002D3	r:embs.SinkParameters	this	m:0166	0
-e!	002D4	m:0166
-c	002D7	1	23	0	23	0	m:016A
-l	002D7	002DB	r:embs.SinkParameters	this	m:016A	0
-e!	002DC	m:016A
-c	002DF	1	39	0	39	0	m:016E
-l	002DF	002E3	r:embs.SinkParameters	this	m:016E	0
-e!	002E4	m:016E
-c	002E7	1	38	0	38	0	m:0172
-l	002E7	002EB	r:embs.SinkParameters	this	m:0172	0
-e!	002EC	m:0172
-c	002EF	1	40	0	40	0	m:0176
-l	002EF	002F3	r:embs.SinkParameters	this	m:0176	0
-e!	002F4	m:0176
-c	002F7	1	36	0	36	0	m:017A
-l	002F7	002FB	r:embs.SinkParameters	this	m:017A	0
-e!	002FC	m:017A
-c	002FF	1	47	0	47	0	m:017E
-l!	002FF	00304	r:embs.SinkParameters	this	m:017E	0
-l	002FF	00304	i	beaconN	m:017E	1
-c	00303	1	48	0	48	0	m:017E
-e!	00304	m:017E
-c	00307	1	53	0	53	0	m:0182
-l!	00307	0030C	r:embs.SinkParameters	this	m:0182	0
-l	00307	0030C	l	beaconT	m:0182	1
-c	0030B	1	54	0	54	0	m:0182
-e!	0030C	m:0182
-c	0030F	1	27	0	27	0	m:0186
-l!	0030F	00314	r:embs.SinkParameters	this	m:0186	0
-l	0030F	00314	z	value	m:0186	1
-c	00313	1	28	0	28	0	m:0186
-e!	00314	m:0186
-c	00317	1	35	0	35	0	m:018A
-l!	00317	0031C	r:embs.SinkParameters	this	m:018A	0
-l	00317	0031C	i	n	m:018A	1
-e!	0031C	m:018A
-c	0031F	1	37	0	37	0	m:018E
-l!	0031F	00324	r:embs.SinkParameters	this	m:018E	0
-l	0031F	00324	l	t	m:018E	1
-e!	00324	m:018E
-c	00327	0	8	0	8	0	m:0192
-l!	00327	00328	r:embs.SourceNode	this	m:0192	0
-e!	00328	m:0192
-c	0032B	0	8	0	8	0	m:0194
-l	0032B	00335	i	x0	m:0194	0
-l	0032B	00335	c[]	x1	m:0194	1
-l	0032B	00335	i	x2	m:0194	2
-l	0032B	00335	i	x3	m:0194	3
-l	0032B	00335	l	x4	m:0194	4
-e	00336	m:0194
-c	00339	0	8	0	8	0	m:019B
-l	00339	00343	i	x0	m:019B	0
-l	00339	00343	c[]	x1	m:019B	1
-l	00339	00343	i	x2	m:019B	2
-l	00339	00343	i	x3	m:019B	3
-l	00339	00343	l	x4	m:019B	4
-e	00344	m:019B
-c	00347	0	157	0	157	0	m:01A2
-l!	00347	003A0	c	sinkIndex	m:01A2	0
-l!	00347	003A0	l	time	m:01A2	1
-c	0034D	0	158	0	158	0	m:01A2
-c	00358	0	159	0	159	0	m:01A2
-c	0035E	0	160	0	160	0	m:01A2
-c	00362	0	161	0	161	0	m:01A2
-c	00366	0	163	0	163	0	m:01A2
-c	0036A	0	164	0	164	0	m:01A2
-c	00373	0	165	0	165	0	m:01A2
-c	00377	0	167	0	167	0	m:01A2
-c	00395	0	168	0	168	0	m:01A2
-c	0039B	0	169	0	169	0	m:01A2
-c	0039F	0	170	0	170	0	m:01A2
-e!	003A0	m:01A2
-c	003A3	0	224	0	224	0	m:01D0
-l	003A3	003D1	i	beaconN	m:01D0	0
-l	003A3	003D1	l	beaconT	m:01D0	1
-l	003A3	003D1	i	channel	m:01D0	3
-l	003A3	003D1	l	t	m:01D0	4
-l	003A3	003D1	l	currentTimeMS	m:01D0	6
-c	003AA	0	225	0	225	0	m:01D0
-l	003AA	003D1	l	broadcastTimeByMSSpan	m:01D0	8
-c	003B2	0	226	0	226	0	m:01D0
-l	003B2	003D1	l	deadline	m:01D0	10
-c	003BC	0	227	0	227	0	m:01D0
-c	003C7	0	228	0	228	0	m:01D0
-c	003D0	0	229	0	229	0	m:01D0
-e	003D2	m:01D0
-c	003D5	0	277	0	277	0	m:01E9
-l	003D5	003D9	i	beacon1N	m:01E9	0
-l	003D5	003D9	i	beacon2N	m:01E9	1
-e	003DA	m:01E9
-c	003DD	0	281	0	281	0	m:01ED
-l	003DD	003F4	l	beacon1T	m:01ED	0
-l	003DD	003F4	l	beacon2T	m:01ED	2
-c	003E2	0	282	0	282	0	m:01ED
-l	003E2	003F4	l	diffT	m:01ED	4
-e	003F4	m:01ED
-c	003F7	0	113	0	113	0	m:01FA
-l	003F7	00520	i	flags	m:01FA	0
-l	003F7	00520	c[]	data	m:01FA	1
-l	003F7	00520	i	len	m:01FA	2
-l	003F7	00520	i	info	m:01FA	3
-l	003F7	00520	l	time	m:01FA	4
-c	003FA	0	114	0	114	0	m:01FA
-c	003FC	0	117	0	117	0	m:01FA
-c	00402	0	118	0	118	0	m:01FA
-l	00402	00520	i	n	m:01FA	6
-c	00408	0	119	0	119	0	m:01FA
-c	00415	0	120	0	120	0	m:01FA
-c	0041B	0	121	0	121	0	m:01FA
-c	00423	0	122	0	122	0	m:01FA
-c	00427	0	123	0	123	0	m:01FA
-c	0042D	0	126	0	126	0	m:01FA
-l	0042D	00520	l	currentTime	m:01FA	7
-c	0043E	0	127	0	127	0	m:01FA
-c	00447	0	128	0	128	0	m:01FA
-c	0044A	0	129	0	129	0	m:01FA
-c	0044C	0	131	0	131	0	m:01FA
-c	00459	0	133	0	133	0	m:01FA
-c	0046B	0	134	0	134	0	m:01FA
-c	00483	0	136	0	136	0	m:01FA
-c	004A2	0	137	0	137	0	m:01FA
-c	004B2	0	138	0	138	0	m:01FA
-l	004B2	00507	i	diffN	m:01FA	9
-c	004C3	0	139	0	139	0	m:01FA
-l	004C3	00507	l	diffT	m:01FA	10
-c	004D7	0	140	0	140	0	m:01FA
-c	004DF	0	141	0	141	0	m:01FA
-l	004DF	00507	l	t	m:01FA	12
-c	004EB	0	142	0	142	0	m:01FA
-c	004F1	0	143	0	143	0	m:01FA
-c	004F6	0	144	0	144	0	m:01FA
-c	004FA	0	145	0	145	0	m:01FA
-c	00507	0	150	0	150	0	m:01FA
-c	00512	0	151	0	151	0	m:01FA
-c	0051E	0	152	0	152	0	m:01FA
-e	00520	m:01FA
-c	00523	0	177	0	177	0	m:0290
-l	00523	0056A	i	flags	m:0290	0
-l	00523	0056A	c[]	data	m:0290	1
-l	00523	0056A	i	len	m:0290	2
-l	00523	0056A	i	info	m:0290	3
-l	00523	0056A	l	time	m:0290	4
-c	0052E	0	178	0	178	0	m:0290
-c	00537	0	179	0	179	0	m:0290
-c	0053A	0	180	0	180	0	m:0290
-c	00540	0	181	0	181	0	m:0290
-c	00548	0	182	0	182	0	m:0290
-c	0054E	0	183	0	183	0	m:0290
-c	00556	0	184	0	184	0	m:0290
-c	0055C	0	185	0	185	0	m:0290
-c	00564	0	186	0	186	0	m:0290
-c	00568	0	187	0	187	0	m:0290
-e	0056A	m:0290
-c	0056D	0	191	0	191	0	m:02B5
-l	0056D	00576	i	currSinkIndex	m:02B5	0
-e	00576	m:02B5
-c	00579	0	197	0	197	0	m:02BB
-l	00579	005F5	i	sinkIndex	m:02BB	0
-c	00583	0	198	0	198	0	m:02BB
-c	00589	0	201	0	201	0	m:02BB
-c	00599	0	202	0	202	0	m:02BB
-c	005A2	0	203	0	203	0	m:02BB
-c	005B3	0	205	0	205	0	m:02BB
-c	005C1	0	206	0	206	0	m:02BB
-c	005D0	0	209	0	209	0	m:02BB
-c	005D4	0	210	0	210	0	m:02BB
-c	005D9	0	212	0	212	0	m:02BB
-c	005DF	0	213	0	213	0	m:02BB
-c	005EA	0	214	0	214	0	m:02BB
-c	005F0	0	215	0	215	0	m:02BB
-c	005F4	0	216	0	216	0	m:02BB
-e	005F6	m:02BB
-c	005F9	0	295	0	295	0	m:02FB
-l	005F9	00632	c	led	m:02FB	0
-c	0061C	0	296	0	296	0	m:02FB
-l	0061C	0062C	c	b	m:02FB	4
-c	00620	0	297	0	297	0	m:02FB
-c	00627	0	299	0	299	0	m:02FB
-c	0062C	0	295	0	295	0	m:02FB
-c	00631	0	302	0	302	0	m:02FB
-e	00632	m:02FB
-c	00635	0	240	0	240	0	m:0319
-l	00635	00677	l	broadcastTime	m:0319	0
-l	00635	00677	l	deadline	m:0319	2
-l	00635	00677	i	sinkIndex	m:0319	4
-l	00635	00677	l	currentTimeMS	m:0319	5
-c	0063B	0	241	0	241	0	m:0319
-c	0063F	0	242	0	242	0	m:0319
-c	00643	0	244	0	244	0	m:0319
-c	00651	0	246	0	246	0	m:0319
-c	0065C	0	247	0	247	0	m:0319
-c	0065E	0	249	0	249	0	m:0319
-c	00669	0	250	0	250	0	m:0319
-c	0066B	0	252	0	252	0	m:0319
-c	00676	0	255	0	255	0	m:0319
-e	00678	m:0319
-c	0067B	0	220	0	220	0	m:033C
-c	00698	0	221	0	221	0	m:033C
-e	0069A	m:033C
-c	0069D	0	286	0	286	0	m:034D
-l	0069D	006B5	i	led	m:034D	0
-c	006A3	0	287	0	287	0	m:034D
-l	006A3	006B5	i	ledState	m:034D	1
-c	006A6	0	288	0	288	0	m:034D
-c	006AE	0	290	0	290	0	m:034D
-c	006B4	0	292	0	292	0	m:034D
-e	006B6	m:034D
+c	0008D	0	16	0	16	0	m:0040
+c	00097	0	18	0	18	0	m:0040
+c	000CE	0	23	0	23	0	m:0040
+c	000D2	0	24	0	24	0	m:0040
+c	000D7	0	25	0	25	0	m:0040
+c	000DB	0	28	0	28	0	m:0040
+c	000DF	0	29	0	29	0	m:0040
+c	000E3	0	30	0	30	0	m:0040
+c	000E7	0	32	0	32	0	m:0040
+c	000EB	0	33	0	33	0	m:0040
+c	000F0	0	34	0	34	0	m:0040
+c	000F8	0	35	0	35	0	m:0040
+c	00100	0	37	0	37	0	m:0040
+c	00111	0	40	0	40	0	m:0040
+c	00118	0	43	0	43	0	m:0040
+c	00120	0	44	0	44	0	m:0040
+c	00128	0	49	0	49	0	m:0040
+c	00134	0	51	0	51	0	m:0040
+c	00139	0	52	0	52	0	m:0040
+c	0013E	0	53	0	53	0	m:0040
+c	00143	0	55	0	55	0	m:0040
+c	0014D	0	56	0	56	0	m:0040
+c	00154	0	57	0	57	0	m:0040
+c	0015E	0	63	0	63	0	m:0040
+c	00168	0	64	0	64	0	m:0040
+c	0016F	0	65	0	65	0	m:0040
+c	00179	0	71	0	71	0	m:0040
+c	00183	0	72	0	72	0	m:0040
+c	0018A	0	73	0	73	0	m:0040
+c	00194	0	80	0	80	0	m:0040
+c	001A4	0	82	0	82	0	m:0040
+c	001B5	0	83	0	83	0	m:0040
+c	001C5	0	86	0	86	0	m:0040
+c	001CB	0	87	0	87	0	m:0040
+c	001D1	0	88	0	88	0	m:0040
+c	001D9	0	89	0	89	0	m:0040
+c	001EB	0	90	0	90	0	m:0040
+c	001F4	0	91	0	91	0	m:0040
+c	00207	0	92	0	92	0	m:0040
+c	0021A	0	95	0	95	0	m:0040
+c	00224	0	101	0	101	0	m:0040
+c	0022E	0	107	0	107	0	m:0040
+c	00243	0	108	0	108	0	m:0040
+e	00244	m:0040
+c	00247	3	10	0	10	0	m:0122
+l!	00247	0024C	r:embs.Broadcast	this	m:0122	0
+l!	00247	0024C	l	broadcastTime	m:0122	1
+c	0024B	3	11	0	11	0	m:0122
+e!	0024C	m:0122
+c	0024F	3	14	0	14	0	m:0126
+l	0024F	00253	r:embs.Broadcast	this	m:0126	0
+e!	00254	m:0126
+c	00257	3	17	0	17	0	m:012A
+l!	00257	0025C	r:embs.Broadcast	this	m:012A	0
+l	00257	0025C	l	broadcastTime	m:012A	1
+c	0025B	3	18	0	18	0	m:012A
+e!	0025C	m:012A
+c	0025F	2	15	0	15	0	m:012E
+l!	0025F	00268	r:embs.ChannelSwitch	this	m:012E	0
+l!	0025F	00268	l	time	m:012E	1
+l	0025F	00268	c	channel	m:012E	3
+c	00263	2	16	0	16	0	m:012E
+c	00267	2	17	0	17	0	m:012E
+e!	00268	m:012E
+c	0026B	2	30	0	30	0	m:0134
+l	0026B	0026F	r:embs.ChannelSwitch	this	m:0134	0
+e!	00270	m:0134
+c	00273	2	20	0	20	0	m:0138
+l	00273	00277	r:embs.ChannelSwitch	this	m:0138	0
+e!	00278	m:0138
+c	0027B	2	27	0	27	0	m:013C
+l!	0027B	00280	r:embs.ChannelSwitch	this	m:013C	0
+l	0027B	00280	c	channel	m:013C	1
+c	0027F	2	28	0	28	0	m:013C
+e!	00280	m:013C
+c	00283	2	23	0	23	0	m:0140
+l!	00283	00288	r:embs.ChannelSwitch	this	m:0140	0
+l	00283	00288	l	time	m:0140	1
+c	00287	2	24	0	24	0	m:0140
+e!	00288	m:0140
+c	0028B	1	10	0	10	0	m:0144
+l!	0028B	002B4	r:embs.SinkParameters	this	m:0144	0
+l!	0028B	002B4	c	channel	m:0144	1
+l!	0028B	002B4	c	panid	m:0144	2
+l!	0028B	002B4	c	address	m:0144	3
+c	0028F	1	11	0	11	0	m:0144
+c	00297	1	12	0	12	0	m:0144
+c	0029B	1	13	0	13	0	m:0144
+c	002A3	1	14	0	14	0	m:0144
+c	002A7	1	18	0	18	0	m:0144
+c	002AB	1	19	0	19	0	m:0144
+c	002AF	1	20	0	20	0	m:0144
+c	002B3	1	21	0	21	0	m:0144
+e!	002B4	m:0144
+c	002B7	1	32	0	32	0	m:015A
+l!	002B7	002C0	r:embs.SinkParameters	this	m:015A	0
+l!	002B7	002C0	i	n	m:015A	1
+l	002B7	002C0	l	t	m:015A	2
+c	002BB	1	33	0	33	0	m:015A
+c	002BF	1	34	0	34	0	m:015A
+e!	002C0	m:015A
+c	002C3	1	42	0	42	0	m:0160
+l	002C3	002C7	r:embs.SinkParameters	this	m:0160	0
+e!	002C8	m:0160
+c	002CB	1	45	0	45	0	m:0164
+l	002CB	002CF	r:embs.SinkParameters	this	m:0164	0
+e!	002D0	m:0164
+c	002D3	1	51	0	51	0	m:0168
+l	002D3	002D7	r:embs.SinkParameters	this	m:0168	0
+e!	002D8	m:0168
+c	002DB	1	24	0	24	0	m:016C
+l	002DB	002DF	r:embs.SinkParameters	this	m:016C	0
+e!	002E0	m:016C
+c	002E3	1	40	0	40	0	m:0170
+l	002E3	002E7	r:embs.SinkParameters	this	m:0170	0
+e!	002E8	m:0170
+c	002EB	1	39	0	39	0	m:0174
+l	002EB	002EF	r:embs.SinkParameters	this	m:0174	0
+e!	002F0	m:0174
+c	002F3	1	62	0	62	0	m:0178
+l	002F3	002F7	r:embs.SinkParameters	this	m:0178	0
+e!	002F8	m:0178
+c	002FB	1	41	0	41	0	m:017C
+l	002FB	002FF	r:embs.SinkParameters	this	m:017C	0
+e!	00300	m:017C
+c	00303	1	37	0	37	0	m:0180
+l	00303	00307	r:embs.SinkParameters	this	m:0180	0
+e!	00308	m:0180
+c	0030B	1	48	0	48	0	m:0184
+l!	0030B	00310	r:embs.SinkParameters	this	m:0184	0
+l	0030B	00310	i	beaconN	m:0184	1
+c	0030F	1	49	0	49	0	m:0184
+e!	00310	m:0184
+c	00313	1	54	0	54	0	m:0188
+l!	00313	00318	r:embs.SinkParameters	this	m:0188	0
+l	00313	00318	l	beaconT	m:0188	1
+c	00317	1	55	0	55	0	m:0188
+e!	00318	m:0188
+c	0031B	1	28	0	28	0	m:018C
+l!	0031B	00320	r:embs.SinkParameters	this	m:018C	0
+l	0031B	00320	z	value	m:018C	1
+c	0031F	1	29	0	29	0	m:018C
+e!	00320	m:018C
+c	00323	1	36	0	36	0	m:0190
+l!	00323	00328	r:embs.SinkParameters	this	m:0190	0
+l	00323	00328	i	n	m:0190	1
+e!	00328	m:0190
+c	0032B	1	58	0	58	0	m:0194
+l!	0032B	00330	r:embs.SinkParameters	this	m:0194	0
+l	0032B	00330	l	l	m:0194	1
+c	0032F	1	59	0	59	0	m:0194
+e!	00330	m:0194
+c	00333	1	38	0	38	0	m:0198
+l!	00333	00338	r:embs.SinkParameters	this	m:0198	0
+l	00333	00338	l	t	m:0198	1
+e!	00338	m:0198
+c	0033B	0	8	0	8	0	m:019C
+l!	0033B	0033C	r:embs.SourceNode	this	m:019C	0
+e!	0033C	m:019C
+c	0033F	0	8	0	8	0	m:019E
+l	0033F	00349	i	x0	m:019E	0
+l	0033F	00349	c[]	x1	m:019E	1
+l	0033F	00349	i	x2	m:019E	2
+l	0033F	00349	i	x3	m:019E	3
+l	0033F	00349	l	x4	m:019E	4
+e	0034A	m:019E
+c	0034D	0	8	0	8	0	m:01A5
+l	0034D	00357	i	x0	m:01A5	0
+l	0034D	00357	c[]	x1	m:01A5	1
+l	0034D	00357	i	x2	m:01A5	2
+l	0034D	00357	i	x3	m:01A5	3
+l	0034D	00357	l	x4	m:01A5	4
+e	00358	m:01A5
+c	0035B	0	162	0	162	0	m:01AC
+l!	0035B	003B6	c	sinkIndex	m:01AC	0
+l!	0035B	003B6	l	time	m:01AC	1
+c	00361	0	163	0	163	0	m:01AC
+c	0036C	0	164	0	164	0	m:01AC
+c	00372	0	165	0	165	0	m:01AC
+c	00378	0	166	0	166	0	m:01AC
+c	0037C	0	168	0	168	0	m:01AC
+c	00380	0	169	0	169	0	m:01AC
+c	00389	0	170	0	170	0	m:01AC
+c	0038D	0	172	0	172	0	m:01AC
+c	003AB	0	173	0	173	0	m:01AC
+c	003B1	0	174	0	174	0	m:01AC
+c	003B5	0	175	0	175	0	m:01AC
+e!	003B6	m:01AC
+c	003B9	0	250	0	250	0	m:01DB
+l	003B9	003EA	i	beaconN	m:01DB	0
+l	003B9	003EA	l	beaconT	m:01DB	1
+l	003B9	003EA	i	channel	m:01DB	3
+l	003B9	003EA	l	t	m:01DB	4
+l	003B9	003EA	l	currentTimeMS	m:01DB	6
+c	003C0	0	251	0	251	0	m:01DB
+l	003C0	003EA	l	broadcastTimeByMSSpan	m:01DB	8
+c	003C8	0	252	0	252	0	m:01DB
+l	003C8	003EA	l	deadline	m:01DB	10
+c	003D2	0	253	0	253	0	m:01DB
+c	003DD	0	254	0	254	0	m:01DB
+c	003E6	0	255	0	255	0	m:01DB
+c	003E9	0	256	0	256	0	m:01DB
+e	003EA	m:01DB
+c	003ED	0	304	0	304	0	m:01F5
+l	003ED	003F1	i	beacon1N	m:01F5	0
+l	003ED	003F1	i	beacon2N	m:01F5	1
+e	003F2	m:01F5
+c	003F5	0	308	0	308	0	m:01F9
+l	003F5	0040C	l	beacon1T	m:01F9	0
+l	003F5	0040C	l	beacon2T	m:01F9	2
+c	003FA	0	309	0	309	0	m:01F9
+l	003FA	0040C	l	diffT	m:01F9	4
+e	0040C	m:01F9
+c	0040F	0	113	0	113	0	m:0206
+l	0040F	00566	i	flags	m:0206	0
+l	0040F	00566	c[]	data	m:0206	1
+l	0040F	00566	i	len	m:0206	2
+l	0040F	00566	i	info	m:0206	3
+l	0040F	00566	l	time	m:0206	4
+c	00412	0	114	0	114	0	m:0206
+c	00414	0	117	0	117	0	m:0206
+c	0041A	0	119	0	119	0	m:0206
+l	0041A	00566	i	n	m:0206	6
+c	00427	0	120	0	120	0	m:0206
+c	00432	0	122	0	122	0	m:0206
+c	00438	0	123	0	123	0	m:0206
+c	00445	0	124	0	124	0	m:0206
+c	0044B	0	125	0	125	0	m:0206
+c	00453	0	126	0	126	0	m:0206
+c	00457	0	127	0	127	0	m:0206
+c	0045D	0	130	0	130	0	m:0206
+l	0045D	00566	l	currentTime	m:0206	7
+c	0046E	0	131	0	131	0	m:0206
+c	00484	0	132	0	132	0	m:0206
+c	0048D	0	133	0	133	0	m:0206
+c	00490	0	134	0	134	0	m:0206
+c	00492	0	136	0	136	0	m:0206
+c	0049F	0	138	0	138	0	m:0206
+c	004B1	0	139	0	139	0	m:0206
+c	004C9	0	141	0	141	0	m:0206
+c	004E8	0	142	0	142	0	m:0206
+c	004F8	0	143	0	143	0	m:0206
+l	004F8	0054D	i	diffN	m:0206	9
+c	00509	0	144	0	144	0	m:0206
+l	00509	0054D	l	diffT	m:0206	10
+c	0051D	0	145	0	145	0	m:0206
+c	00525	0	146	0	146	0	m:0206
+l	00525	0054D	l	t	m:0206	12
+c	00531	0	147	0	147	0	m:0206
+c	00537	0	148	0	148	0	m:0206
+c	0053C	0	149	0	149	0	m:0206
+c	00540	0	150	0	150	0	m:0206
+c	0054D	0	155	0	155	0	m:0206
+c	00558	0	156	0	156	0	m:0206
+c	00564	0	157	0	157	0	m:0206
+e	00566	m:0206
+c	00569	0	178	0	178	0	m:02B3
+l	00569	005D8	i	flags	m:02B3	0
+l	00569	005D8	c[]	data	m:02B3	1
+l	00569	005D8	i	len	m:02B3	2
+l	00569	005D8	i	info	m:02B3	3
+l	00569	005D8	l	time	m:02B3	4
+c	00591	0	182	0	182	0	m:02B3
+c	0059C	0	183	0	183	0	m:02B3
+c	005A5	0	184	0	184	0	m:02B3
+c	005A8	0	185	0	185	0	m:02B3
+c	005AE	0	186	0	186	0	m:02B3
+c	005B6	0	187	0	187	0	m:02B3
+c	005BC	0	188	0	188	0	m:02B3
+c	005C4	0	189	0	189	0	m:02B3
+c	005CA	0	190	0	190	0	m:02B3
+c	005D2	0	191	0	191	0	m:02B3
+c	005D6	0	192	0	192	0	m:02B3
+e	005D8	m:02B3
+c	005DB	0	197	0	197	0	m:02EC
+l	005DB	0064E	i	currSinkIndex	m:02EC	0
+l	005DB	0064E	i	x	m:02EC	1
+c	005E1	0	198	0	198	0	m:02EC
+l	005E1	0064E	l	nextBeaconTime	m:02EC	2
+c	005E3	0	199	0	199	0	m:02EC
+l	005E3	0064E	i	nextBeaconSinkIndex	m:02EC	4
+c	005EC	0	200	0	200	0	m:02EC
+c	005F0	0	201	0	201	0	m:02EC
+c	00610	0	202	0	202	0	m:02EC
+c	00619	0	203	0	203	0	m:02EC
+c	0061B	0	199	0	199	0	m:02EC
+c	00620	0	207	0	207	0	m:02EC
+c	00624	0	208	0	208	0	m:02EC
+c	0062D	0	210	0	210	0	m:02EC
+c	00633	0	211	0	211	0	m:02EC
+c	00637	0	212	0	212	0	m:02EC
+c	00642	0	213	0	213	0	m:02EC
+c	00648	0	215	0	215	0	m:02EC
+c	0064C	0	216	0	216	0	m:02EC
+e	0064E	m:02EC
+c	00651	0	223	0	223	0	m:0327
+l	00651	006CD	i	sinkIndex	m:0327	0
+c	0065B	0	224	0	224	0	m:0327
+c	00661	0	227	0	227	0	m:0327
+c	00671	0	228	0	228	0	m:0327
+c	0067A	0	229	0	229	0	m:0327
+c	0068B	0	231	0	231	0	m:0327
+c	00699	0	232	0	232	0	m:0327
+c	006A8	0	235	0	235	0	m:0327
+c	006AC	0	236	0	236	0	m:0327
+c	006B1	0	238	0	238	0	m:0327
+c	006B7	0	239	0	239	0	m:0327
+c	006C2	0	240	0	240	0	m:0327
+c	006C8	0	241	0	241	0	m:0327
+c	006CC	0	242	0	242	0	m:0327
+e	006CE	m:0327
+c	006D1	0	322	0	322	0	m:0367
+l	006D1	0070A	c	led	m:0367	0
+c	006F4	0	323	0	323	0	m:0367
+l	006F4	00704	c	b	m:0367	4
+c	006F8	0	324	0	324	0	m:0367
+c	006FF	0	326	0	326	0	m:0367
+c	00704	0	322	0	322	0	m:0367
+c	00709	0	329	0	329	0	m:0367
+e	0070A	m:0367
+c	0070D	0	267	0	267	0	m:0385
+l	0070D	0074F	l	broadcastTime	m:0385	0
+l	0070D	0074F	l	deadline	m:0385	2
+l	0070D	0074F	i	sinkIndex	m:0385	4
+l	0070D	0074F	l	currentTimeMS	m:0385	5
+c	00713	0	268	0	268	0	m:0385
+c	00717	0	269	0	269	0	m:0385
+c	0071B	0	271	0	271	0	m:0385
+c	00729	0	273	0	273	0	m:0385
+c	00734	0	274	0	274	0	m:0385
+c	00736	0	276	0	276	0	m:0385
+c	00741	0	277	0	277	0	m:0385
+c	00743	0	279	0	279	0	m:0385
+c	0074E	0	282	0	282	0	m:0385
+e	00750	m:0385
+c	00753	0	246	0	246	0	m:03A8
+c	00770	0	247	0	247	0	m:03A8
+e	00772	m:03A8
+c	00775	0	313	0	313	0	m:03B9
+l	00775	0078D	i	led	m:03B9	0
+c	0077B	0	314	0	314	0	m:03B9
+l	0077B	0078D	i	ledState	m:03B9	1
+c	0077E	0	315	0	315	0	m:03B9
+c	00786	0	317	0	317	0	m:03B9
+c	0078C	0	319	0	319	0	m:03B9
+e	0078E	m:03B9
 S	M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java
 :	package embs;
 :	
@@ -578,6 +614,10 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java
 :			}
 :				
 :			int n = data[11];
+:			
+:			if (n>sinks[currentSinkIndex].getMaxObservedN()){
+:				sinks[currentSinkIndex].setMaxObservedN(n);
+:			}
 :			Logger.appendString(csr.s2b("Received packet c:"));
 :			Logger.appendByte(sinks[currentSinkIndex].getChannel());
 :			Logger.appendString(csr.s2b(" n:"));
@@ -587,7 +627,8 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java
 :			
 :			//Case where first beacon received is n=1 and no previous known beacons, switch channel
 :			if (sinks[currentSinkIndex].getBeaconN()==-1 && n==1){
-:				setChannel(pickNextChannel(currentSinkIndex));
+:				sinks[currentSinkIndex].setNextBeaconTime(currentTime + (11*T_MIN));
+:				setChannel(pickNextSink(currentSinkIndex));
 :				startListening();
 :				return 0;
 :			}
@@ -620,7 +661,7 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java
 :			Logger.appendString(csr.s2b("BROADCASTING! on channel: "));
 :			Logger.appendByte(sinks[sinkIndex].getChannel());
 :			Logger.appendString(csr.s2b("at time: "));
-:			Logger.appendLong(time);
+:			Logger.appendLong(Time.currentTicks());
 :			Logger.flush(Mote.WARN);
 :			
 :			setChannel((int) sinkIndex);
@@ -633,12 +674,12 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java
 :		}
 :	
 :		private static int onTransmit(int flags, byte[] data, int len, int info, long time) {
-:	
+:			sinks[currentSinkIndex].setNextBeaconTime(Time.currentTime(Time.MILLISECS)+(sinks[currentSinkIndex].getT()*(11+sinks[currentSinkIndex].getMaxObservedN())));
 :			//TODO schedule listen callback
 :	//		Logger.appendInt(currentSinkIndex);
 :	//		Logger.flush(Mote.ERROR);
 :			sinks[currentSinkIndex].setBroadcastSet(false);
-:			setChannel(pickNextChannel(currentSinkIndex));
+:			setChannel(pickNextSink(currentSinkIndex));
 :			startListening();
 :			Logger.appendString(csr.s2b("Broadcast results: "));
 :			Logger.appendInt(broadcasted[0]);
@@ -650,8 +691,29 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java
 :			return 0;
 :		}
 :		
-:		private static int pickNextChannel(int currSinkIndex){
-:			return (currSinkIndex+1) % (sinks.length);
+:		private static int pickNextSink(int currSinkIndex){
+:			int x = 0;
+:			long nextBeaconTime = -1;
+:			int nextBeaconSinkIndex = -1;
+:			for (x=0; x<sinks.length;x++){
+:				if (x!=currSinkIndex){
+:					if (nextBeaconTime==-1 | sinks[x].getNextBeaconTime()<nextBeaconTime){
+:						nextBeaconTime = sinks[x].getNextBeaconTime();
+:						nextBeaconSinkIndex = x;
+:					}
+:				}
+:			}
+:			if (nextBeaconSinkIndex==-1){
+:				return (currSinkIndex+1) % (sinks.length);
+:			} else {
+:				Logger.appendString(csr.s2b("PICKED DIFFERENT CHANNEL!: "));
+:				Logger.appendInt(nextBeaconSinkIndex);
+:				if (((currSinkIndex+1) % (sinks.length))==nextBeaconSinkIndex){
+:					Logger.appendString(csr.s2b("PAA!: "));
+:				}
+:				Logger.flush(Mote.ERROR);
+:				return nextBeaconSinkIndex;
+:			}
 :		}
 :		
 :		
@@ -688,7 +750,8 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java
 :			long deadline = broadcastTimeByMSSpan + T_MIN;
 :			setupBroadcastAndCallBack(broadcastTimeByMSSpan, deadline, channel, currentTimeMS);
 :			sinks[currentSinkIndex].setBroadcastSet(true);
-:			setChannel(pickNextChannel(currentSinkIndex));
+:			setChannel(pickNextSink(currentSinkIndex));
+:			startListening();
 :		}
 :	
 :		private static void setupBroadcastAndCallBack(long broadcastTime, long deadline, int sinkIndex, long currentTimeMS){
@@ -795,11 +858,12 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/SinkParameters.java
 :	    private byte panid;
 :	    private byte address;
 :	    
-:	    private int N = -1;
+:	    private int maxObservedN = -1;
 :	    private long T = -1;
 :	    private int beaconN = -1;
 :	    private long beaconT = -1;
 :	    private boolean broadcastSet = false;
+:		private long nextBeaconTime;
 :	    
 :	    public SinkParameters(byte channel, byte panid, byte address){
 :	    	this.channel =  channel;
@@ -820,10 +884,10 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/SinkParameters.java
 :	    	this.beaconT = t;
 :	    }
 :	    
-:		public void setN(int n) {this.N = n;}
+:		public void setMaxObservedN(int n) {this.maxObservedN = n;}
 :		public long getT() {return T;}
 :		public void setT(long t) {this.T = t;}
-:		public int getN() {return N;}
+:		public int getMaxObservedN() {return maxObservedN;}
 :		public byte getChannel() {return channel;}
 :		public byte getPanid() {return panid;}
 :		public byte getAddress() {return address;}
@@ -839,6 +903,14 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/SinkParameters.java
 :		}
 :		public void setBeaconT(long beaconT) {
 :			this.beaconT = beaconT;
+:		}
+:	
+:		public void setNextBeaconTime(long l) {
+:			this.nextBeaconTime = l;
+:		}
+:		
+:		public long getNextBeaconTime(){
+:			return this.nextBeaconTime;
 :		}
 :	  
 :		
