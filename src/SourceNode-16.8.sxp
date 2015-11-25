@@ -1,6 +1,6 @@
 .sxp-version 2.0
 
-.assembly SourceNode-16.7
+.assembly SourceNode-16.8
 
 
 .namespace embs
@@ -10,6 +10,8 @@
 	.method#0 static public SourceNode(r:embs.SourceNode this)v
 
 	.method#1 static protected broadcastToSink(c sinkIndex, l time)v
+
+	.method#5 static protected doBroadcast(c param, l time)v
 .end
 
 

@@ -1,6 +1,6 @@
 .sxp-version 2.0
 
-.assembly SourceNode-16.7
+.assembly SourceNode-17.1
 
 
 .namespace embs
@@ -10,6 +10,8 @@
 	.method#0 static public SourceNode(r:embs.SourceNode this)v
 
 	.method#1 static protected broadcastToSink(c sinkIndex, l time)v
+
+	.method#4 static protected doBroadcast(c param, l time)v
 .end
 
 
@@ -48,7 +50,7 @@
 
 
 ;;! Class used to represent channel switch events
-.class#2 public ChannelSwitch
+.class#3 public ChannelSwitch
 
 	.method#0 public getTime()l
 
@@ -58,18 +60,18 @@
 
 	.method#3 public getChannel()c
 
-	.method#3 static public ChannelSwitch(r:embs.ChannelSwitch this, l time,c channel)v
+	.method#5 static public ChannelSwitch(r:embs.ChannelSwitch this, l time,c channel)v
 .end
 
 
 ;;! Represents a scheduled broadcast
-.class#3 public Broadcast
+.class#2 public Broadcast
 
 	.method#0 public getBroadcastTime()l
 
 	.method#1 public setBroadcastTime(l broadcastTime)v
 
-	.method#4 static public Broadcast(r:embs.Broadcast this, l broadcastTime)v
+	.method#3 static public Broadcast(r:embs.Broadcast this, l broadcastTime)v
 .end
 
 .end
