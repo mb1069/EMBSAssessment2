@@ -2,14 +2,15 @@ package embs;
 
 import com.ibm.saguaro.system.*;
 import com.ibm.saguaro.logger.*;
-//import embs.SinkParameter;
 
 
 public class SourceNode {
 
-	static Timer  timer0;
-	static Timer  timer1;
-	static Timer  timer2;
+	
+	// Timers to schedule broadcast callbacks
+	static Timer  timer0; // Timer for sink0
+	static Timer  timer1; // Timer for sink1
+	static Timer  timer2; // Timer for sink 2
 	
 	static byte[] xmit;
 	static long   wait;
@@ -19,10 +20,9 @@ public class SourceNode {
 		new SinkParameters((byte) 11,(byte)  0x11,(byte)  0x11), 
 		new SinkParameters((byte) 12, (byte) 0x12, (byte) 0x12),
 		new SinkParameters((byte) 13, (byte) 0x13, (byte) 0x13)};
-	// settings for SourceNode A
+	
+	// settings for initial sink
 	static int currentSinkIndex = 0;
-	static byte ownPanId = 0x11;
-	static byte ownShortAddr = 0x1;
 
 
 	static byte YELLOW_LED = (byte) 0;
@@ -34,12 +34,9 @@ public class SourceNode {
 	static long T_MIN = 250;
 	static long T_MAX = 1500;
 	
-	static int[] broadcasted = new int[]{0,0,0};
+	static int[] sendPerSink = new int[]{0,0,0};
 
-//	static ChannelSwitch[] channelSwitches = new ChannelSwitch[3];
-	static Broadcast[] broadcasts = new Broadcast[3];
-
-	static int previousChannel;
+	static int previousSinkIndex;
 	static long TIME_ADJUSTMENT = 3;
 	static long lastChannelSwitch = 0;
 	
@@ -162,15 +159,20 @@ public class SourceNode {
 	}
 
 	protected static void broadcastToSink(byte sinkIndex, long time){
+		if (radio.getState()==Device.S_RXEN){
+			radio.stopRx();
+		}
 		Logger.appendString(csr.s2b("BROADCASTING! on channel: "));
 		Logger.appendByte(sinks[sinkIndex].getChannel());
 		Logger.appendString(csr.s2b("at time: "));
 		Logger.appendLong(Time.currentTicks());
 		Logger.flush(Mote.WARN);
+
+		previousSinkIndex = (int) currentSinkIndex;
 		
 		setChannel((int) sinkIndex);
-		broadcasted[sinkIndex]++;
-		previousChannel = (int) sinkIndex;
+		sendPerSink[sinkIndex]++;
+		
 		
 		radio.transmit(Device.TIMED, xmit, 0, 12, Time.currentTicks()+Time.toTickSpan(Time.MILLISECS, T_MIN/2));
 		Logger.appendString(csr.s2b("Finished broadcast."));
@@ -183,14 +185,18 @@ public class SourceNode {
 //		Logger.appendInt(currentSinkIndex);
 //		Logger.flush(Mote.ERROR);
 		sinks[currentSinkIndex].setBroadcastSet(false);
-		setChannel(pickNextSink(currentSinkIndex));
+		if (sinks[previousSinkIndex].getT()==-1){
+			setChannel(previousSinkIndex);
+		} else {
+			setChannel(pickNextSink(currentSinkIndex));
+		}
 		startListening();
 		Logger.appendString(csr.s2b("Broadcast results: "));
-		Logger.appendInt(broadcasted[0]);
+		Logger.appendInt(sendPerSink[0]);
 		Logger.appendString(csr.s2b("/"));
-		Logger.appendInt(broadcasted[1]);
+		Logger.appendInt(sendPerSink[1]);
 		Logger.appendString(csr.s2b("/"));
-		Logger.appendInt(broadcasted[2]);
+		Logger.appendInt(sendPerSink[2]);
 		Logger.flush(Mote.WARN);
 		return 0;
 	}
@@ -308,7 +314,7 @@ public class SourceNode {
 	}
 
 	private static long getDiffT(long beacon1T, long beacon2T) {
-		long diffT = beacon1T-beacon2T;
+		long diffT = beacon2T-beacon1T;
 		return (diffT < 0) ? -diffT : diffT;
 	}
 

@@ -1,10 +1,11 @@
+//line 1 "M:/EMBS/EMBS_assessment2/part2/src/embs/Sink3.java"
 package embs;
 
 import com.ibm.saguaro.logger.Logger;
 import com.ibm.saguaro.system.*;
 
 @SuppressWarnings("Duplicates")
-public class Sink1 {
+public class Sink3 {
 
     private static Timer  tsend;
     private static Timer  tstart;
@@ -14,15 +15,15 @@ public class Sink1 {
     private static byte[] xmit;
     private static long   wait;
     static Radio radio = new Radio();
-    private static int n = 2; // number of beacons of sync phase - sample only, assessment will use unknown values
+    private static int n = 9; // number of beacons of sync phase - sample only, assessment will use unknown values
     private static int nc;
 
-    private static int t = 250; // milliseconds between beacons - sample only, assessment will use unknown values
+    private static int t = 1400; // milliseconds between beacons - sample only, assessment will use unknown values
 
     // settings for sink A
-    private static byte channel = 11; // channel 11
-    private static byte panid = (byte) (0x11);
-    private static byte address = (byte) (0x11);
+    private static byte channel = 13; // channel 11
+    private static byte panid = (byte) (0x13);
+    private static byte address = (byte) (0x13);
 
     private static int okCount = 0;
     private static int okCountTemp = 0;
@@ -55,7 +56,7 @@ public class Sink1 {
         // register delegate for received frames
         radio.setRxHandler(new DevCallback(null){
             public int invoke (int flags, byte[] data, int len, int info, long time) {
-                return  Sink1.onReceive(flags, data, len, info, time);
+                return  Sink3.onReceive(flags, data, len, info, time);
             }
         });
 
@@ -65,14 +66,14 @@ public class Sink1 {
         tsend = new Timer();
         tsend.setCallback(new TimerEvent(null){
             public void invoke(byte param, long time){
-                Sink1.periodicSend(param, time);
+                Sink3.periodicSend(param, time);
             }
         });
 
         flashTimer = new Timer();
         flashTimer.setCallback(new TimerEvent(null) {
             @Override
-            public void invoke(byte param, long time) { Sink1.flash(param, time); }
+            public void invoke(byte param, long time) { Sink3.flash(param, time); }
         });
 
 
@@ -82,7 +83,7 @@ public class Sink1 {
         tstart = new Timer();
         tstart.setCallback(new TimerEvent(null){
             public void invoke(byte param, long time){
-                Sink1.restart(param, time);
+                Sink3.restart(param, time);
             }
         });
 
@@ -113,7 +114,7 @@ public class Sink1 {
             LED.setState((byte)2, (byte)0);
 
             //set alarm to restart protocol
-            Logger.appendString(csr.s2b("sink11 end receive")); Logger.flush(Mote.WARN);
+            Logger.appendString(csr.s2b("sink13 end receive")); Logger.flush(Mote.WARN);
             tstart.setAlarmBySpan(10*wait);
 
             okCountTemp = okCount<<1;
@@ -155,7 +156,7 @@ public class Sink1 {
         }
         else{
             //start reception phase
-            Logger.appendString(csr.s2b("sink11 receiving")); Logger.flush(Mote.WARN);
+            Logger.appendString(csr.s2b("sink13 receiving")); Logger.flush(Mote.WARN);
             radio.startRx(Device.ASAP, 0, Time.currentTicks()+wait);
             // turn green LED on
             LED.setState((byte)0, (byte)0);
