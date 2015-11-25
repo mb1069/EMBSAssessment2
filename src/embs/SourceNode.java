@@ -14,7 +14,7 @@ public class SourceNode {
 	static byte[] xmit;
 	static long   wait;
 	static Radio radio = new Radio();
-
+	
 	private static SinkParameters[] sinks = {
 		new SinkParameters((byte) 11,(byte)  0x11,(byte)  0x11), 
 		new SinkParameters((byte) 12, (byte) 0x12, (byte) 0x12),
@@ -34,6 +34,7 @@ public class SourceNode {
 	static long T_MIN = 250;
 	static long T_MAX = 1500;
 	
+	static int[] broadcasted = new int[]{0,0,0};
 
 //	static ChannelSwitch[] channelSwitches = new ChannelSwitch[3];
 	static Broadcast[] broadcasts = new Broadcast[3];
@@ -156,7 +157,7 @@ public class SourceNode {
 		Logger.flush(Mote.WARN);
 		
 		setChannel((int) sinkIndex);
-		
+		broadcasted[sinkIndex]++;
 		previousChannel = (int) sinkIndex;
 		
 		radio.transmit(Device.TIMED, xmit, 0, 12, Time.currentTicks()+Time.toTickSpan(Time.MILLISECS, T_MIN/2));
@@ -174,12 +175,21 @@ public class SourceNode {
 		sinks[currentSinkIndex].setBroadcastSet(false);
 		setChannel(pickNextChannel(currentSinkIndex));
 		startListening();
+		Logger.appendString(csr.s2b("Broadcast results: "));
+		Logger.appendInt(broadcasted[0]);
+		Logger.appendString(csr.s2b("/"));
+		Logger.appendInt(broadcasted[1]);
+		Logger.appendString(csr.s2b("/"));
+		Logger.appendInt(broadcasted[2]);
+		Logger.flush(Mote.WARN);
 		return 0;
 	}
 	
 	private static byte pickNextChannel(int currSinkIndex){
 		if (currSinkIndex==0){
 			return 1;
+		} else if (currSinkIndex==1){
+			return 2;
 		} else {
 			return 0;
 		}

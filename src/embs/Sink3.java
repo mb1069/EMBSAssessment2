@@ -14,13 +14,13 @@ public class Sink3 {
     private static byte[] xmit;
     private static long   wait;
     static Radio radio = new Radio();
-    private static int n = 3; // number of beacons of sync phase - sample only, assessment will use unknown values
+    private static int n = 9; // number of beacons of sync phase - sample only, assessment will use unknown values
     private static int nc;
 
-    private static int t = 1500; // milliseconds between beacons - sample only, assessment will use unknown values
+    private static int t = 900; // milliseconds between beacons - sample only, assessment will use unknown values
 
     // settings for sink A
-    private static byte channel = 13; // channel 13
+    private static byte channel = 13; // channel 11
     private static byte panid = (byte) (0x13);
     private static byte address = (byte) (0x13);
 
@@ -113,7 +113,7 @@ public class Sink3 {
             LED.setState((byte)2, (byte)0);
 
             //set alarm to restart protocol
-            Logger.appendString(csr.s2b("end receive")); Logger.flush(Mote.WARN);
+            Logger.appendString(csr.s2b("sink13 end receive")); Logger.flush(Mote.WARN);
             tstart.setAlarmBySpan(10*wait);
 
             okCountTemp = okCount<<1;
@@ -155,7 +155,7 @@ public class Sink3 {
         }
         else{
             //start reception phase
-            Logger.appendString(csr.s2b("receiving")); Logger.flush(Mote.WARN);
+            Logger.appendString(csr.s2b("sink13 receiving")); Logger.flush(Mote.WARN);
             radio.startRx(Device.ASAP, 0, Time.currentTicks()+wait);
             // turn green LED on
             LED.setState((byte)0, (byte)0);

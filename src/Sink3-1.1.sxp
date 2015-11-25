@@ -1,0 +1,17 @@
+.sxp-version 2.0
+
+.assembly Sink3-1.1
+
+
+.namespace embs
+
+.class#0 public Sink3
+
+	.method#0 static public Sink3(r:embs.Sink3 this)v
+
+	.method#1 static public periodicSend(c param, l time)v
+
+	.method#2 static public restart(c param, l time)v
+.end
+
+.end
