@@ -141,7 +141,7 @@ public class SourceNode {
 				if (sinks[currentSinkIndex].getBeaconT()!=-1 && sinks[currentSinkIndex].getBeaconN()!=-1){
 					int diffN = getDiffN(sinks[currentSinkIndex].getBeaconN(), n);
 					long diffT = getDiffT(sinks[currentSinkIndex].getBeaconT(), currentTime);
-					if (diffN>0 && diffT-TIME_ADJUSTMENT <=(T_MAX*diffN)){
+					if (diffN>0 && diffT-TIME_ADJUSTMENT <=(T_MAX*diffN)  && isValidPeriod(diffT/diffN)){
 						long t = diffT/diffN;
 						sinks[currentSinkIndex].setT(t);
 						Logger.appendString(csr.s2b("Calculated T: "));
@@ -157,6 +157,9 @@ public class SourceNode {
 		return 0;
 	}
 
+	protected static boolean isValidPeriod(long period){
+		return T_MIN-TIME_ADJUSTMENT<=period && period <= T_MAX+TIME_ADJUSTMENT;
+	}
 
 	protected static void broadcastToSink(byte sinkIndex, long time){
 		Logger.appendString(csr.s2b("BROADCASTING! on channel: "));
