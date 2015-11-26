@@ -7,7 +7,6 @@ public class SinkParameters {
     private byte panid;
     private byte address;
     
-    private int maxObservedN = -1;
     private long T = -1;
     private int beaconN = -1;
     private long beaconT = -1;
@@ -33,10 +32,8 @@ public class SinkParameters {
     	this.beaconT = t;
     }
     
-	public void setMaxObservedN(int n) {this.maxObservedN = n;}
 	public long getT() {return T;}
 	public void setT(long t) {this.T = t;}
-	public int getMaxObservedN() {return maxObservedN;}
 	public byte getChannel() {return channel;}
 	public byte getPanid() {return panid;}
 	public byte getAddress() {return address;}

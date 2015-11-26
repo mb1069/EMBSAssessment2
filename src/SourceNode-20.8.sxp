@@ -1,6 +1,6 @@
 .sxp-version 2.0
 
-.assembly SourceNode-20.6
+.assembly SourceNode-20.8
 
 
 .namespace embs
@@ -16,8 +16,6 @@
 .end
 
 
-;;! Exam candidate number: Y0076159
-;;! Class to store all known data for an individual sink
 .class#1 public SinkParameters
 
 	.method#0 public getBroadcastSet()z

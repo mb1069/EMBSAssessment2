@@ -1,6 +1,6 @@
 .sxp-version 2.0
 
-.assembly TEST-1.0
+.assembly Sink1-1.16
 
 
 .namespace embs

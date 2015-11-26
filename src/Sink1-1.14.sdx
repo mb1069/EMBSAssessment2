@@ -1,4 +1,4 @@
-A!	Sink1-1.14.58383	2.0	Java
+A!	Sink1-1.14.03787	2.0	Java
 
 X	c:01/000	com.ibm.saguaro.system.Assembly
 X	c:01/001	com.ibm.saguaro.system.Util
@@ -34,9 +34,8 @@ X	c:02/000	com.ibm.saguaro.logger.Logger
 C!	c:004	embs.Sink1	-1	0	c:000
 R	tsend	r:com.ibm.saguaro.system.Timer	0	0
 R	tstart	r:com.ibm.saguaro.system.Timer	0	1
-R	flashTimer	r:com.ibm.saguaro.system.Timer	0	2
-R	xmit	c[]	0	3
-R	radio	r:com.ibm.saguaro.system.Radio	0	4
+R	xmit	c[]	0	2
+R	radio	r:com.ibm.saguaro.system.Radio	0	3
 F	light	z	0	0
 F	wait	l	0	1
 F	n	i	0	3
@@ -45,24 +44,17 @@ F	t	i	0	5
 F	channel	c	0	6
 F	panid	c	0	7
 F	address	c	0	8
-F	okCount	i	0	9
-F	okCountTemp	i	0	10
-H	sink11_end_receive$UTF8	b[]	0	115,105,110,107,49,49,32,101,110,100,32,114,101,99,101,105,118,101
-H	sink11_receiving$UTF8	b[]	0	115,105,110,107,49,49,32,114,101,99,101,105,118,105,110,103
-M!	Sink1(r:embs.Sink1)v	-1	m:0098	00130	4
-M	access$000(i,c[],i,i,l)i	-1	m:009A	00134	14
-M	access$100(c,l)v	-1	m:00A1	00142	10
-M	flash(c,l)v	-1	m:00A6	0014C	46
-M	onReceive(i,c[],i,i,l)i	-1	m:00BD	0017A	116
-M!	periodicSend(c,l)v	-1	m:00F7	001EE	102
-M!	restart(c,l)v	-1	m:012A	00254	46
+M!	Sink1(r:embs.Sink1)v	-1	m:008A	00114	4
+M	access$000(i,c[],i,i,l)i	-1	m:008C	00118	14
+M	onReceive(i,c[],i,i,l)i	-1	m:0093	00126	72
+M!	periodicSend(c,l)v	-1	m:00B7	0016E	82
+M!	restart(c,l)v	-1	m:00E0	001C0	32
 
 C	c:006	com.ibm.saguaro.system.$tatics	-1	-1	c:01/000
 r	embs.Sink1.tsend	r:com.ibm.saguaro.system.Timer	-1	0
 r	embs.Sink1.tstart	r:com.ibm.saguaro.system.Timer	-1	1
-r	embs.Sink1.flashTimer	r:com.ibm.saguaro.system.Timer	-1	2
-r	embs.Sink1.xmit	c[]	-1	3
-r	embs.Sink1.radio	r:com.ibm.saguaro.system.Radio	-1	4
+r	embs.Sink1.xmit	c[]	-1	2
+r	embs.Sink1.radio	r:com.ibm.saguaro.system.Radio	-1	3
 f	embs.Sink1.light	z	-1	0
 f	embs.Sink1.wait	l	-1	1
 f	embs.Sink1.n	i	-1	3
@@ -71,149 +63,115 @@ f	embs.Sink1.t	i	-1	5
 f	embs.Sink1.channel	c	-1	6
 f	embs.Sink1.panid	c	-1	7
 f	embs.Sink1.address	c	-1	8
-f	embs.Sink1.okCount	i	-1	9
-f	embs.Sink1.okCountTemp	i	-1	10
-M	__init()v	-1	m:0010	00020	272
+M	__init()v	-1	m:0010	00020	244
 
-c	0002D	0	12	0	12	0	m:0010
-c	00031	0	16	0	16	0	m:0010
-c	0003B	0	17	0	17	0	m:0010
-c	00040	0	20	0	20	0	m:0010
-c	00046	0	23	0	23	0	m:0010
-c	0004A	0	24	0	24	0	m:0010
-c	0004F	0	25	0	25	0	m:0010
+c	0002D	0	10	0	10	0	m:0010
+c	00031	0	14	0	14	0	m:0010
+c	0003B	0	15	0	15	0	m:0010
+c	00040	0	18	0	18	0	m:0010
+c	00046	0	21	0	21	0	m:0010
+c	0004A	0	22	0	22	0	m:0010
+c	0004F	0	23	0	23	0	m:0010
 c	00054	0	27	0	27	0	m:0010
-c	00058	0	28	0	28	0	m:0010
-c	0005C	0	32	0	32	0	m:0010
-c	00068	0	36	0	36	0	m:0010
-c	00071	0	40	0	40	0	m:0010
-c	0007B	0	41	0	41	0	m:0010
-c	00084	0	45	0	45	0	m:0010
-c	0008A	0	46	0	46	0	m:0010
-c	00090	0	47	0	47	0	m:0010
-c	00098	0	48	0	48	0	m:0010
-c	000A3	0	49	0	49	0	m:0010
-c	000AC	0	50	0	50	0	m:0010
-c	000B8	0	51	0	51	0	m:0010
-c	000C4	0	53	0	53	0	m:0010
-c	000CE	0	56	0	56	0	m:0010
-c	000D8	0	65	0	65	0	m:0010
-c	000E2	0	66	0	66	0	m:0010
-c	000EC	0	72	0	72	0	m:0010
-c	000F6	0	73	0	73	0	m:0010
-c	00100	0	82	0	82	0	m:0010
-c	0010A	0	83	0	83	0	m:0010
-c	00114	0	91	0	91	0	m:0010
-c	0011F	0	94	0	94	0	m:0010
-c	0012E	0	98	0	98	0	m:0010
-e	00130	m:0010
-c	00133	0	7	0	7	0	m:0098
-l!	00133	00134	r:embs.Sink1	this	m:0098	0
-e!	00134	m:0098
-c	00137	0	7	0	7	0	m:009A
-l	00137	00141	i	x0	m:009A	0
-l	00137	00141	c[]	x1	m:009A	1
-l	00137	00141	i	x2	m:009A	2
-l	00137	00141	i	x3	m:009A	3
-l	00137	00141	l	x4	m:009A	4
-e	00142	m:009A
-c	00145	0	7	0	7	0	m:00A1
-l	00145	0014B	c	x0	m:00A1	0
-l	00145	0014B	l	x1	m:00A1	1
-e	0014C	m:00A1
-c	0014F	0	101	0	101	0	m:00A6
-l	0014F	00179	c	param	m:00A6	0
-l	0014F	00179	l	time	m:00A6	1
-c	0015A	0	102	0	102	0	m:00A6
-c	00169	0	103	0	103	0	m:00A6
-c	00178	0	105	0	105	0	m:00A6
-e	0017A	m:00A6
-c	0017D	0	109	0	109	0	m:00BD
-l	0017D	001EE	i	flags	m:00BD	0
-l	0017D	001EE	c[]	data	m:00BD	1
-l	0017D	001EE	i	len	m:00BD	2
-l	0017D	001EE	i	info	m:00BD	3
-l	0017D	001EE	l	time	m:00BD	4
-c	00180	0	111	0	111	0	m:00BD
-c	00185	0	112	0	112	0	m:00BD
-c	0018A	0	113	0	113	0	m:00BD
-c	0018F	0	116	0	116	0	m:00BD
-c	00199	0	117	0	117	0	m:00BD
-c	001A8	0	119	0	119	0	m:00BD
-c	001B0	0	120	0	120	0	m:00BD
-c	001B9	0	122	0	122	0	m:00BD
-c	001BB	0	128	0	128	0	m:00BD
-c	001C0	0	129	0	129	0	m:00BD
-c	001C7	0	132	0	132	0	m:00BD
-c	001CC	0	134	0	134	0	m:00BD
-c	001D8	0	136	0	136	0	m:00BD
-c	001E0	0	137	0	137	0	m:00BD
-c	001E4	0	138	0	138	0	m:00BD
-c	001EC	0	140	0	140	0	m:00BD
-e	001EE	m:00BD
-c	001F1	0	148	0	148	0	m:00F7
-l!	001F1	00254	c	param	m:00F7	0
-l!	001F1	00254	l	time	m:00F7	1
-c	001F6	0	150	0	150	0	m:00F7
-c	00208	0	152	0	152	0	m:00F7
-c	00211	0	153	0	153	0	m:00F7
-c	00219	0	154	0	154	0	m:00F7
-c	00227	0	158	0	158	0	m:00F7
-c	00231	0	159	0	159	0	m:00F7
-c	00244	0	161	0	161	0	m:00F7
-c	00249	0	162	0	162	0	m:00F7
-c	0024E	0	163	0	163	0	m:00F7
-c	00253	0	167	0	167	0	m:00F7
-e!	00254	m:00F7
-c	00257	0	173	0	173	0	m:012A
-l!	00257	00282	c	param	m:012A	0
-l!	00257	00282	l	time	m:012A	1
-c	0025D	0	174	0	174	0	m:012A
-c	00267	0	175	0	175	0	m:012A
-c	00272	0	177	0	177	0	m:012A
-c	00277	0	178	0	178	0	m:012A
-c	0027C	0	179	0	179	0	m:012A
-c	00281	0	180	0	180	0	m:012A
-e!	00282	m:012A
+c	00060	0	31	0	31	0	m:0010
+c	00069	0	35	0	35	0	m:0010
+c	00073	0	36	0	36	0	m:0010
+c	0007C	0	40	0	40	0	m:0010
+c	00082	0	41	0	41	0	m:0010
+c	00088	0	42	0	42	0	m:0010
+c	00090	0	43	0	43	0	m:0010
+c	0009B	0	44	0	44	0	m:0010
+c	000A4	0	45	0	45	0	m:0010
+c	000B0	0	46	0	46	0	m:0010
+c	000BC	0	48	0	48	0	m:0010
+c	000C6	0	51	0	51	0	m:0010
+c	000D0	0	60	0	60	0	m:0010
+c	000DA	0	61	0	61	0	m:0010
+c	000E4	0	71	0	71	0	m:0010
+c	000EE	0	72	0	72	0	m:0010
+c	000F8	0	80	0	80	0	m:0010
+c	00103	0	83	0	83	0	m:0010
+c	00112	0	87	0	87	0	m:0010
+e	00114	m:0010
+c	00117	0	6	0	6	0	m:008A
+l!	00117	00118	r:embs.Sink1	this	m:008A	0
+e!	00118	m:008A
+c	0011B	0	6	0	6	0	m:008C
+l	0011B	00125	i	x0	m:008C	0
+l	0011B	00125	c[]	x1	m:008C	1
+l	0011B	00125	i	x2	m:008C	2
+l	0011B	00125	i	x3	m:008C	3
+l	0011B	00125	l	x4	m:008C	4
+e	00126	m:008C
+c	00129	0	91	0	91	0	m:0093
+l	00129	0016D	i	flags	m:0093	0
+l	00129	0016D	c[]	data	m:0093	1
+l	00129	0016D	i	len	m:0093	2
+l	00129	0016D	i	info	m:0093	3
+l	00129	0016D	l	time	m:0093	4
+c	0012C	0	93	0	93	0	m:0093
+c	00131	0	96	0	96	0	m:0093
+c	00140	0	98	0	98	0	m:0093
+c	00142	0	104	0	104	0	m:0093
+c	00147	0	105	0	105	0	m:0093
+c	0014E	0	108	0	108	0	m:0093
+c	00153	0	110	0	110	0	m:0093
+c	0015F	0	112	0	112	0	m:0093
+c	00167	0	113	0	113	0	m:0093
+c	0016B	0	114	0	114	0	m:0093
+e	0016E	m:0093
+c	00171	0	122	0	122	0	m:00B7
+l!	00171	001C0	c	param	m:00B7	0
+l!	00171	001C0	l	time	m:00B7	1
+c	00176	0	124	0	124	0	m:00B7
+c	00188	0	126	0	126	0	m:00B7
+c	00191	0	127	0	127	0	m:00B7
+c	00199	0	128	0	128	0	m:00B7
+c	001A7	0	132	0	132	0	m:00B7
+c	001BA	0	134	0	134	0	m:00B7
+c	001BF	0	138	0	138	0	m:00B7
+e!	001C0	m:00B7
+c	001C3	0	144	0	144	0	m:00E0
+l!	001C3	001DF	c	param	m:00E0	0
+l!	001C3	001DF	l	time	m:00E0	1
+c	001C9	0	145	0	145	0	m:00E0
+c	001D3	0	146	0	146	0	m:00E0
+c	001DE	0	148	0	148	0	m:00E0
+e!	001E0	m:00E0
 S	M:/EMBS/EMBS_assessment2/part2/src/embs/Sink1.java
 :	package embs;
 :	
-:	import com.ibm.saguaro.logger.Logger;
 :	import com.ibm.saguaro.system.*;
+:	import com.ibm.saguaro.logger.*;
 :	
-:	@SuppressWarnings("Duplicates")
 :	public class Sink1 {
 :	
 :	    private static Timer  tsend;
 :	    private static Timer  tstart;
-:	    private static Timer flashTimer;
 :	    private static boolean light=false;
-:	
+:	    
 :	    private static byte[] xmit;
 :	    private static long   wait;
 :	    static Radio radio = new Radio();
 :	    private static int n = 8; // number of beacons of sync phase - sample only, assessment will use unknown values
 :	    private static int nc;
-:	
-:	    private static int t = 800; // milliseconds between beacons - sample only, assessment will use unknown values
-:	
+:	    
+:	    private static int t = 600; // milliseconds between beacons - sample only, assessment will use unknown values 
+:	    
 :	    // settings for sink A
 :	    private static byte channel = 0; // channel 11
-:	    private static byte panid = (byte) (0x11);
-:	    private static byte address = (byte) (0x11);
-:	
-:	    private static int okCount = 0;
-:	    private static int okCountTemp = 0;
+:	    private static byte panid = 0x11;
+:	    private static byte address = 0x11;
 :	
 :	    static {
 :	        // Open the default radio
 :	        radio.open(Radio.DID, null, 0, 0);
-:	
-:	
-:	        // Set channel
+:	        
+:	        
+:	        // Set channel 
 :	        radio.setChannel((byte)channel);
-:	
-:	
+:	        
+:	        
 :	        // Set the PAN ID and the short address
 :	        radio.setPanId(panid, true);
 :	        radio.setShortAddr(address);
@@ -223,138 +181,111 @@ S	M:/EMBS/EMBS_assessment2/part2/src/embs/Sink1.java
 :	        xmit = new byte[12];
 :	        xmit[0] = Radio.FCF_BEACON;
 :	        xmit[1] = Radio.FCA_SRC_SADDR|Radio.FCA_DST_SADDR;
-:	        Util.set16le(xmit, 3, panid); // destination PAN address
-:	        Util.set16le(xmit, 5, 0xFFFF); // broadcast address
-:	        Util.set16le(xmit, 7, panid); // own PAN address
-:	        Util.set16le(xmit, 9, address); // own short address
+:	        Util.set16le(xmit, 3, panid); // destination PAN address 
+:	        Util.set16le(xmit, 5, 0xFFFF); // broadcast address 
+:	        Util.set16le(xmit, 7, panid); // own PAN address 
+:	        Util.set16le(xmit, 9, address); // own short address 
 :	
 :	        xmit[11] = (byte)n;
 :	
-:	        // register delegate for received frames
+:			// register delegate for received frames
 :	        radio.setRxHandler(new DevCallback(null){
-:	            public int invoke (int flags, byte[] data, int len, int info, long time) {
-:	                return  Sink1.onReceive(flags, data, len, info, time);
-:	            }
-:	        });
+:	                public int invoke (int flags, byte[] data, int len, int info, long time) {
+:	                    return  Sink1.onReceive(flags, data, len, info, time);
+:	                }
+:	            });
 :	
 :	
-:	
+:	        
 :	        // Setup a periodic timer callback for beacon transmissions
 :	        tsend = new Timer();
 :	        tsend.setCallback(new TimerEvent(null){
-:	            public void invoke(byte param, long time){
-:	                Sink1.periodicSend(param, time);
-:	            }
-:	        });
-:	
-:	        flashTimer = new Timer();
-:	        flashTimer.setCallback(new TimerEvent(null) {
-:	            @Override
-:	            public void invoke(byte param, long time) { Sink1.flash(param, time); }
-:	        });
-:	
-:	
-:	
-:	
+:	                public void invoke(byte param, long time){
+:	                    Sink1.periodicSend(param, time);
+:	                }
+:	            });
+:	            
+:	            
+:	        
+:	        
 :	        // Setup a periodic timer callback to restart the protocol
 :	        tstart = new Timer();
 :	        tstart.setCallback(new TimerEvent(null){
-:	            public void invoke(byte param, long time){
-:	                Sink1.restart(param, time);
-:	            }
-:	        });
+:	                public void invoke(byte param, long time){
+:	                    Sink1.restart(param, time);
+:	                }
+:	            });
 :	
-:	
+:	            
 :	        // Convert the periodic delay from ms to platform ticks
 :	        wait = Time.toTickSpan(Time.MILLISECS, t);
-:	
-:	
-:	        tstart.setAlarmBySpan(Time.toTickSpan(Time.SECONDS, 1)); //starts the protocol 5 seconds after constructing the assembly
-:	
-:	
-:	
+:	        
+:	        
+:	        tstart.setAlarmBySpan(Time.toTickSpan(Time.SECONDS, 5)); //starts the protocol 5 seconds after constructing the assembly
+:	        
+:	        
+:	        
 :	    }
 :	
-:	    private static void flash(byte param, long time) {
-:	        if(okCountTemp-- > 0) {
-:	            LED.setState((byte) 2, LED.getState((byte) 2) == 1 ? (byte) 0 : (byte) 1);
-:	            flashTimer.setAlarmBySpan(Time.toTickSpan(Time.MILLISECS, 300));
-:	        }
-:	    }
-:	
-:	    // Called when a frame is received or at the end of a reception period
+:	    // Called when a frame is received or at the end of a reception period 
 :	    private static int onReceive (int flags, byte[] data, int len, int info, long time) {
 :	        if (data == null) { // marks end of reception period
-:	            // turn green LED off
-:	            LED.setState((byte)0, (byte)0);
-:	            LED.setState((byte)1, (byte)0);
-:	            LED.setState((byte)2, (byte)0);
-:	
-:	            //set alarm to restart protocol
-:	            Logger.appendString(csr.s2b("sink11 end receive")); Logger.flush(Mote.WARN);
-:	            tstart.setAlarmBySpan(10*wait);
-:	
-:	            okCountTemp = okCount<<1;
-:	            flashTimer.setAlarmBySpan(wait);
-:	
+:	            // turn green LED off 
+:		        LED.setState((byte)1, (byte)0);
+:		        
+:		        //set alarm to restart protocol
+:		    	tstart.setAlarmBySpan(10*wait);
+:	                    
 :	            return 0;
 :	        }
 :	
 :	
-:	        // frame received, so blink red LED and log its payload
+:			// frame received, so blink red LED and log its payload
 :	
 :	        if(light){
-:	            LED.setState((byte)2, (byte)1);
+:	         	LED.setState((byte)2, (byte)1);
 :	        }
 :	        else{
-:	            LED.setState((byte)2, (byte)0);
-:	        }
-:	        light=!light;
-:	
-:	        Logger.appendByte(data[11]);
-:	        Logger.flush(Mote.ERROR);
-:	        okCount++;
-:	
+:	        	LED.setState((byte)2, (byte)0);
+:			}
+:			light=!light;
+:			
+:			Logger.appendByte(data[11]);
+:	        Logger.flush(Mote.WARN);
 :	        return 0;
-:	
+:	        
 :	    }
 :	
 :	
 :	    // Called on a timer alarm
 :	    public static void periodicSend(byte param, long time) {
-:	
+:	        
 :	        if(nc>0){
-:	            // transmit a beacon
-:	            radio.transmit(Device.ASAP|Radio.TXMODE_POWER_MAX, xmit, 0, 12, 0);
-:	            // program new alarm
-:	            tsend.setAlarmBySpan(wait);
-:	            nc--;
-:	            xmit[11]--;
+:		        // transmit a beacon 
+:	    	    radio.transmit(Device.ASAP|Radio.TXMODE_POWER_MAX, xmit, 0, 12, 0);
+:	        	// program new alarm
+:	        	tsend.setAlarmBySpan(wait);
+:	        	nc--;
+:	        	xmit[11]--;
 :	        }
 :	        else{
-:	            //start reception phase
-:	            Logger.appendString(csr.s2b("sink11 receiving")); Logger.flush(Mote.WARN);
-:	            radio.startRx(Device.ASAP, 0, Time.currentTicks()+wait);
-:	            // turn green LED on
-:	            LED.setState((byte)0, (byte)0);
-:	            LED.setState((byte)1, (byte)1);
-:	            LED.setState((byte)2, (byte)0);
-:	
+:	        	//start reception phase
+:		        radio.startRx(Device.ASAP, 0, Time.currentTicks()+wait);
+:		        // turn green LED on 
+:		        LED.setState((byte)1, (byte)1);
+:		        
 :	        }
-:	
+:	        
 :	    }
 :	
 :	
 :	    // Called on a timer alarm, starts the protocol
 :	    public static void restart(byte param, long time) {
-:	
+:	        
 :	        nc=n;
 :	        xmit[11]=(byte)n;
-:	        tsend.setAlarmBySpan(0);
-:	
-:	        LED.setState((byte)0, (byte)1);
-:	        LED.setState((byte)1, (byte)0);
-:	        LED.setState((byte)2, (byte)0);
+:	       	tsend.setAlarmBySpan(0);
+:	        
 :	    }
 :	
 :	

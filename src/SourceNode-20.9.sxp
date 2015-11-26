@@ -1,6 +1,6 @@
 .sxp-version 2.0
 
-.assembly SourceNode-20.6
+.assembly SourceNode-20.9
 
 
 .namespace embs
@@ -10,14 +10,26 @@
 
 	.method#0 static public SourceNode(r:embs.SourceNode this)v
 
+	;;! Validate if calculated period is permissible given constants
+	;;!
+	;;! @param period:
+	;;! calculated period to be verified
+	;;!
+	;;! @return
+	;;! boolean True if period is valid, false otherwise
 	.method#1 static protected isValidPeriod(l period)z
 
+	;;! Send message to sink
+	;;!
+	;;! @param sinkIndex:
+	;;! index of sink in sinks
+	;;!
+	;;! @param time:
+	;;! current time
 	.method#2 static protected broadcastToSink(c sinkIndex, l time)v
 .end
 
 
-;;! Exam candidate number: Y0076159
-;;! Class to store all known data for an individual sink
 .class#1 public SinkParameters
 
 	.method#0 public getBroadcastSet()z

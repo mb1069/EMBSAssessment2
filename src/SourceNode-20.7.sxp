@@ -1,6 +1,6 @@
 .sxp-version 2.0
 
-.assembly SourceNode-20.6
+.assembly SourceNode-20.7
 
 
 .namespace embs
