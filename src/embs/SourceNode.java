@@ -17,9 +17,9 @@ public class SourceNode {
 	static Radio radio = new Radio();
 	
 	private static SinkParameters[] sinks = {
-		new SinkParameters((byte) 11,(byte)  0x11,(byte)  0x11), 
-		new SinkParameters((byte) 12, (byte) 0x12, (byte) 0x12),
-		new SinkParameters((byte) 13, (byte) 0x13, (byte) 0x13)};
+		new SinkParameters((byte) 0,(byte)  0x11,(byte)  0x11), 
+		new SinkParameters((byte) 1, (byte) 0x12, (byte) 0x12),
+		new SinkParameters((byte) 2, (byte) 0x13, (byte) 0x13)};
 	
 	// settings for initial sink
 	static int currentSinkIndex = 0;
@@ -45,9 +45,9 @@ public class SourceNode {
 		// Open the default radio
 		radio.open(Radio.DID, null, 0, 0);
 
-		LED.setState((byte) 0, (byte) 1);
-		LED.setState((byte) 1, (byte) 1);
-		LED.setState((byte) 2, (byte) 1);
+		LED.setState((byte) 11, (byte) 1);
+		LED.setState((byte) 12, (byte) 1);
+		LED.setState((byte) 13, (byte) 1);
 
 		timer0 = new Timer();
 		timer0.setParam((byte) 0);
@@ -100,7 +100,7 @@ public class SourceNode {
 				return SourceNode.onTransmit(flags, data, len, info, time);
 			}
 		});
-//		radio.setRxMode(Radio.RXMODE_PROMISCUOUS);
+
 		radio.startRx(Device.ASAP, 0, Time.currentTicks()+0x7FFFFFFF);
 	}
 
@@ -172,18 +172,16 @@ public class SourceNode {
 		
 		setChannel((int) sinkIndex);
 		sendPerSink[sinkIndex]++;
+		long sinkDelay = sinks[sinkIndex].getT()/2;
 		
-		
-		radio.transmit(Device.TIMED, xmit, 0, 12, Time.currentTicks()+Time.toTickSpan(Time.MILLISECS, T_MIN/2));
+		radio.transmit(Device.TIMED, xmit, 0, 12, Time.currentTicks()+Time.toTickSpan(Time.MILLISECS, sinkDelay));
 		Logger.appendString(csr.s2b("Finished broadcast."));
 		Logger.flush(Mote.INFO);
 	}
 
 	private static int onTransmit(int flags, byte[] data, int len, int info, long time) {
 		sinks[currentSinkIndex].setNextBeaconTime(Time.currentTime(Time.MILLISECS)+(sinks[currentSinkIndex].getT()*(11+sinks[currentSinkIndex].getMaxObservedN())));
-		//TODO schedule listen callback
-//		Logger.appendInt(currentSinkIndex);
-//		Logger.flush(Mote.ERROR);
+
 		sinks[currentSinkIndex].setBroadcastSet(false);
 		if (sinks[previousSinkIndex].getT()==-1){
 			setChannel(previousSinkIndex);
@@ -216,12 +214,6 @@ public class SourceNode {
 		if (nextBeaconSinkIndex==-1){
 			return (currSinkIndex+1) % (sinks.length);
 		} else {
-			Logger.appendString(csr.s2b("PICKED DIFFERENT CHANNEL!: "));
-			Logger.appendInt(nextBeaconSinkIndex);
-			if (((currSinkIndex+1) % (sinks.length))==nextBeaconSinkIndex){
-				Logger.appendString(csr.s2b("PAA!: "));
-			}
-			Logger.flush(Mote.ERROR);
 			return nextBeaconSinkIndex;
 		}
 	}
@@ -247,6 +239,7 @@ public class SourceNode {
 		Logger.appendString(csr.s2b("Changed channel to: "));
 		Logger.appendByte(sinks[sinkIndex].getChannel());
 		Logger.appendString(csr.s2b(" at time: "));
+		Logger.appendLong(Time.currentTicks());
 		Logger.flush(Mote.WARN);
 	}
 

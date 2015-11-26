@@ -1,0 +1,55 @@
+.sxp-version 2.0
+
+.assembly SourceNode-20.6
+
+
+.namespace embs
+
+.class#0 public SourceNode
+
+	.method#0 static public SourceNode(r:embs.SourceNode this)v
+
+	.method#1 static protected isValidPeriod(l period)z
+
+	.method#2 static protected broadcastToSink(c sinkIndex, l time)v
+.end
+
+
+.class#1 public SinkParameters
+
+	.method#0 public getBroadcastSet()z
+
+	.method#1 public setBroadcastSet(z value)v
+
+	.method#2 public addBeacon(i n, l t)v
+
+	.method#3 public setMaxObservedN(i n)v
+
+	.method#4 public getT()l
+
+	.method#5 public setT(l t)v
+
+	.method#6 public getMaxObservedN()i
+
+	.method#7 public getChannel()c
+
+	.method#8 public getPanid()c
+
+	.method#9 public getAddress()c
+
+	.method#10 public getBeaconN()i
+
+	.method#11 public setBeaconN(i beaconN)v
+
+	.method#12 public getBeaconT()l
+
+	.method#13 public setBeaconT(l beaconT)v
+
+	.method#14 public setNextBeaconTime(l l)v
+
+	.method#15 public getNextBeaconTime()l
+
+	.method#3 static public SinkParameters(r:embs.SinkParameters this, c channel,c panid,c address)v
+.end
+
+.end

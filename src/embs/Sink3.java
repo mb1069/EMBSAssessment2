@@ -14,13 +14,13 @@ public class Sink3 {
     private static byte[] xmit;
     private static long   wait;
     static Radio radio = new Radio();
-    private static int n = 9; // number of beacons of sync phase - sample only, assessment will use unknown values
+    private static int n = 4; // number of beacons of sync phase - sample only, assessment will use unknown values
     private static int nc;
 
-    private static int t = 1400; // milliseconds between beacons - sample only, assessment will use unknown values
+    private static int t = 250; // milliseconds between beacons - sample only, assessment will use unknown values
 
     // settings for sink A
-    private static byte channel = 13; // channel 11
+    private static byte channel = 2; // channel 11
     private static byte panid = (byte) (0x13);
     private static byte address = (byte) (0x13);
 

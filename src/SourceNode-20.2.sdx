@@ -1,0 +1,876 @@
+A!	SourceNode-20.2.55217	2.0	Java
+
+X	c:01/000	com.ibm.saguaro.system.Assembly
+X	c:01/001	com.ibm.saguaro.system.Util
+X	c:01/002	com.ibm.saguaro.system.Timer
+X	c:01/003	com.ibm.saguaro.system.Time
+X	c:01/004	com.ibm.saguaro.system.MoteException
+X	c:01/005	com.ibm.saguaro.system.Device
+X	c:01/006	com.ibm.saguaro.system.SDev
+X	c:01/007	com.ibm.saguaro.system.CDev
+X	c:01/008	com.ibm.saguaro.system.OutOfResourcesException
+X	c:01/009	com.ibm.saguaro.system.OsException
+X	c:01/00A	com.ibm.saguaro.system.NullReferenceException
+X	c:01/00B	com.ibm.saguaro.system.SystemException
+X	c:01/00C	com.ibm.saguaro.system.Mote
+X	c:01/00D	com.ibm.saguaro.system.LIP
+X	c:01/00E	com.ibm.saguaro.system.LED
+X	c:01/00F	com.ibm.saguaro.system.InvalidCastException
+X	c:01/010	com.ibm.saguaro.system.IndexOutOfRangeException
+X	c:01/011	com.ibm.saguaro.system.I2C
+X	c:01/012	com.ibm.saguaro.system.GPIO
+X	c:01/013	com.ibm.saguaro.system.Err
+X	c:01/014	com.ibm.saguaro.system.DeviceException
+X	c:01/015	com.ibm.saguaro.system.SPI
+X	c:01/016	com.ibm.saguaro.system.Radio
+X	c:01/017	com.ibm.saguaro.system.WLIP
+X	c:01/018	com.ibm.saguaro.system.ArrayTypeMismatchException
+X	c:01/019	com.ibm.saguaro.system.ArithmException
+X	c:01/01A	com.ibm.saguaro.system.ArgumentException
+X	c:01/01B	com.ibm.saguaro.system.AccessException
+X	c:01/01C	com.ibm.saguaro.system.ADC
+X	c:02/000	com.ibm.saguaro.logger.Logger
+
+C!	c:005	embs.SourceNode	-1	0	c:000
+R	timer0	r:com.ibm.saguaro.system.Timer	0	0
+R	timer1	r:com.ibm.saguaro.system.Timer	0	1
+R	timer2	r:com.ibm.saguaro.system.Timer	0	2
+R	xmit	c[]	0	3
+R	radio	r:com.ibm.saguaro.system.Radio	0	4
+R	sinks	r:embs.SinkParameters[]	0	5
+R	sendPerSink	i[]	0	6
+F	currentSinkIndex	i	0	0
+F	YELLOW_LED	c	0	1
+F	GREEN_LED	c	0	2
+F	RED_LED	c	0	3
+F	N_MIN	i	0	4
+F	N_MAX	i	0	5
+F	T_MIN	l	0	6
+F	T_MAX	l	0	8
+F	previousSinkIndex	i	0	10
+F	TIME_ADJUSTMENT	l	0	11
+F	lastChannelSwitch	l	0	13
+F	wait	l	0	3327
+H	BROADCASTING_on_channel$UTF8	b[]	0	66,82,79,65,68,67,65,83,84,73,78,71,33,32,111,110,32,99,104,97,110,110,101,108,58,32
+H	Broadcast_results$UTF8	b[]	0	66,114,111,97,100,99,97,115,116,32,114,101,115,117,108,116,115,58,32
+H	Calculated_T$UTF8	b[]	0	67,97,108,99,117,108,97,116,101,100,32,84,58,32
+H	Changed_channel_to$UTF8	b[]	0	67,104,97,110,103,101,100,32,99,104,97,110,110,101,108,32,116,111,58,32
+H	Finished_broadcast$UTF8	b[]	0	70,105,110,105,115,104,101,100,32,98,114,111,97,100,99,97,115,116,46
+H	PAA$UTF8	b[]	0	80,65,65,33,58,32
+H	PICKED_DIFFERENT_CHANNEL$UTF8	b[]	0	80,73,67,75,69,68,32,68,73,70,70,69,82,69,78,84,32,67,72,65,78,78,69,76,33,58,32
+H	PREPARING_BROADCAST_for_channel$UTF8	b[]	0	80,82,69,80,65,82,73,78,71,32,66,82,79,65,68,67,65,83,84,33,32,102,111,114,32,99,104,97,110,110,101,108,58,32
+H	Received_packet_c$UTF8	b[]	0	82,101,99,101,105,118,101,100,32,112,97,99,107,101,116,32,99,58
+H	at_time$UTF8	b[]	0	97,116,32,116,105,109,101,58,32
+H	at_time0$UTF8	b[]	0	32,97,116,32,116,105,109,101,58,32
+H	n$UTF8	b[]	0	32,110,58
+H	s$UTF8	b[]	0	47
+M!	SourceNode(r:embs.SourceNode)v	-1	m:015F	002BE	4
+M	access$000(i,c[],i,i,l)i	-1	m:0161	002C2	14
+M	access$100(i,c[],i,i,l)i	-1	m:0168	002D0	14
+M!	broadcastToSink(c,l)v	-1	m:016F	002DE	112
+M	createNextBroadcast(i,l,i,l,l)v	-1	m:01A7	0034E	52
+M	getDiffN(i,i)i	-1	m:01C1	00382	8
+M	getDiffT(l,l)l	-1	m:01C5	0038A	26
+M!	isValidPeriod(l)z	-1	m:01D2	003A4	30
+M	onReceive(i,c[],i,i,l)i	-1	m:01E1	003C2	358
+M	onTransmit(i,c[],i,i,l)i	-1	m:0294	00528	140
+M	pickNextSink(i)i	-1	m:02DA	005B4	118
+M	setChannel(i)v	-1	m:0315	0062A	134
+M	setLEDListening(c)v	-1	m:0358	006B0	60
+M	setupBroadcastAndCallBack(l,l,i,l)v	-1	m:0376	006EC	70
+M	startListening()v	-1	m:0399	00732	34
+M	toggleLed(i)v	-1	m:03AA	00754	28
+
+C!	c:007	embs.SinkParameters	1	1	c:000
+f	nextBeaconTime	l	1	0
+f	broadcastSet	z	1	2
+f	beaconT	l	1	3
+f	beaconN	i	1	5
+f	T	l	1	6
+f	maxObservedN	i	1	8
+f	address	c	1	9
+f	panid	c	1	10
+f	channel	c	1	11
+m!	addBeacon(i,l)v	1	m:011D	0023A	12	2
+m!	getAddress()c	1	m:0123	00246	8	9
+m!	getBeaconN()i	1	m:0127	0024E	8	10
+m!	getBeaconT()l	1	m:012B	00256	8	12
+m!	getBroadcastSet()z	1	m:012F	0025E	8	0
+m!	getChannel()c	1	m:0133	00266	8	7
+m!	getMaxObservedN()i	1	m:0137	0026E	8	6
+m!	getNextBeaconTime()l	1	m:013B	00276	8	15
+m!	getPanid()c	1	m:013F	0027E	8	8
+m!	getT()l	1	m:0143	00286	8	4
+m!	setBeaconN(i)v	1	m:0147	0028E	8	11
+m!	setBeaconT(l)v	1	m:014B	00296	8	13
+m!	setBroadcastSet(z)v	1	m:014F	0029E	8	1
+m!	setMaxObservedN(i)v	1	m:0153	002A6	8	3
+m!	setNextBeaconTime(l)v	1	m:0157	002AE	8	14
+m!	setT(l)v	1	m:015B	002B6	8	5
+M!	SinkParameters(r:embs.SinkParameters,c,c,c)v	1	m:0107	0020E	44
+
+C	c:015	com.ibm.saguaro.system.$tatics	-1	-1	c:01/000
+r	embs.SourceNode.timer0	r:com.ibm.saguaro.system.Timer	-1	0
+r	embs.SourceNode.timer1	r:com.ibm.saguaro.system.Timer	-1	1
+r	embs.SourceNode.timer2	r:com.ibm.saguaro.system.Timer	-1	2
+r	embs.SourceNode.xmit	c[]	-1	3
+r	embs.SourceNode.radio	r:com.ibm.saguaro.system.Radio	-1	4
+r	embs.SourceNode.sinks	r:embs.SinkParameters[]	-1	5
+r	embs.SourceNode.sendPerSink	i[]	-1	6
+f	embs.SourceNode.currentSinkIndex	i	-1	0
+f	embs.SourceNode.YELLOW_LED	c	-1	1
+f	embs.SourceNode.GREEN_LED	c	-1	2
+f	embs.SourceNode.RED_LED	c	-1	3
+f	embs.SourceNode.N_MIN	i	-1	4
+f	embs.SourceNode.N_MAX	i	-1	5
+f	embs.SourceNode.T_MIN	l	-1	6
+f	embs.SourceNode.T_MAX	l	-1	8
+f	embs.SourceNode.previousSinkIndex	i	-1	10
+f	embs.SourceNode.TIME_ADJUSTMENT	l	-1	11
+f	embs.SourceNode.lastChannelSwitch	l	-1	13
+M	__init()v	-1	m:002E	0005C	434
+
+c	00069	0	17	0	17	0	m:002E
+c	00073	0	19	0	19	0	m:002E
+c	000A7	0	25	0	25	0	m:002E
+c	000AB	0	28	0	28	0	m:002E
+c	000AF	0	29	0	29	0	m:002E
+c	000B3	0	30	0	30	0	m:002E
+c	000B7	0	32	0	32	0	m:002E
+c	000BB	0	33	0	33	0	m:002E
+c	000C0	0	34	0	34	0	m:002E
+c	000C8	0	35	0	35	0	m:002E
+c	000D0	0	37	0	37	0	m:002E
+c	000E1	0	40	0	40	0	m:002E
+c	000E9	0	41	0	41	0	m:002E
+c	000F1	0	46	0	46	0	m:002E
+c	000FD	0	48	0	48	0	m:002E
+c	00102	0	49	0	49	0	m:002E
+c	00107	0	50	0	50	0	m:002E
+c	0010C	0	52	0	52	0	m:002E
+c	00116	0	53	0	53	0	m:002E
+c	0011D	0	54	0	54	0	m:002E
+c	00127	0	60	0	60	0	m:002E
+c	00131	0	61	0	61	0	m:002E
+c	00138	0	62	0	62	0	m:002E
+c	00142	0	68	0	68	0	m:002E
+c	0014C	0	69	0	69	0	m:002E
+c	00153	0	70	0	70	0	m:002E
+c	0015D	0	77	0	77	0	m:002E
+c	0016D	0	79	0	79	0	m:002E
+c	0017E	0	80	0	80	0	m:002E
+c	0018E	0	83	0	83	0	m:002E
+c	00194	0	84	0	84	0	m:002E
+c	0019A	0	85	0	85	0	m:002E
+c	001A2	0	86	0	86	0	m:002E
+c	001B4	0	87	0	87	0	m:002E
+c	001BD	0	88	0	88	0	m:002E
+c	001D0	0	89	0	89	0	m:002E
+c	001E3	0	92	0	92	0	m:002E
+c	001ED	0	98	0	98	0	m:002E
+c	001F7	0	104	0	104	0	m:002E
+c	0020C	0	105	0	105	0	m:002E
+e	0020E	m:002E
+c	00211	1	10	0	10	0	m:0107
+l!	00211	0023A	r:embs.SinkParameters	this	m:0107	0
+l!	00211	0023A	c	channel	m:0107	1
+l!	00211	0023A	c	panid	m:0107	2
+l!	00211	0023A	c	address	m:0107	3
+c	00215	1	11	0	11	0	m:0107
+c	0021D	1	12	0	12	0	m:0107
+c	00221	1	13	0	13	0	m:0107
+c	00229	1	14	0	14	0	m:0107
+c	0022D	1	18	0	18	0	m:0107
+c	00231	1	19	0	19	0	m:0107
+c	00235	1	20	0	20	0	m:0107
+c	00239	1	21	0	21	0	m:0107
+e!	0023A	m:0107
+c	0023D	1	32	0	32	0	m:011D
+l!	0023D	00246	r:embs.SinkParameters	this	m:011D	0
+l!	0023D	00246	i	n	m:011D	1
+l	0023D	00246	l	t	m:011D	2
+c	00241	1	33	0	33	0	m:011D
+c	00245	1	34	0	34	0	m:011D
+e!	00246	m:011D
+c	00249	1	42	0	42	0	m:0123
+l	00249	0024D	r:embs.SinkParameters	this	m:0123	0
+e!	0024E	m:0123
+c	00251	1	45	0	45	0	m:0127
+l	00251	00255	r:embs.SinkParameters	this	m:0127	0
+e!	00256	m:0127
+c	00259	1	51	0	51	0	m:012B
+l	00259	0025D	r:embs.SinkParameters	this	m:012B	0
+e!	0025E	m:012B
+c	00261	1	24	0	24	0	m:012F
+l	00261	00265	r:embs.SinkParameters	this	m:012F	0
+e!	00266	m:012F
+c	00269	1	40	0	40	0	m:0133
+l	00269	0026D	r:embs.SinkParameters	this	m:0133	0
+e!	0026E	m:0133
+c	00271	1	39	0	39	0	m:0137
+l	00271	00275	r:embs.SinkParameters	this	m:0137	0
+e!	00276	m:0137
+c	00279	1	62	0	62	0	m:013B
+l	00279	0027D	r:embs.SinkParameters	this	m:013B	0
+e!	0027E	m:013B
+c	00281	1	41	0	41	0	m:013F
+l	00281	00285	r:embs.SinkParameters	this	m:013F	0
+e!	00286	m:013F
+c	00289	1	37	0	37	0	m:0143
+l	00289	0028D	r:embs.SinkParameters	this	m:0143	0
+e!	0028E	m:0143
+c	00291	1	48	0	48	0	m:0147
+l!	00291	00296	r:embs.SinkParameters	this	m:0147	0
+l	00291	00296	i	beaconN	m:0147	1
+c	00295	1	49	0	49	0	m:0147
+e!	00296	m:0147
+c	00299	1	54	0	54	0	m:014B
+l!	00299	0029E	r:embs.SinkParameters	this	m:014B	0
+l	00299	0029E	l	beaconT	m:014B	1
+c	0029D	1	55	0	55	0	m:014B
+e!	0029E	m:014B
+c	002A1	1	28	0	28	0	m:014F
+l!	002A1	002A6	r:embs.SinkParameters	this	m:014F	0
+l	002A1	002A6	z	value	m:014F	1
+c	002A5	1	29	0	29	0	m:014F
+e!	002A6	m:014F
+c	002A9	1	36	0	36	0	m:0153
+l!	002A9	002AE	r:embs.SinkParameters	this	m:0153	0
+l	002A9	002AE	i	n	m:0153	1
+e!	002AE	m:0153
+c	002B1	1	58	0	58	0	m:0157
+l!	002B1	002B6	r:embs.SinkParameters	this	m:0157	0
+l	002B1	002B6	l	l	m:0157	1
+c	002B5	1	59	0	59	0	m:0157
+e!	002B6	m:0157
+c	002B9	1	38	0	38	0	m:015B
+l!	002B9	002BE	r:embs.SinkParameters	this	m:015B	0
+l	002B9	002BE	l	t	m:015B	1
+e!	002BE	m:015B
+c	002C1	0	7	0	7	0	m:015F
+l!	002C1	002C2	r:embs.SourceNode	this	m:015F	0
+e!	002C2	m:015F
+c	002C5	0	7	0	7	0	m:0161
+l	002C5	002CF	i	x0	m:0161	0
+l	002C5	002CF	c[]	x1	m:0161	1
+l	002C5	002CF	i	x2	m:0161	2
+l	002C5	002CF	i	x3	m:0161	3
+l	002C5	002CF	l	x4	m:0161	4
+e	002D0	m:0161
+c	002D3	0	7	0	7	0	m:0168
+l	002D3	002DD	i	x0	m:0168	0
+l	002D3	002DD	c[]	x1	m:0168	1
+l	002D3	002DD	i	x2	m:0168	2
+l	002D3	002DD	i	x3	m:0168	3
+l	002D3	002DD	l	x4	m:0168	4
+e	002DE	m:0168
+c	002E1	0	162	0	162	0	m:016F
+l!	002E1	0034E	c	sinkIndex	m:016F	0
+l!	002E1	0034E	l	time	m:016F	1
+c	002EB	0	163	0	163	0	m:016F
+c	002F1	0	165	0	165	0	m:016F
+c	002F7	0	166	0	166	0	m:016F
+c	00302	0	167	0	167	0	m:016F
+c	00308	0	168	0	168	0	m:016F
+c	0030E	0	169	0	169	0	m:016F
+c	00312	0	171	0	171	0	m:016F
+c	00318	0	173	0	173	0	m:016F
+c	0031C	0	174	0	174	0	m:016F
+c	00325	0	177	0	177	0	m:016F
+c	00343	0	178	0	178	0	m:016F
+c	00349	0	179	0	179	0	m:016F
+c	0034D	0	180	0	180	0	m:016F
+e!	0034E	m:016F
+c	00351	0	260	0	260	0	m:01A7
+l	00351	00382	i	beaconN	m:01A7	0
+l	00351	00382	l	beaconT	m:01A7	1
+l	00351	00382	i	channel	m:01A7	3
+l	00351	00382	l	t	m:01A7	4
+l	00351	00382	l	currentTimeMS	m:01A7	6
+c	00358	0	261	0	261	0	m:01A7
+l	00358	00382	l	broadcastTimeByMSSpan	m:01A7	8
+c	00360	0	262	0	262	0	m:01A7
+l	00360	00382	l	deadline	m:01A7	10
+c	0036A	0	263	0	263	0	m:01A7
+c	00375	0	264	0	264	0	m:01A7
+c	0037E	0	265	0	265	0	m:01A7
+c	00381	0	266	0	266	0	m:01A7
+e	00382	m:01A7
+c	00385	0	314	0	314	0	m:01C1
+l	00385	00389	i	beacon1N	m:01C1	0
+l	00385	00389	i	beacon2N	m:01C1	1
+e	0038A	m:01C1
+c	0038D	0	318	0	318	0	m:01C5
+l	0038D	003A4	l	beacon1T	m:01C5	0
+l	0038D	003A4	l	beacon2T	m:01C5	2
+c	00392	0	319	0	319	0	m:01C5
+l	00392	003A4	l	diffT	m:01C5	4
+e	003A4	m:01C5
+c	003A7	0	158	0	158	0	m:01D2
+l!	003A7	003C2	l	period	m:01D2	0
+e!	003C2	m:01D2
+c	003C5	0	110	0	110	0	m:01E1
+l	003C5	00527	i	flags	m:01E1	0
+l	003C5	00527	c[]	data	m:01E1	1
+l	003C5	00527	i	len	m:01E1	2
+l	003C5	00527	i	info	m:01E1	3
+l	003C5	00527	l	time	m:01E1	4
+c	003C8	0	111	0	111	0	m:01E1
+c	003CA	0	114	0	114	0	m:01E1
+c	003D0	0	116	0	116	0	m:01E1
+l	003D0	00527	i	n	m:01E1	6
+c	003DD	0	117	0	117	0	m:01E1
+c	003E8	0	119	0	119	0	m:01E1
+c	003EE	0	120	0	120	0	m:01E1
+c	003FB	0	121	0	121	0	m:01E1
+c	00401	0	122	0	122	0	m:01E1
+c	00409	0	123	0	123	0	m:01E1
+c	0040D	0	124	0	124	0	m:01E1
+c	00413	0	127	0	127	0	m:01E1
+l	00413	00527	l	currentTime	m:01E1	7
+c	00424	0	128	0	128	0	m:01E1
+c	0043A	0	129	0	129	0	m:01E1
+c	00443	0	130	0	130	0	m:01E1
+c	00446	0	131	0	131	0	m:01E1
+c	00448	0	133	0	133	0	m:01E1
+c	00455	0	135	0	135	0	m:01E1
+c	00467	0	136	0	136	0	m:01E1
+c	0047F	0	138	0	138	0	m:01E1
+c	0049E	0	139	0	139	0	m:01E1
+c	004AE	0	140	0	140	0	m:01E1
+l	004AE	0050E	i	diffN	m:01E1	9
+c	004BF	0	141	0	141	0	m:01E1
+l	004BF	0050E	l	diffT	m:01E1	10
+c	004DE	0	142	0	142	0	m:01E1
+c	004E6	0	143	0	143	0	m:01E1
+l	004E6	0050E	l	t	m:01E1	12
+c	004F2	0	144	0	144	0	m:01E1
+c	004F8	0	145	0	145	0	m:01E1
+c	004FD	0	146	0	146	0	m:01E1
+c	00501	0	147	0	147	0	m:01E1
+c	0050E	0	152	0	152	0	m:01E1
+c	00519	0	153	0	153	0	m:01E1
+c	00525	0	154	0	154	0	m:01E1
+e	00528	m:01E1
+c	0052B	0	183	0	183	0	m:0294
+l	0052B	005B4	i	flags	m:0294	0
+l	0052B	005B4	c[]	data	m:0294	1
+l	0052B	005B4	i	len	m:0294	2
+l	0052B	005B4	i	info	m:0294	3
+l	0052B	005B4	l	time	m:0294	4
+c	00553	0	187	0	187	0	m:0294
+c	0055E	0	188	0	188	0	m:0294
+c	00570	0	189	0	189	0	m:0294
+c	00578	0	191	0	191	0	m:0294
+c	00581	0	193	0	193	0	m:0294
+c	00584	0	194	0	194	0	m:0294
+c	0058A	0	195	0	195	0	m:0294
+c	00592	0	196	0	196	0	m:0294
+c	00598	0	197	0	197	0	m:0294
+c	005A0	0	198	0	198	0	m:0294
+c	005A6	0	199	0	199	0	m:0294
+c	005AE	0	200	0	200	0	m:0294
+c	005B2	0	201	0	201	0	m:0294
+e	005B4	m:0294
+c	005B7	0	206	0	206	0	m:02DA
+l	005B7	0062A	i	currSinkIndex	m:02DA	0
+l	005B7	0062A	i	x	m:02DA	1
+c	005BD	0	207	0	207	0	m:02DA
+l	005BD	0062A	l	nextBeaconTime	m:02DA	2
+c	005BF	0	208	0	208	0	m:02DA
+l	005BF	0062A	i	nextBeaconSinkIndex	m:02DA	4
+c	005C8	0	209	0	209	0	m:02DA
+c	005CC	0	210	0	210	0	m:02DA
+c	005EC	0	211	0	211	0	m:02DA
+c	005F5	0	212	0	212	0	m:02DA
+c	005F7	0	208	0	208	0	m:02DA
+c	005FC	0	216	0	216	0	m:02DA
+c	00600	0	217	0	217	0	m:02DA
+c	00609	0	219	0	219	0	m:02DA
+c	0060F	0	220	0	220	0	m:02DA
+c	00613	0	221	0	221	0	m:02DA
+c	0061E	0	222	0	222	0	m:02DA
+c	00624	0	224	0	224	0	m:02DA
+c	00628	0	225	0	225	0	m:02DA
+e	0062A	m:02DA
+c	0062D	0	232	0	232	0	m:0315
+l	0062D	006AF	i	sinkIndex	m:0315	0
+c	00637	0	233	0	233	0	m:0315
+c	0063D	0	236	0	236	0	m:0315
+c	0064D	0	237	0	237	0	m:0315
+c	00656	0	238	0	238	0	m:0315
+c	00667	0	240	0	240	0	m:0315
+c	00675	0	241	0	241	0	m:0315
+c	00684	0	244	0	244	0	m:0315
+c	00688	0	245	0	245	0	m:0315
+c	0068D	0	247	0	247	0	m:0315
+c	00693	0	248	0	248	0	m:0315
+c	0069E	0	249	0	249	0	m:0315
+c	006A4	0	250	0	250	0	m:0315
+c	006AA	0	251	0	251	0	m:0315
+c	006AE	0	252	0	252	0	m:0315
+e	006B0	m:0315
+c	006B3	0	332	0	332	0	m:0358
+l	006B3	006EC	c	led	m:0358	0
+c	006D6	0	333	0	333	0	m:0358
+l	006D6	006E6	c	b	m:0358	4
+c	006DA	0	334	0	334	0	m:0358
+c	006E1	0	336	0	336	0	m:0358
+c	006E6	0	332	0	332	0	m:0358
+c	006EB	0	339	0	339	0	m:0358
+e	006EC	m:0358
+c	006EF	0	277	0	277	0	m:0376
+l	006EF	00731	l	broadcastTime	m:0376	0
+l	006EF	00731	l	deadline	m:0376	2
+l	006EF	00731	i	sinkIndex	m:0376	4
+l	006EF	00731	l	currentTimeMS	m:0376	5
+c	006F5	0	278	0	278	0	m:0376
+c	006F9	0	279	0	279	0	m:0376
+c	006FD	0	281	0	281	0	m:0376
+c	0070B	0	283	0	283	0	m:0376
+c	00716	0	284	0	284	0	m:0376
+c	00718	0	286	0	286	0	m:0376
+c	00723	0	287	0	287	0	m:0376
+c	00725	0	289	0	289	0	m:0376
+c	00730	0	292	0	292	0	m:0376
+e	00732	m:0376
+c	00735	0	256	0	256	0	m:0399
+c	00752	0	257	0	257	0	m:0399
+e	00754	m:0399
+c	00757	0	323	0	323	0	m:03AA
+l	00757	0076F	i	led	m:03AA	0
+c	0075D	0	324	0	324	0	m:03AA
+l	0075D	0076F	i	ledState	m:03AA	1
+c	00760	0	325	0	325	0	m:03AA
+c	00768	0	327	0	327	0	m:03AA
+c	0076E	0	329	0	329	0	m:03AA
+e	00770	m:03AA
+S	M:/EMBS/EMBS_assessment2/part2/src/embs/SourceNode.java
+:	package embs;
+:	
+:	import com.ibm.saguaro.system.*;
+:	import com.ibm.saguaro.logger.*;
+:	
+:	
+:	public class SourceNode {
+:	
+:		
+:		// Timers to schedule broadcast callbacks
+:		static Timer  timer0; // Timer for sink0
+:		static Timer  timer1; // Timer for sink1
+:		static Timer  timer2; // Timer for sink 2
+:		
+:		static byte[] xmit;
+:		static long   wait;
+:		static Radio radio = new Radio();
+:		
+:		private static SinkParameters[] sinks = {
+:			new SinkParameters((byte) 0,(byte)  0x11,(byte)  0x11), 
+:			new SinkParameters((byte) 1, (byte) 0x12, (byte) 0x12),
+:			new SinkParameters((byte) 2, (byte) 0x13, (byte) 0x13)};
+:		
+:		// settings for initial sink
+:		static int currentSinkIndex = 0;
+:	
+:	
+:		static byte YELLOW_LED = (byte) 0;
+:		static byte GREEN_LED = (byte) 1;
+:		static byte RED_LED = (byte) 2;
+:	
+:		static int N_MIN = 2;
+:		static int N_MAX = 10;
+:		static long T_MIN = 250;
+:		static long T_MAX = 1500;
+:		
+:		static int[] sendPerSink = new int[]{0,0,0};
+:	
+:		static int previousSinkIndex;
+:		static long TIME_ADJUSTMENT = 3;
+:		static long lastChannelSwitch = 0;
+:		
+:		
+:		static {
+:			// Open the default radio
+:			radio.open(Radio.DID, null, 0, 0);
+:	
+:			LED.setState((byte) 0, (byte) 1);
+:			LED.setState((byte) 1, (byte) 1);
+:			LED.setState((byte) 2, (byte) 1);
+:	
+:			timer0 = new Timer();
+:			timer0.setParam((byte) 0);
+:			timer0.setCallback(new TimerEvent(null){
+:				public void invoke(byte param, long time){
+:					SourceNode.broadcastToSink(param, time);
+:				}
+:			});
+:			
+:			timer1 = new Timer();
+:			timer1.setParam((byte) 1);
+:			timer1.setCallback(new TimerEvent(null){
+:				public void invoke(byte param, long time){
+:					SourceNode.broadcastToSink(param, time);
+:				}
+:			});
+:			
+:			timer2 = new Timer();
+:			timer2.setParam((byte) 2);
+:			timer2.setCallback(new TimerEvent(null){
+:				public void invoke(byte param, long time){
+:					SourceNode.broadcastToSink(param, time);
+:				}
+:			});
+:	
+:			// Set channel 
+:			radio.setChannel((byte) sinks[currentSinkIndex].getChannel());
+:			// Set the PAN ID and the short address
+:			radio.setPanId(sinks[currentSinkIndex].getPanid(), true);
+:			radio.setShortAddr(sinks[currentSinkIndex].getAddress());
+:	
+:			// Prepare beacon frame with source and destination addressing
+:			xmit = new byte[12];
+:			xmit[0] = Radio.FCF_BEACON;
+:			xmit[1] = Radio.FCA_SRC_SADDR|Radio.FCA_DST_SADDR;
+:			Util.set16le(xmit, 3, sinks[currentSinkIndex].getPanid()); // destination PAN address 
+:			Util.set16le(xmit, 5, 0xFFFF); // broadcast address 
+:			Util.set16le(xmit, 7, sinks[currentSinkIndex].getPanid()); // own PAN address 
+:			Util.set16le(xmit, 9, sinks[currentSinkIndex].getAddress()); // own short address 
+:	
+:			// register delegate for received frames
+:			radio.setRxHandler(new DevCallback(null){
+:				public int invoke (int flags, byte[] data, int len, int info, long time) {
+:					return  SourceNode.onReceive(flags, data, len, info, time);
+:				}
+:			});
+:	
+:			radio.setTxHandler(new DevCallback(null){
+:				public int invoke(int flags, byte[] data, int len, int info, long time) {
+:					return SourceNode.onTransmit(flags, data, len, info, time);
+:				}
+:			});
+:	//		radio.setRxMode(Radio.RXMODE_PROMISCUOUS);
+:			radio.startRx(Device.ASAP, 0, Time.currentTicks()+0x7FFFFFFF);
+:		}
+:	
+:		// Called when a frame is received or at the end of a reception period 
+:		private static int onReceive (int flags, byte[] data, int len, int info, long time) {
+:	
+:			if (data == null) { // marks end of reception period
+:				return 0;
+:			}
+:				
+:			int n = data[11];
+:			
+:			if (n>sinks[currentSinkIndex].getMaxObservedN()){
+:				sinks[currentSinkIndex].setMaxObservedN(n);
+:			}
+:			Logger.appendString(csr.s2b("Received packet c:"));
+:			Logger.appendByte(sinks[currentSinkIndex].getChannel());
+:			Logger.appendString(csr.s2b(" n:"));
+:			Logger.appendByte(data[11]);
+:			Logger.flush(Mote.WARN);
+:			long currentTime = Time.currentTime(Time.MILLISECS);
+:			
+:			//Case where first beacon received is n=1 and no previous known beacons, switch channel
+:			if (sinks[currentSinkIndex].getBeaconN()==-1 && n==1){
+:				sinks[currentSinkIndex].setNextBeaconTime(currentTime + (11*T_MIN));
+:				setChannel(pickNextSink(currentSinkIndex));
+:				startListening();
+:				return 0;
+:			}
+:			if (!sinks[currentSinkIndex].getBroadcastSet()){
+:				//If T is known for sink
+:				if (sinks[currentSinkIndex].getT()!=-1){
+:					createNextBroadcast(n, currentTime, currentSinkIndex, sinks[currentSinkIndex].getT(), currentTime);
+:				} else {
+:					if (sinks[currentSinkIndex].getBeaconT()!=-1 && sinks[currentSinkIndex].getBeaconN()!=-1){
+:						int diffN = getDiffN(sinks[currentSinkIndex].getBeaconN(), n);
+:						long diffT = getDiffT(sinks[currentSinkIndex].getBeaconT(), currentTime);
+:						if (diffN>0 && diffT-TIME_ADJUSTMENT <=(T_MAX*diffN)  && isValidPeriod(diffT/diffN)){
+:							long t = diffT/diffN;
+:							sinks[currentSinkIndex].setT(t);
+:							Logger.appendString(csr.s2b("Calculated T: "));
+:							Logger.appendLong(t);
+:							Logger.flush(Mote.WARN);
+:							createNextBroadcast(n, currentTime, currentSinkIndex, t, currentTime);
+:						}
+:					}
+:				}
+:			}
+:			sinks[currentSinkIndex].setBeaconN(n);
+:			sinks[currentSinkIndex].setBeaconT(currentTime);
+:			return 0;
+:		}
+:	
+:		protected static boolean isValidPeriod(long period){
+:			return T_MIN-TIME_ADJUSTMENT<=period && period <= T_MAX+TIME_ADJUSTMENT;
+:		}
+:	
+:		protected static void broadcastToSink(byte sinkIndex, long time){
+:			if (radio.getState()==Device.S_RXEN){
+:				radio.stopRx();
+:			}
+:			Logger.appendString(csr.s2b("BROADCASTING! on channel: "));
+:			Logger.appendByte(sinks[sinkIndex].getChannel());
+:			Logger.appendString(csr.s2b("at time: "));
+:			Logger.appendLong(Time.currentTicks());
+:			Logger.flush(Mote.WARN);
+:	
+:			previousSinkIndex = (int) currentSinkIndex;
+:			
+:			setChannel((int) sinkIndex);
+:			sendPerSink[sinkIndex]++;
+:			
+:			
+:			radio.transmit(Device.TIMED, xmit, 0, 12, Time.currentTicks()+Time.toTickSpan(Time.MILLISECS, T_MIN/2));
+:			Logger.appendString(csr.s2b("Finished broadcast."));
+:			Logger.flush(Mote.INFO);
+:		}
+:	
+:		private static int onTransmit(int flags, byte[] data, int len, int info, long time) {
+:			sinks[currentSinkIndex].setNextBeaconTime(Time.currentTime(Time.MILLISECS)+(sinks[currentSinkIndex].getT()*(11+sinks[currentSinkIndex].getMaxObservedN())));
+:			//TODO schedule listen callback
+:	//		Logger.appendInt(currentSinkIndex);
+:	//		Logger.flush(Mote.ERROR);
+:			sinks[currentSinkIndex].setBroadcastSet(false);
+:			if (sinks[previousSinkIndex].getT()==-1){
+:				setChannel(previousSinkIndex);
+:			} else {
+:				setChannel(pickNextSink(currentSinkIndex));
+:			}
+:			startListening();
+:			Logger.appendString(csr.s2b("Broadcast results: "));
+:			Logger.appendInt(sendPerSink[0]);
+:			Logger.appendString(csr.s2b("/"));
+:			Logger.appendInt(sendPerSink[1]);
+:			Logger.appendString(csr.s2b("/"));
+:			Logger.appendInt(sendPerSink[2]);
+:			Logger.flush(Mote.WARN);
+:			return 0;
+:		}
+:		
+:		private static int pickNextSink(int currSinkIndex){
+:			int x = 0;
+:			long nextBeaconTime = -1;
+:			int nextBeaconSinkIndex = -1;
+:			for (x=0; x<sinks.length;x++){
+:				if (x!=currSinkIndex){
+:					if (nextBeaconTime==-1 | sinks[x].getNextBeaconTime()<nextBeaconTime){
+:						nextBeaconTime = sinks[x].getNextBeaconTime();
+:						nextBeaconSinkIndex = x;
+:					}
+:				}
+:			}
+:			if (nextBeaconSinkIndex==-1){
+:				return (currSinkIndex+1) % (sinks.length);
+:			} else {
+:				Logger.appendString(csr.s2b("PICKED DIFFERENT CHANNEL!: "));
+:				Logger.appendInt(nextBeaconSinkIndex);
+:				if (((currSinkIndex+1) % (sinks.length))==nextBeaconSinkIndex){
+:					Logger.appendString(csr.s2b("PAA!: "));
+:				}
+:				Logger.flush(Mote.ERROR);
+:				return nextBeaconSinkIndex;
+:			}
+:		}
+:		
+:		
+:		private static void setChannel(int sinkIndex){
+:	
+:			if (radio.getState()==Device.S_RXEN){
+:				radio.stopRx();
+:			}
+:			
+:			Util.set16le(xmit, 3, sinks[sinkIndex].getPanid()); // destination PAN address 
+:			Util.set16le(xmit, 5, 0xFFFF); // broadcast address 
+:			Util.set16le(xmit, 7, sinks[sinkIndex].getPanid()); // own PAN address 
+:			
+:			radio.setChannel((byte) sinks[sinkIndex].getChannel());
+:			radio.setPanId(sinks[sinkIndex].getPanid(), true);
+:	//		radio.setShortAddr(sinks[sinkIndex].getAddress());
+:					
+:			currentSinkIndex = sinkIndex;
+:			setLEDListening((byte) sinkIndex);
+:	
+:			Logger.appendString(csr.s2b("Changed channel to: "));
+:			Logger.appendByte(sinks[sinkIndex].getChannel());
+:			Logger.appendString(csr.s2b(" at time: "));
+:			Logger.appendLong(Time.currentTicks());
+:			Logger.flush(Mote.WARN);
+:		}
+:	
+:		
+:		private static void startListening(){
+:			radio.startRx(Device.TIMED, Time.currentTicks()+Time.toTickSpan(Time.MILLISECS, 10), Time.currentTicks()+0x7FFFFFFF);
+:		}
+:		
+:		private static void createNextBroadcast(int beaconN, long beaconT, int channel, long t, long currentTimeMS) {
+:			long broadcastTimeByMSSpan = (t  * beaconN);
+:			long deadline = broadcastTimeByMSSpan + T_MIN;
+:			setupBroadcastAndCallBack(broadcastTimeByMSSpan, deadline, channel, currentTimeMS);
+:			sinks[currentSinkIndex].setBroadcastSet(true);
+:			setChannel(pickNextSink(currentSinkIndex));
+:			startListening();
+:		}
+:	
+:		private static void setupBroadcastAndCallBack(long broadcastTime, long deadline, int sinkIndex, long currentTimeMS){
+:	//		ChannelSwitch cs = new ChannelSwitch(broadcastTime, sinks[sinkIndex].getChannel());
+:	//		for (ChannelSwitch c: channelSwitches){
+:	//			if (c!=null && c.getTime()==broadcastTime){
+:	//				return;
+:	//			}
+:	//		}
+:	//		channelSwitches = insertChannelSwitchInBuffer(channelSwitches, cs);
+:			
+:			Logger.appendString(csr.s2b("PREPARING BROADCAST! for channel: "));
+:			Logger.appendInt(sinkIndex);
+:			Logger.flush(Mote.WARN);
+:			
+:			switch (sinkIndex){
+:			case 0:
+:				timer0.setAlarmBySpan(Time.toTickSpan(Time.MILLISECS, broadcastTime));
+:				break;
+:			case 1:
+:				timer1.setAlarmBySpan(Time.toTickSpan(Time.MILLISECS, broadcastTime));
+:				break;
+:			case 2:
+:				timer2.setAlarmBySpan(Time.toTickSpan(Time.MILLISECS, broadcastTime));
+:				break;
+:			}
+:		}
+:		
+:		
+:	//	private static ChannelSwitch[] insertChannelSwitchInBuffer(ChannelSwitch[] css, ChannelSwitch cs){
+:	//		// If space available in buffer
+:	//		int x;
+:	//		for (x=0; x<css.length; x++){
+:	//			if (css[x]==null){
+:	//				css[x] = cs;
+:	//				return css;
+:	//			}
+:	//		}
+:	//		ChannelSwitch[] newCss = new ChannelSwitch[css.length+2];
+:	//		for (x=0; x<css.length; x++){
+:	//			newCss[x] = css[x];
+:	//		}
+:	//		newCss[x+1] = cs;
+:	//		return newCss;
+:	//	}
+:	
+:	
+:		private static int getDiffN(int beacon1N, int beacon2N) {
+:			return beacon1N - beacon2N;
+:		}
+:	
+:		private static long getDiffT(long beacon1T, long beacon2T) {
+:			long diffT = beacon2T-beacon1T;
+:			return (diffT < 0) ? -diffT : diffT;
+:		}
+:	
+:		private static void toggleLed(int led){
+:			int ledState = LED.getState((byte) led);
+:			if (ledState==0){
+:				LED.setState((byte) led, (byte) 1);
+:			} else {
+:				LED.setState((byte) led, (byte) 0);
+:			}
+:		}
+:	
+:		private static void setLEDListening(byte led){
+:			for (byte b: new byte[]{YELLOW_LED, RED_LED, GREEN_LED}){
+:				if (b==led){
+:					LED.setState(b, (byte) 1);
+:				} else {
+:					LED.setState(b, (byte) 0);
+:				}
+:			}
+:		}
+:		
+:		//	// Called on a timer alarm
+:		//    public static void periodicSend(byte param, long time) {
+:		//        
+:		//        if(nc>0){
+:		//	        // transmit a beacon 
+:		//    	    radio.transmit(Device.ASAP|Radio.TXMODE_POWER_MAX, xmit, 0, 12, 0);
+:		//        	// program new alarm
+:		//        	tsend.setAlarmBySpan(wait);
+:		//        	nc--;
+:		//        	xmit[11]--;
+:		//        }
+:		//        else{
+:		//        	//start reception phase
+:		//	        radio.startRx(Device.ASAP, 0, Time.currentTicks()+wait);
+:		//	        // turn green LED on 
+:		//	        LED.setState((byte)1, (byte)1);
+:		//	        
+:		//        }
+:		//        
+:		//    }
+:	}
+S	M:/EMBS/EMBS_assessment2/part2/src/embs/SinkParameters.java
+:	package embs;
+:	
+:	import com.ibm.saguaro.system.Timer;
+:	
+:	public class SinkParameters {
+:	    private byte channel;
+:	    private byte panid;
+:	    private byte address;
+:	    
+:	    private int maxObservedN = -1;
+:	    private long T = -1;
+:	    private int beaconN = -1;
+:	    private long beaconT = -1;
+:	    private boolean broadcastSet = false;
+:		private long nextBeaconTime;
+:	    
+:	    public SinkParameters(byte channel, byte panid, byte address){
+:	    	this.channel =  channel;
+:	    	this.panid =  panid;
+:	    	this.address =  address;
+:	    }
+:	
+:	    public boolean getBroadcastSet(){
+:	    	return this.broadcastSet;
+:	    }
+:	    
+:	    public void setBroadcastSet(boolean value){
+:	    	this.broadcastSet = value;
+:	    }
+:	    
+:	    public void addBeacon(int n, long t){
+:	    	this.beaconN = n;
+:	    	this.beaconT = t;
+:	    }
+:	    
+:		public void setMaxObservedN(int n) {this.maxObservedN = n;}
+:		public long getT() {return T;}
+:		public void setT(long t) {this.T = t;}
+:		public int getMaxObservedN() {return maxObservedN;}
+:		public byte getChannel() {return channel;}
+:		public byte getPanid() {return panid;}
+:		public byte getAddress() {return address;}
+:	
+:		public int getBeaconN() {
+:			return beaconN;
+:		}
+:		public void setBeaconN(int beaconN) {
+:			this.beaconN = beaconN;
+:		}
+:		public long getBeaconT() {
+:			return beaconT;
+:		}
+:		public void setBeaconT(long beaconT) {
+:			this.beaconT = beaconT;
+:		}
+:	
+:		public void setNextBeaconTime(long l) {
+:			this.nextBeaconTime = l;
+:		}
+:		
+:		public long getNextBeaconTime(){
+:			return this.nextBeaconTime;
+:		}
+:	  
+:		
+:	}
