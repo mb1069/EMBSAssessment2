@@ -1,7 +1,8 @@
 package embs;
 
-import com.ibm.saguaro.system.Timer;
-
+/**
+ * Exam candidate number: Y0076159
+ */
 public class SinkParameters {
     private byte channel;
     private byte panid;
